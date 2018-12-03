@@ -7,7 +7,9 @@
     "trailing-comma": false,
     "variable-name": [true, "check-format", "allow-pascal-case", "allow-leading-underscore"],
     "function-name": false,
-    "align": [true, "parameters", "elements", "members", "statements"]
+    "align": [true, "parameters", "elements", "members", "statements"],
+    "import-name": false,
+    "object-shorthand-properties-first": false
   },
   "env": {
     "jest": true

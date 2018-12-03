@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { ISiteData, IBlogPostFrontmatter } from '../types/graphql'
+import { ISiteData, IBlogPostFrontmatter } from './types'
 
 interface IProps {
   site: ISiteData
@@ -18,17 +18,17 @@ interface IBlogPost {
 
 const generateBlogJSONLD = ({ frontmatter, url }: IBlogPost) => ([
   {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
+    '@context': 'http://schema.org',
+    '@type': 'BlogPosting',
     headline: frontmatter.title,
     keywords: frontmatter.tags,
     url,
     datePublished: frontmatter.date,
     dateCreated: frontmatter.date,
-    //image
-    //publisher
-    //dateModified
-    //mainEntityOfPage
+    // image
+    // publisher
+    // dateModified
+    // mainEntityOfPage
     author: {
       '@type': 'Person',
       name: 'Teemu Koivisto'
@@ -38,8 +38,8 @@ const generateBlogJSONLD = ({ frontmatter, url }: IBlogPost) => ([
 
 const generateSiteJSONLD = ({ siteMetadata }: ISiteData) => ([
   {
-    "@context": "http://schema.org",
-    "@type": "WebSite",
+    '@context': 'http://schema.org',
+    '@type': 'WebSite',
     url: siteMetadata.url,
     name: siteMetadata.title,
     description: siteMetadata.description,

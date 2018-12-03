@@ -3,17 +3,24 @@ const path = require('path')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
-  entry: {
-    'my-lib': './src/index.ts',
-    'my-lib.min': './src/index.ts'
-  },
+  entry: path.resolve(__dirname + '/src/index.ts'),
   output: {
-    path: path.resolve(__dirname, '_bundles'),
-    filename: '[name].js',
+    path: path.resolve(__dirname + '/dist/'),
+    filename: 'react-seo.min.js',
     libraryTarget: 'umd',
-    library: 'MyLib',
-    umdNamedDefine: true
+    library: 'react-seo',
   },
+  // entry: {
+  //   'react-seo': './src/index.ts',
+  //   'react-seo.min': './src/index.ts'
+  // },
+  // output: {
+  //   path: path.resolve(__dirname, '_bundles'),
+  //   filename: '[name].js',
+  //   libraryTarget: 'umd',
+  //   library: 'react-seo',
+  //   umdNamedDefine: true
+  // },
   resolve: {
     extensions: ['.ts', '.tsx', '.js']
   },
@@ -21,7 +28,6 @@ module.exports = {
   plugins: [
     new webpack.EnvironmentPlugin({
       ANALYTICS_VERSION: '1.0.0',
-      API_URL: process.env.WA_URL || 'https://ueu06c6kc0.execute-api.eu-west-1.amazonaws.com/prod'
     }),
     new UglifyJSPlugin({
       // minimize: true,
@@ -29,14 +35,20 @@ module.exports = {
       include: /\.min\.js$/,
     })
   ],
+  externals: {
+    react: 'react',
+    'react-dom': 'react-dom'
+  },
   module: {
-    rules: [{
-      test: /\.tsx?$/,
-      loader: 'awesome-typescript-loader',
-      exclude: /node_modules/,
-      query: {
-        declaration: false,
-      }
-    }]
+    rules: [
+      {
+        test: /\.tsx?$/,
+        loader: 'awesome-typescript-loader',
+        exclude: /node_modules/,
+        query: {
+          declaration: false,
+        }
+      },
+    ]
   }
 }
