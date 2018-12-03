@@ -1,0 +1,2 @@
+
+export { ReactSEO } from './ReactSEO'

@@ -1,0 +1,15 @@
+{
+  "extends": ["tslint-config-airbnb"],
+  "rules": {
+    "interface-name": [true, "always-prefix"],
+    "max-line-length": [true, 140],
+    "semicolon": [true, "never"],
+    "trailing-comma": false,
+    "variable-name": [true, "check-format", "allow-pascal-case", "allow-leading-underscore"],
+    "function-name": false,
+    "align": [true, "parameters", "elements", "members", "statements"]
+  },
+  "env": {
+    "jest": true
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "react-seo",
+  "version": "0.0.1",
+  "description": "SEO metatags for React apps, mainly with Gatsby + react-helmet",
+  "main": "dist/index.js",
+  "types": "react-seo.d.ts",
+  "scripts": {
+    "dev": "webpack --config ./webpack.config.js --watch --mode=development",
+    "build": "rm -r dist/ || true && webpack --config ./webpack.config.js --mode=production",
+    "prepublishOnly": "npm run compile && npm run docs",
+    "compile": "rm -r dist/ || true && npm run lint && npm run test && npm run build",
+    "lint": "tslint --project ./ -c tslint.json",
+    "test": "exit 0",
+    "ts:watch": "tsc -w",
+    "ts": "tsc",
+    "preversion": "npm run lint",
+    "version": "git add -A src",
+    "postversion": "git push && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/teemukoivisto/react-seo.git"
+  },
+  "keywords": [
+    "seo",
+    "react",
+    "gatsby",
+    "react-helmet",
+    "jsonld",
+    "opengraph"
+  ],
+  "author": "https://github.com/teemukoivisto",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "5.2.0",
+    "tslint": "5.11.0",
+    "tslint-config-airbnb": "5.9.2",
+    "typescript": "3.0.1",
+    "uglifyjs-webpack-plugin": "1.3.0",
+    "webpack": "4.17.1",
+    "webpack-cli": "3.1.0"
+  }
+}
