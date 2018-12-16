@@ -96,7 +96,6 @@ const generateBlogPosting = ({ url, title, description, image, datePublished, da
 /**
  * Stringifying eliminates the undefined values, which keeps the JSON-LD somewhat tidy.
  * Some empty objects might remain, but that shouldn't be a problem. 
- *
  */
 
 export const createWebsiteJSONLD = (props: WebsiteProps) =>

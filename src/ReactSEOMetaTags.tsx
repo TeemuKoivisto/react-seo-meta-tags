@@ -16,14 +16,17 @@ import {
  * So instead everything is rendered here as methods of this SEO. Sigh.
  */
 export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps> {
+  /**
+   * General tags. OG and Twitter tags both fallback on these three incase description or image is not provided.
+   * However by the way this library works, OG and Twitter tags are both extended from the same objects so
+   * they'll always be defined or undefined.
+   * @param props
+   */
   renderGeneral({ title, description, image }: CombinedProps<{}>) {
     return ([
-      // General tags. OG and Twitter tags both fallback on these three incase description or image is not provided.
-      // However by the way this library works, OG and Twitter tags are both extended from the same objects so
-      // they'll always be defined or undefined.
-      <title>{ title }</title>,
+      <title key="title">{ title }</title>,
       description && <meta key="description" name="description" content={description} />,
-      image && <meta key="image" name="image" content={image} />,
+      image && <meta key="image" name="image" content={image} />
     ])
   }
   renderNonBlogOgTags() {
@@ -34,8 +37,8 @@ export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps>
   renderBlogOgTags({ datePublished, dateModified } : BlogPostProps) {
     return ([
       <meta key="og:type" property="og:type" content="article" />,
-      datePublished && <meta property="article:published_time" content={datePublished} />,
-      dateModified && <meta property="article:modified_time" content={dateModified} />,
+      datePublished && <meta key="article:published_time" property="article:published_time" content={datePublished} />,
+      dateModified && <meta key="article:modified_time" property="article:modified_time" content={dateModified} />,
     ])
   }
   /**
@@ -48,8 +51,7 @@ export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps>
       url && <meta key="og:url" property="og:url" content={url} />, // Important
       <meta key="og:title" property="og:title" content={title} />, // Important
       description && <meta key="og:description" property="og:description" content={description} />, // Somewhat important
-      // Facebook recommends 1200x630 size, ratio of 1.91:1
-      // But 1200x1200 is also fine
+      // Facebook recommends 1200x630 size, ratio of 1.91:1 but 1200x1200 is also fine
       image && <meta key="og:image" property="og:image" content={image} />, // Important
       site && site.siteName && <meta key="og:site_name" property="og:site_name" content={site!.siteName} />, // Eeh... can't hurt?
       facebookAppId && <meta key="fb:app_id" property="fb:app_id" content={facebookAppId}/>
@@ -58,7 +60,7 @@ export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps>
   renderTwitter({ title, description, image, twitterUser }: CombinedProps<TwitterProps>) {
     return ([
       image && <meta key="twitter:card" name="twitter:card" content="summary_large_image" />,
-      twitterUser && <meta name="twitter:creator" content={twitterUser} />,
+      twitterUser && <meta key="twitter:creator" name="twitter:creator" content={twitterUser} />,
       <meta key="twitter:title" name="twitter:title" content={title} />,
       description && <meta key="twitter:description" name="twitter:description" content={description} />,
       image && <meta key="twitter:image" name="twitter:image" content={image} />
@@ -91,12 +93,16 @@ export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps>
     ])
   }
   render() {
+    let el: React.ReactNode
     if (this.props.blogPost) {
-      return this.renderBlogPostSEO(this.props)
+      el = this.renderBlogPostSEO(this.props)
     }
     if (this.props.website) {
-      return this.renderWebsiteSEO(this.props)
+      el = this.renderWebsiteSEO(this.props)
     }
-    return undefined
+    if (this.props.render) {
+      return this.props.render(el)
+    }
+    return el
   }
 }

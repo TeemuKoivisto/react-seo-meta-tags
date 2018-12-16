@@ -1,5 +1,6 @@
 declare module 'react-seo-meta-tags' {
   export interface ReactSEOMetaTagsProps {
+    render?: (el: React.ReactNode) => React.ReactNode
     website?: WebsiteProps
     blogPost?: BlogPostProps
     facebook?: FacebookProps

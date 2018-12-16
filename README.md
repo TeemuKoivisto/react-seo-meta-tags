@@ -45,7 +45,7 @@ https://blog.realmacsoftware.com/which-meta-tags-matter-for-seo-in-2018/
 
 ## Open Graph
 
-Metadata forma developed by Facebook.
+Metadata format developed by Facebook.
 
 http://ogp.me/
 
