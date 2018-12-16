@@ -2,16 +2,13 @@
  * JSON-LD is a format for encoding structured data in the Internet.
  * Its popularity is due to the fact Google uses it and advocates websites to use it.
  * There is a lot of different formats for publishing data on JSON-LD but since
- * this is a shabby blog I'll be only using a small subset of them.
+ * my own use-case is only for publishing blog posts I'll be using but a small subset
+ * of them.
  */
 
 import {
-  ReactSEOMetaTagsProps,
   WebsiteProps,
   BlogPostProps,
-  FacebookProps,
-  TwitterProps,
-  CombinedProps,
 } from './types'
 
 /**
@@ -21,17 +18,18 @@ import {
  * @param props
  */
 const generateSiteJSONLD = ({ url, title, description, author } : WebsiteProps) => (
-{
-  '@context': 'http://schema.org',
-  '@type': 'WebSite',
-  url,
-  name: title,
-  description,
-  author: {
-    '@type': author!.schemaType,
-    name: author!.name
+  {
+    '@context': 'http://schema.org',
+    '@type': 'WebSite',
+    name: title,
+    url,
+    description,
+    author: {
+      '@type': author && author.schemaType,
+      name: author && author.name
+    }
   }
-})
+)
 
 /**
  * This schema is a bit tricker one but it's simply a showcase of your page on say Google results.
@@ -40,7 +38,7 @@ const generateSiteJSONLD = ({ url, title, description, author } : WebsiteProps) 
  * @param props
  */
 const generateBreadcrumbList = ({ url, title, image } : WebsiteProps & BlogPostProps) => (
-{
+  {
   '@context': 'http://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
@@ -48,10 +46,10 @@ const generateBreadcrumbList = ({ url, title, image } : WebsiteProps & BlogPostP
       '@type': 'ListItem',
       position: 1,
       item: {
-        '@id': url,
         name: title,
+        '@id': url,
         image,
-      },
+      }
     },
   ],
 })
@@ -60,19 +58,18 @@ const generateBreadcrumbList = ({ url, title, image } : WebsiteProps & BlogPostP
  * This is a general BlogPosting schema which covers quite a few attributes.
  * @param props
  */
-const generateBlogPosting = ({ url, title, description, image, datePublished, dateModified, tags, site: { canonicalUrl }, author, organization } : WebsiteProps & BlogPostProps) => (
+const generateBlogPosting = ({ url, title, description, image, datePublished, dateModified, tags, site, author, organization } : WebsiteProps & BlogPostProps) => (
 {
   '@context': 'http://schema.org',
   '@type': 'BlogPosting',
   url,
   name: title,
-  // alternateName: defaultTitle,
   headline: title,
   keywords: tags,
   description,
   author: {
-    '@type': 'Person',
-    name: author.name,
+    '@type': author && author.schemaType,
+    name: author && author.name
   },
   image: {
     '@type': 'ImageObject',
@@ -80,13 +77,13 @@ const generateBlogPosting = ({ url, title, description, image, datePublished, da
   },
   publisher: {
     '@type': 'Organization',
-    url: organization.url,
-    // logo: organization.logo,
-    name: organization.name,
+    url: organization && organization.url,
+    logo: organization && organization.logo,
+    name: organization && organization.name,
   },
   mainEntityOfPage: {
     '@type': 'WebSite',
-    '@id': canonicalUrl,
+    '@id': site && site.canonicalUrl,
   },
   datePublished,
   dateModified, // Recommended by https://search.google.com/structured-data/testing-tool
@@ -95,6 +92,12 @@ const generateBlogPosting = ({ url, title, description, image, datePublished, da
   // users are also more likely to click an article with a recent date listed next to it.
   // Does it make sense as you can just manipulate the date? Eeeh... Perhaps Google is aware of that.
 })
+
+/**
+ * Stringifying eliminates the undefined values, which keeps the JSON-LD somewhat tidy.
+ * Some empty objects might remain, but that shouldn't be a problem. 
+ *
+ */
 
 export const createWebsiteJSONLD = (props: WebsiteProps) =>
   JSON.stringify([

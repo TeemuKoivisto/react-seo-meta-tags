@@ -2,7 +2,7 @@
   "name": "react-seo-meta-tags",
   "version": "0.0.1",
   "description": "SEO metatags for React apps, mainly to be used with Gatsby + react-helmet",
-  "main": "dist/react-seo-meta-tags.js",
+  "main": "dist/index.js",
   "types": "react-seo-meta-tags.d.ts",
   "scripts": {
     "dev": "webpack --config ./webpack.config.js --watch --mode=development",
