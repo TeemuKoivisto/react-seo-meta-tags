@@ -5,8 +5,6 @@
   "main": "dist/index.js",
   "types": "react-seo-meta-tags.d.ts",
   "scripts": {
-    "dev": "webpack --config ./webpack.config.js --watch --mode=development",
-    "build": "rm -r dist/ || true && webpack --config ./webpack.config.js --mode=development",
     "prepublishOnly": "npm run compile && npm run docs",
     "compile": "rm -r dist/ || true && npm run lint && npm run test && npm run build",
     "lint": "tslint --project ./ -c tslint.json",
@@ -46,14 +44,10 @@
   "devDependencies": {
     "@types/react": "16.7.12",
     "@types/react-dom": "16.0.11",
-    "awesome-typescript-loader": "5.2.1",
     "react": "16.6.3",
     "react-dom": "16.6.3",
     "tslint": "5.11.0",
     "tslint-config-airbnb": "5.11.1",
-    "typescript": "3.2.1",
-    "uglifyjs-webpack-plugin": "2.0.1",
-    "webpack": "4.26.1",
-    "webpack-cli": "3.1.2"
+    "typescript": "3.2.1"
   }
 }

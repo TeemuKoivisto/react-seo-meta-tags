@@ -15,7 +15,12 @@ npm i react-seo-meta-tags
 
 With react-helmet:
 ```ts
+import React from 'react'
+import Helmet from 'react-helmet'
 import { ReactSEOMetaTags } from 'react-seo-meta-tags'
+// Or
+import ReactSEOMetaTags from 'react-seo-meta-tags'
+
 ...
     <ReactSEOMetaTags
       render={(el: React.ReactNode) => <Helmet>{el}</Helmet>}
@@ -25,14 +30,21 @@ import { ReactSEOMetaTags } from 'react-seo-meta-tags'
 
 Without:
 ```ts
+import React from 'react'
 import { ReactSEOMetaTags } from 'react-seo-meta-tags'
+
 ...
     <ReactSEOMetaTags
+      website={{ ...siteMetadata }}
       blogPost={{ ...blogPost }}
       facebook={{ facebookAppId: 'abc123' }}
       twitter={{ twitterUser: '@mickey_mouse' }}
     />
 ```
+
+In the previous example the inheritance of the properties goes like this: website < blogPost < facebook | twitter. So if the same property (eg title or image) is specified in blogPost and facebook, the facebook object's property will be the one used.
+
+The properties are perhaps a little weirdly made, the `site` property of the website is required for some of the blogPost's meta tags.
 
 # API
 
@@ -138,11 +150,15 @@ cd example & npm start
 
 # How to publish changes
 
-This one is more for the maintainers such as me. All the changes should go through PRs.
+This one is more for the maintainers such as me. All the changes should go through PRs. But because there's no automatic CI such as Travis set up (yet), the new versions are published locally.
 
-First you have to login to your npm account: `npm login`.
+1) Login to your npm account: `npm login`.
+2) After making changes to the code (*cough* pulling from master I mean), run `npm run compile`.
+3) Update the version number in `package.json`. Do it semantically\*. Git add and commit the change eg `git commit -m "Version 1.5.1"`. Tag it: `git tag 1.5.1`.
+4) Push the changes to GitHub: `git push origin master `.
+5) Publish to npm: `npm publish`. This will push the files specified in `package.json` `"files"`-block + default files (package.json, README, LICENSE).
 
-After making changes to the code, you can publish the project simply by `npm publish`. Npm will prompt you for a new version number so you don't have to change it manually. Version your changes **semantically** so big breaking changes are new version, general changes or bug fixes are minor versions and patches are just some general maintenance or refactoring. After giving the new version npm will run scripts depending on the hooks you have defined in your `"scripts"` eg. probably `"prepublishOnly"` and perhaps `"version"` etc. to run git commands automatically. Mostly only `"prepublishOnly"` is needed. After that npm will just copy the current contents (minus those in `.npmignore` and `node_modules` by default) and push it to the remote repository which is probably our npm registry.
+\***Semantically**: big breaking changes are new version, general changes or bug fixes are minor versions and patches are just some general maintenance or refactoring.
 
 # How to contribute
 

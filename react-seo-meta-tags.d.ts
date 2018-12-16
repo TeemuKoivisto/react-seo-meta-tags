@@ -63,4 +63,5 @@ declare module 'react-seo-meta-tags' {
   }
   
   export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps> {}
+  export default ReactSEOMetaTags
 }
