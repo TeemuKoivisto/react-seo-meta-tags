@@ -1,7 +1,7 @@
 {
   "extends": ["tslint-config-airbnb"],
   "rules": {
-    "interface-name": [true, "always-prefix"],
+    "interface-name": [false, "never-prefix"],
     "max-line-length": [true, 140],
     "semicolon": [true, "never"],
     "trailing-comma": false,
@@ -9,7 +9,7 @@
     "function-name": false,
     "align": [true, "parameters", "elements", "members", "statements"],
     "import-name": false,
-    "object-shorthand-properties-first": false
+    "object-shorthand-properties-first": false,
   },
   "env": {
     "jest": true

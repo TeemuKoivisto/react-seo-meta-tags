@@ -1,12 +1,12 @@
 {
-  "name": "react-seo",
+  "name": "react-seo-meta-tags",
   "version": "0.0.1",
   "description": "SEO metatags for React apps, mainly to be used with Gatsby + react-helmet",
-  "main": "dist/index.js",
-  "types": "react-seo.d.ts",
+  "main": "dist/react-seo-meta-tags.js",
+  "types": "react-seo-meta-tags.d.ts",
   "scripts": {
     "dev": "webpack --config ./webpack.config.js --watch --mode=development",
-    "build": "rm -r dist/ || true && webpack --config ./webpack.config.js --mode=production",
+    "build": "rm -r dist/ || true && webpack --config ./webpack.config.js --mode=development",
     "prepublishOnly": "npm run compile && npm run docs",
     "compile": "rm -r dist/ || true && npm run lint && npm run test && npm run build",
     "lint": "tslint --project ./ -c tslint.json",
@@ -17,9 +17,13 @@
     "version": "git add -A src",
     "postversion": "git push && git push --tags"
   },
+  "files": [
+    "dist/*",
+    "react-seo-meta-tags.d.ts"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/teemukoivisto/react-seo.git"
+    "url": "git+https://github.com/teemukoivisto/react-seo-meta-tags.git"
   },
   "keywords": [
     "seo",
@@ -32,9 +36,9 @@
   "author": "https://github.com/teemukoivisto",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/teemukoivisto/react-seo/issues"
+    "url": "https://github.com/teemukoivisto/react-seo-meta-tags/issues"
   },
-  "homepage": "https://github.com/teemukoivisto/react-seo#readme",
+  "homepage": "https://github.com/teemukoivisto/react-seo-meta-tags#readme",
   "peerDependencies": {
     "react": "^16.2.0",
     "react-dom": "^16.2.0"

@@ -1,2 +1,2 @@
 
-export { ReactSEO } from './ReactSEO'
+export { ReactSEOMetaTags } from './ReactSEOMetaTags'

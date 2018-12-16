@@ -1,4 +1,4 @@
-# react-seo
+# react-seo-meta-tags
 
 SEO metatags for React apps, best used with Gatsby + react-helmet.
 
@@ -9,8 +9,8 @@ Motive for this was the infuriating complexity of SEO coupled with the fact ther
 Requires: Node.js >= 8.
 
 1) Clone this repo & run `npm i`.
-2) To use with the example project, install its dependencies too: `cd example & npm i`.
-3) Back in the root directory, link `react-seo` to your local npm libraries: `npm link`. It should be now available as a global dependency for any npm projects, link it to your example-app: `cd example & npm link react-seo`. It creates a symlink pointing to this library's root folder.
+2) To use with the examplee project, install its dependencies too: `cd example & npm i`.
+3) Back in the root directory, link `react-seo-meta-tags` to your local npm libraries: `npm link`. It should be now available as a global dependency for any npm projects, link it to your example-app: `cd example & npm link react-seo-meta-tags`. It creates a symlink pointing to this library's root folder.
 4) Start the TypeScript compiler in one bash session: `npm run ts:watch`.
 5) Start the example Gatsby site with: `npm start`.
 6) The app should open in http://localhost:8000. The changes to the source code should be reloaded automatically and be seen in the `<head>`'s metatags. Happy hacking!
@@ -21,7 +21,7 @@ As one script:
 npm i
 cd example & npm i
 cd .. & npm link
-cd example & npm link react-seo
+cd example & npm link react-seo-meta-tags
 cd .. & npm run ts:watch
 # Open another terminal session
 cd example & npm start
@@ -38,3 +38,14 @@ After making changes to the code, you can publish the project simply by `npm pub
 # How to contribute
 
 Create issues or PRs for bug reports/feedback/feature requests.
+
+# Other resources about SEO in general
+
+https://blog.realmacsoftware.com/which-meta-tags-matter-for-seo-in-2018/
+
+## Open Graph
+
+Metadata forma developed by Facebook.
+
+http://ogp.me/
+
