@@ -1,4 +1,4 @@
-# react-seo-meta-tags
+# react-seo-meta-tags [![npm version](https://badge.fury.io/js/react-seo-meta-tags.svg)](https://badge.fury.io/js/react-seo-meta-tags)
 
 SEO metatags for React apps, best used with Gatsby + react-helmet.
 
@@ -28,6 +28,8 @@ import ReactSEOMetaTags from 'react-seo-meta-tags'
     />
 ```
 
+Reason for that is because `react-helmet` doesn't allow nesting of components, everything has to be directly rendered under ReactHelmet. It's ... silly.
+
 Without:
 ```ts
 import React from 'react'
@@ -44,7 +46,7 @@ import { ReactSEOMetaTags } from 'react-seo-meta-tags'
 
 In the previous example the inheritance of the properties goes like this: `website < blogPost < facebook | twitter`. So if the same property (eg image) is specified in blogPost and facebook, the facebook object's property will be the one used in its respective tag (og:image in this case).
 
-The properties are perhaps a little weirdly made, the `site` property of the website is required for some of the blogPost's meta tags.
+The API for the properties is still in flux. The `site` property of the website is required for blogPost's `mainEntityOfPage` (canonicalUrl). Did I mention PRs are welcomed? So to get the most of the properties, provide website with `site` property, then blogPost with all properties. For facebook and twitter you can customize the image sizes or titles as they appear when the post is shared.
 
 # API
 
@@ -128,7 +130,7 @@ For more custom tags you either have to render them by yourself or, and I hope y
 Requires: Node.js >= 8.
 
 1) Clone this repo & run `npm i`.
-2) To use with the examplee project, install its dependencies too: `cd example & npm i`.
+2) To use with the example project, install its dependencies too: `cd example & npm i`. TODO
 3) Back in the root directory, link `react-seo-meta-tags` to your local npm libraries: `npm link`. It should be now available as a global dependency for any npm projects, link it to your example-app: `cd example & npm link react-seo-meta-tags`. It creates a symlink pointing to this library's root folder.
 4) Start the TypeScript compiler in one bash session: `npm run ts:watch`.
 5) Start the example Gatsby site with: `npm start`.
