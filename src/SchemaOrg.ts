@@ -33,7 +33,7 @@ const generateSiteJSONLD = ({ url, title, description, author } : WebsiteProps) 
 
 /**
  * This schema is a bit tricker one but it's simply a showcase of your page on say Google results.
- * A small box with a word or and and a picture.
+ * A small box with a word and/or a picture.
  * https://developers.google.com/search/docs/guides/enhance-site#enable-breadcrumb
  * @param props
  */

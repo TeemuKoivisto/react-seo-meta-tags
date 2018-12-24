@@ -96,8 +96,7 @@ export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps>
     let el: React.ReactNode
     if (this.props.blogPost) {
       el = this.renderBlogPostSEO(this.props)
-    }
-    if (this.props.website) {
+    } else if (this.props.website) {
       el = this.renderWebsiteSEO(this.props)
     }
     if (this.props.render) {

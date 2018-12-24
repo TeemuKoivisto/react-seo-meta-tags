@@ -42,7 +42,7 @@ import { ReactSEOMetaTags } from 'react-seo-meta-tags'
     />
 ```
 
-In the previous example the inheritance of the properties goes like this: website < blogPost < facebook | twitter. So if the same property (eg title or image) is specified in blogPost and facebook, the facebook object's property will be the one used.
+In the previous example the inheritance of the properties goes like this: `website < blogPost < facebook | twitter`. So if the same property (eg image) is specified in blogPost and facebook, the facebook object's property will be the one used in its respective tag (og:image in this case).
 
 The properties are perhaps a little weirdly made, the `site` property of the website is required for some of the blogPost's meta tags.
 
@@ -55,8 +55,6 @@ Website is a general page with some added Facebook (og) and Twitter tags for bet
 BlogPost is a page for a blogpost (og:type article) that can have quite a few properties. I made only `title` to be required but you probably want at least `description`, `image`, `datePublished` and `author` to be specified. Well in general it's probably best for SEO purposes to include most of them, if not all. Each bit helps (I believe, haven't had empirical data yet).
 
 For more custom tags you either have to render them by yourself or, and I hope you will, create a PR that includes the missing features in a compact and *well documented* way. There's so much boilerplate already with these tags so I don't want to include some random tags without knowing what they are for.
-
-
 
 ```ts
   export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps> {}

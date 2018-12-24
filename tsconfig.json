@@ -16,7 +16,7 @@
     "strictNullChecks": true,
     "noUnusedLocals": true,
     "baseUrl": ".",
-    "declaration": true
+    "declaration": false
   },
   "include": [
     "src/**/*"

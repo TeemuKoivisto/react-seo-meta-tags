@@ -5,8 +5,9 @@
   "main": "dist/index.js",
   "types": "react-seo-meta-tags.d.ts",
   "scripts": {
+    "build": "rm -r dist/ || true && tsc",
     "prepublishOnly": "npm run compile && npm run docs",
-    "compile": "rm -r dist/ || true && npm run lint && npm run test && npm run build",
+    "compile": "npm run lint && npm run test && npm run build",
     "lint": "tslint --project ./ -c tslint.json",
     "test": "exit 0",
     "ts:watch": "tsc -w",
