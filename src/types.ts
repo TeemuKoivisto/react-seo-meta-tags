@@ -16,7 +16,8 @@ export interface WebsiteProps {
     schemaType: string // 'Person', etc
   }
   site?: {
-    siteName?: string // "If your object is part of a larger web site, the name which should be displayed for the overall site. e.g., "IMDb"."
+    // "If your object is part of a larger web site, the name which should be displayed for the overall site. e.g., "IMDb"."
+    siteName?: string
     canonicalUrl?: string // The index URL of the website (eg https://google.com), used for BlogPosting JSON-LD schema.
   }
 }
@@ -43,7 +44,9 @@ export interface TwitterProps {
 }
 
 export interface BlogPostProps {
-  url?: string // The canonical URL for your page. This should be the undecorated URL, without session variables, user identifying parameters, or counters.
+  // The canonical URL for your page. This should be the undecorated URL, without session
+  // variables, user identifying parameters, or counters.
+  url?: string
   title: string // Title of the post. Max 70 characters.
   description?: string // Should be a short description about the topic, <=200 words. Mainly for SEO purposes.
   image?: string // Based on other SEO tags, an image of 1200x628 with 1.91:1 ratio in PNG, JPEG, or GIF is the optimum.

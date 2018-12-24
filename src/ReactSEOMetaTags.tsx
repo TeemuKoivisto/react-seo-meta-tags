@@ -44,7 +44,7 @@ export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps>
   /**
    * https://developers.facebook.com/docs/sharing/webmasters/
    * http://ogp.me/
-   * @param props 
+   * @param props
    */
   renderFacebook({ url, title, description, image, site, facebookAppId }: CombinedProps<FacebookProps>) {
     return ([

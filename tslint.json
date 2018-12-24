@@ -9,7 +9,7 @@
     "function-name": false,
     "align": [true, "parameters", "elements", "members", "statements"],
     "import-name": false,
-    "object-shorthand-properties-first": false,
+    "object-shorthand-properties-first": false
   },
   "env": {
     "jest": true
