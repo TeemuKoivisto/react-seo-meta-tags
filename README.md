@@ -48,7 +48,7 @@ In the previous example the inheritance of the properties goes like this: `websi
 
 The API for the properties is still in flux. For a general page, provide just the website property. This should also the add og:title and twitter:title although probably redundantly. Always remember to add the title of the page, it's used also to render a `<title>` tag so be aware!
 
-For a blog post, provide all the blogPost's properties. I know it's a bit of work, but this way you'll avoid any complaints from SEO validation tools such as https://search.google.com/structured-data/testing-tool. For facebook and twitter you can customize the image sizes or titles as they appear when the post is shared. There's still a lot of tags missing from them both, that I have not added but which could be useful for use-cases different than mine. If something's missing that you'd very much want, please create an issue or PR.
+For a blog post, provide all the blogPost's properties. I know it's a bit of work, but this way you'll avoid any complaints from SEO validation tools such as https://search.google.com/structured-data/testing-tool. For facebook and twitter you can customize the image sizes or titles as they appear when the post is shared. There's still a lot of tags missing from them both that I have not added but which could be useful for use-cases different than mine. If something's missing that you'd very much want, please create an issue or PR.
 
 # API
 
@@ -174,9 +174,17 @@ This one is more for the maintainers such as me. All the changes should go throu
 
 Create issues or PRs for bug reports/feedback/feature requests.
 
+# SEO Tools
+
+* https://search.google.com/structured-data/testing-tool
+* https://developers.facebook.com/tools/debug/sharing/
+* https://cards-dev.twitter.com/validator
+
 # Other resources about SEO in general
 
-https://blog.realmacsoftware.com/which-meta-tags-matter-for-seo-in-2018/
+* https://blog.realmacsoftware.com/which-meta-tags-matter-for-seo-in-2018/
+* https://developers.facebook.com/docs/sharing/webmasters#markup
+* https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/markup.html
 
 ## Open Graph
 

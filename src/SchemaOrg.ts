@@ -79,7 +79,10 @@ const generateBlogPosting = ({
     publisher: {
       '@type': 'Organization',
       url: organization && organization.url,
-      logo: organization && organization.logo,
+      logo: organization && {
+        '@type': 'ImageObject',
+        url: organization.logo
+      },
       name: organization && organization.name,
     },
     mainEntityOfPage: {
