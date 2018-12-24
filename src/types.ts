@@ -27,7 +27,7 @@ export interface WebsiteProps {
  * http://ogp.me/
  */
 export interface FacebookProps {
-  title: string // The title of your article without any branding such as your site name.
+  title?: string // The title of your article without any branding such as your site name.
   description?: string // A brief description of the content, usually between 2 and 4 sentences.
   image?: string // Facebook recommends 1200x630 size, ratio of 1.91:1. PNG, JPEG, or GIF.
   facebookAppId?: string // "Insights lets you view analytics for traffic to your site from Facebook."
@@ -37,7 +37,7 @@ export interface FacebookProps {
  * https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/markup.html
  */
 export interface TwitterProps {
-  title: string // Title of content (max 70 characters). Fallback: og:title.
+  title?: string // Title of content (max 70 characters). Fallback: og:title.
   description?: string // Description of content (maximum 200 characters). Fallback: og:description.
   image?: string // Twitter card image, optimal ratio 1.91:1. Recommended: 1200x628. PNG, JPEG, or GIF. Fallback: og:image.
   twitterUser?: string // @username of content creator.
@@ -61,6 +61,11 @@ export interface BlogPostProps {
     name: string // Name of the organization (Google Inc.) or the owner of the website (Larry Page).
     logo?: string // URL to the logo image.
     url: string // URL of the organization eg. https://google.com
+  }
+  site?: {
+    // "If your object is part of a larger web site, the name which should be displayed for the overall site. e.g., "IMDb"."
+    siteName?: string // Used for og:site_name
+    canonicalUrl?: string // The index URL of the website (eg https://google.com), used for blogPost's JSON-LD schema's "mainEntityOfPage".
   }
 }
 

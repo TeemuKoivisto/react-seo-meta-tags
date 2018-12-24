@@ -46,7 +46,9 @@ import { ReactSEOMetaTags } from 'react-seo-meta-tags'
 
 In the previous example the inheritance of the properties goes like this: `website < blogPost < facebook | twitter`. So if the same property (eg image) is specified in blogPost and facebook, the facebook object's property will be the one used in its respective tag (og:image in this case).
 
-The API for the properties is still in flux. The `site` property of the website is required for blogPost's `mainEntityOfPage` (canonicalUrl). Did I mention PRs are welcomed? So to get the most of the properties, provide website with `site` property, then blogPost with all properties. For facebook and twitter you can customize the image sizes or titles as they appear when the post is shared.
+The API for the properties is still in flux. For a general page, provide just the website property. This should also the add og:title and twitter:title although probably redundantly. Always remember to add the title of the page, it's used also to render a `<title>` tag so be aware!
+
+For a blog post, provide all the blogPost's properties. I know it's a bit of work, but this way you'll avoid any complaints from SEO validation tools such as https://search.google.com/structured-data/testing-tool. For facebook and twitter you can customize the image sizes or titles as they appear when the post is shared. There's still a lot of tags missing from them both, that I have not added but which could be useful for use-cases different than mine. If something's missing that you'd very much want, please create an issue or PR.
 
 # API
 
@@ -59,70 +61,78 @@ BlogPost is a page for a blogpost (og:type article) that can have quite a few pr
 For more custom tags you either have to render them by yourself or, and I hope you will, create a PR that includes the missing features in a compact and *well documented* way. There's so much boilerplate already with these tags so I don't want to include some random tags without knowing what they are for.
 
 ```ts
-  export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps> {}
+export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps> {}
 
-  export interface ReactSEOMetaTagsProps {
-    render?: (el: React.ReactNode) => React.ReactNode
-    website?: WebsiteProps
-    blogPost?: BlogPostProps
-    facebook?: FacebookProps
-    twitter?: TwitterProps
+export interface ReactSEOMetaTagsProps {
+  render?: (el: React.ReactNode) => React.ReactNode
+  website?: WebsiteProps
+  blogPost?: BlogPostProps
+  facebook?: FacebookProps
+  twitter?: TwitterProps
+}
+
+export interface WebsiteProps {
+  url?: string // The URL of this page (eg https://google.com/about)
+  title: string // Maximum 70 characters.
+  description?: string // Maximum 200 characters.
+  image?: string // URL to the image, PNG, JPEG, or GIF recommended.
+  author?: {
+    name: string
+    schemaType: string // 'Person', etc
   }
-  
-  export interface WebsiteProps {
-    url?: string // The URL of this page (eg https://google.com/about)
-    title: string // Maximum 70 characters.
-    description?: string // Maximum 200 characters.
-    image?: string // URL to the image, PNG, JPEG, or GIF recommended.
-    author?: {
-      name: string
-      schemaType: string // 'Person', etc
-    }
-    site?: {
-      siteName?: string // "If your object is part of a larger web site, the name which should be displayed for the overall site. e.g., "IMDb"."
-      canonicalUrl?: string // The index URL of the website (eg https://google.com), used for BlogPosting JSON-LD schema.
-    }
+  site?: {
+    // "If your object is part of a larger web site, the name which should be displayed for the overall site. e.g., "IMDb"."
+    siteName?: string
+    canonicalUrl?: string // The index URL of the website (eg https://google.com), used for BlogPosting JSON-LD schema.
   }
-  
-  /**
-   * https://developers.facebook.com/docs/sharing/webmasters/
-   * http://ogp.me/
-   */
-  export interface FacebookProps {
-    title: string // The title of your article without any branding such as your site name.
-    description?: string // A brief description of the content, usually between 2 and 4 sentences.
-    image?: string // Facebook recommends 1200x630 size, ratio of 1.91:1. PNG, JPEG, or GIF.
-    facebookAppId?: string // "Insights lets you view analytics for traffic to your site from Facebook."
+}
+
+/**
+ * https://developers.facebook.com/docs/sharing/webmasters/
+ * http://ogp.me/
+ */
+export interface FacebookProps {
+  title?: string // The title of your article without any branding such as your site name.
+  description?: string // A brief description of the content, usually between 2 and 4 sentences.
+  image?: string // Facebook recommends 1200x630 size, ratio of 1.91:1. PNG, JPEG, or GIF.
+  facebookAppId?: string // "Insights lets you view analytics for traffic to your site from Facebook."
+}
+
+/**
+ * https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/markup.html
+ */
+export interface TwitterProps {
+  title?: string // Title of content (max 70 characters). Fallback: og:title.
+  description?: string // Description of content (maximum 200 characters). Fallback: og:description.
+  image?: string // Twitter card image, optimal ratio 1.91:1. Recommended: 1200x628. PNG, JPEG, or GIF. Fallback: og:image.
+  twitterUser?: string // @username of content creator.
+}
+
+export interface BlogPostProps {
+  // The canonical URL for your page. This should be the undecorated URL, without session
+  // variables, user identifying parameters, or counters.
+  url?: string
+  title: string // Title of the post. Max 70 characters.
+  description?: string // Should be a short description about the topic, <=200 words. Mainly for SEO purposes.
+  image?: string // Based on other SEO tags, an image of 1200x628 with 1.91:1 ratio in PNG, JPEG, or GIF is the optimum.
+  datePublished?: string // The original publication date. Don't change arbitrarily, Google might downrank you.
+  dateModified?: string // Google prefers recent content in search results and also users are more likely to click a recent article
+  tags?: string[]
+  author?: {
+    name: string
+    schemaType: string // 'Person', etc
   }
-  
-  /**
-   * https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/markup.html
-   */
-  export interface TwitterProps {
-    title: string // Title of content (max 70 characters). Fallback: og:title.
-    description?: string // Description of content (maximum 200 characters). Fallback: og:description.
-    image?: string // Twitter card image, optimal ratio 1.91:1. Recommended: 1200x628. PNG, JPEG, or GIF. Fallback: og:image.
-    twitterUser?: string // @username of content creator.
+  organization?: {
+    name: string // Name of the organization (Google Inc.) or the owner of the website (Larry Page).
+    logo?: string // URL to the logo image.
+    url: string // URL of the organization eg. https://google.com
   }
-  
-  export interface BlogPostProps {
-    url?: string // The canonical URL for your page. This should be the undecorated URL, without session variables, user identifying parameters, or counters.
-    title: string // Title of the post. Max 70 characters.
-    description?: string // Should be a short description about the topic, <=200 words. Mainly for SEO purposes.
-    image?: string // Based on other SEO tags, an image of 1200x628 with 1.91:1 ratio in PNG, JPEG, or GIF is the optimum.
-    datePublished?: string // The original publication date. Don't change arbitrarily, Google might downrank you.
-    dateModified?: string // Google prefers recent content in search results and also users are more likely to click a recent article
-    tags?: string[]
-    author?: {
-      name: string
-      schemaType: string // 'Person', etc
-    }
-    organization?: {
-      name: string // Name of the organization (Google Inc.) or the owner of the website (Larry Page).
-      logo?: string // URL to the logo image.
-      url: string // URL of the organization eg. https://google.com
-    }
+  site?: {
+    // "If your object is part of a larger web site, the name which should be displayed for the overall site. e.g., "IMDb"."
+    siteName?: string // Used for og:site_name
+    canonicalUrl?: string // The index URL of the website (eg https://google.com), used for blogPost's JSON-LD schema's "mainEntityOfPage".
   }
+}
 ```
 
 # How to develop locally
