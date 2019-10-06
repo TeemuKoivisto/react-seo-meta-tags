@@ -1,5 +1,10 @@
 import * as React from 'react'
-import { createWebsiteJSONLD, createBlogPostJSONLD } from './SchemaOrg'
+import {
+  generateWebsite,
+  generateBreadcrumbList,
+  generateBlogPosting,
+  generateOrganization,
+} from './SchemaOrg'
 
 import {
   ReactSEOMetaTagsProps,
@@ -46,9 +51,10 @@ export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps>
    * http://ogp.me/
    * @param props
    */
-  renderFacebook({ url, title, description, image, site, facebookAppId }: CombinedProps<FacebookProps>) {
+  renderFacebook({ url, title, description, image, site, language = 'en-US', facebookAppId }: CombinedProps<FacebookProps>) {
     return ([
       url && <meta key="og:url" property="og:url" content={url} />, // Important
+      <meta property="og:locale" content={language}/>,
       <meta key="og:title" property="og:title" content={title} />, // Important
       description && <meta key="og:description" property="og:description" content={description} />, // Somewhat important
       // Facebook recommends 1200x630 size, ratio of 1.91:1 but 1200x1200 is also fine
@@ -67,12 +73,19 @@ export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps>
     ])
   }
   renderBlogPostSEO(props: ReactSEOMetaTagsProps) {
-    const { website, facebook, twitter } = props
+    const { website, breadcrumb, facebook, twitter, organization } = props
     const blogPost = props.blogPost as BlogPostProps
     return ([
       this.renderGeneral({ ...website, ...blogPost }),
       <script key="application/ld+json" type="application/ld+json">
-        { createBlogPostJSONLD({ ...website, ...blogPost })}
+        {
+          JSON.stringify([
+            generateWebsite(blogPost),
+            breadcrumb && generateBreadcrumbList(breadcrumb),
+            generateBlogPosting(blogPost),
+            organization && generateOrganization(organization),
+          ])
+        }
       </script>,
       this.renderBlogOgTags(blogPost),
       this.renderFacebook({ ...website, ...blogPost, ...facebook }),
@@ -80,12 +93,22 @@ export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps>
     ])
   }
   renderWebsiteSEO(props: ReactSEOMetaTagsProps) {
-    const { facebook, twitter } = props
+    const { facebook, breadcrumb, twitter, organization } = props
     const website = props.website as WebsiteProps
     return ([
       this.renderGeneral(website),
       <script key="application/ld+json" type="application/ld+json">
-        { createWebsiteJSONLD(website)}
+        {
+        /**
+         * Stringifying eliminates the undefined values, which keeps the JSON-LD somewhat tidy.
+         * Some empty objects might remain, but that shouldn't be a problem.
+         */
+          JSON.stringify([
+            generateWebsite(website),
+            breadcrumb && generateBreadcrumbList(breadcrumb),
+            organization && generateOrganization(organization),
+          ])
+        }
       </script>,
       this.renderNonBlogOgTags(),
       this.renderFacebook({ ...website, ...facebook }),

@@ -50,5 +50,6 @@
     "tslint": "5.18.0",
     "tslint-config-airbnb": "5.11.1",
     "typescript": "3.5.3"
-  }
+  },
+  "dependencies": {}
 }
