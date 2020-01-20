@@ -37,7 +37,7 @@
   "bugs": {
     "url": "https://github.com/teemukoivisto/react-seo-meta-tags/issues"
   },
-  "homepage": "https://github.com/teemukoivisto/react-seo-meta-tags#readme",
+  "homepage": "https://teemukoivisto.github.io/react-seo-meta-tags/",
   "peerDependencies": {
     "react": ">=16.2.0",
     "react-dom": ">=16.2.0"

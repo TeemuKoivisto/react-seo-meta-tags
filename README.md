@@ -1,10 +1,10 @@
-# react-seo-meta-tags [![npm version](https://badge.fury.io/js/react-seo-meta-tags.svg)](https://badge.fury.io/js/react-seo-meta-tags)
+# [react-seo-meta-tags](https://teemukoivisto.github.io/react-seo-meta-tags/) [![npm version](https://badge.fury.io/js/react-seo-meta-tags.svg)](https://badge.fury.io/js/react-seo-meta-tags)
 
 SEO metatags for React apps, best used with Gatsby + react-helmet.
 
 Motive for this was the infuriating complexity of SEO coupled with the fact there wasn't really any good SEO packages out there for React.
 
-[Example Gatsby site](https://teemukoivisto.github.io/react-seo-meta-tags/)
+<u>[Example Gatsby site](https://teemukoivisto.github.io/react-seo-meta-tags/)</u>
 
 # How to install
 
