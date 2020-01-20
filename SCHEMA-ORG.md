@@ -4,6 +4,13 @@ WIP because this is complicated and it's not very useful use of my time.
 
 Some things left to cover:
 * `'@id'` property (sets the unique id for crawlers)
+* image width, height property
+* author sameAs list
+* thumbnail
+* dateModified to website
+* image as list
+* canonicalUrl for what??
+* also what is site-name
 
 ## Always include WebPage (or other page) property
 
