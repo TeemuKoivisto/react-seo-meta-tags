@@ -4,6 +4,8 @@ SEO metatags for React apps, best used with Gatsby + react-helmet.
 
 Motive for this was the infuriating complexity of SEO coupled with the fact there wasn't really any good SEO packages out there for React.
 
+[Example Gatsby site](https://teemukoivisto.github.io/react-seo-meta-tags/)
+
 # How to install
 
 Requires `react`, `react-dom` >=16. Probably you want to use `react-helmet` also.
@@ -207,24 +209,11 @@ export interface OrganizationProps {
 
 Requires: Node.js >= 8.
 
-1) Clone this repo & run `npm i`.
-2) To use with the example project, install its dependencies too: `cd example & npm i`. TODO
-3) Back in the root directory, link `react-seo-meta-tags` to your local npm libraries: `npm link`. It should be now available as a global dependency for any npm projects, link it to your example-app: `cd example & npm link react-seo-meta-tags`. It creates a symlink pointing to this library's root folder.
-4) Start the TypeScript compiler in one bash session: `npm run ts:watch`.
-5) Start the example Gatsby site with: `npm start`.
-6) The app should open in http://localhost:8000. The changes to the source code should be reloaded automatically and be seen in the `<head>`'s metatags. Happy hacking!
-
-As one script:
-```bash
-#!/bin/bash
-npm i
-cd example & npm i
-cd .. & npm link
-cd example & npm link react-seo-meta-tags
-cd .. & npm run ts:watch
-# Open another terminal session
-cd example & npm start
-```
+1. Clone this repo & run `npm i`
+2. Star the TypeScript compiler: `npm run ts:watch`
+3. In another terminal go to the example project and install dependencies: `cd example & npm i`
+4. Start the Gatsby app with: `npm start`
+5. The app should open in http://localhost:8000. The changes to the source code should be reloaded automatically and be seen in the `<head>`'s metatags. Happy hacking!
 
 # How to publish changes
 
@@ -233,7 +222,7 @@ This one is more for the maintainers such as me. All the changes should go throu
 1) Login to your npm account: `npm login`.
 2) After making changes to the code (*cough* pulling from master I mean), run `npm run compile`.
 3) Depending on the changes you have made, use either `npm version patch|minor|major` to update the version in `package.json`. Do it semantically\*.
-4) It should automatically tag it, but if it didn't tag it yourself: `git tag 1.5.1`.
+4) It should automatically tag it, but if it didn't tag it yourself: `git tag v1.5.1`.
 5) Push the changes to GitHub: `git push origin master && git push origin master --tags`.
 6) Publish to npm: `npm publish`. This will push the files specified in `package.json` `"files"`-block + default files (package.json, README, LICENSE).
 
