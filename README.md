@@ -248,6 +248,7 @@ Create issues or PRs for bug reports/feedback/feature requests.
 * https://search.google.com/structured-data/testing-tool
 * https://developers.facebook.com/tools/debug/sharing/
 * https://cards-dev.twitter.com/validator
+* https://developers.google.com/speed/pagespeed/insights
 
 # Other resources about SEO in general
 
@@ -255,6 +256,8 @@ Create issues or PRs for bug reports/feedback/feature requests.
 * https://developers.facebook.com/docs/sharing/webmasters#markup
 * https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/markup.html
 * https://developers.google.com/search/docs/data-types/article
+* https://salon.thefamily.co/the-google-seo-bible-everything-a-startup-needs-to-know-a60dbac2d060
+* https://htmlhead.dev
 
 ## Open Graph
 

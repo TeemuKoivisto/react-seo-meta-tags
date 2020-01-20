@@ -1,3 +1,5 @@
+import * as React from 'react'
+
 export interface ReactSEOMetaTagsProps {
   render?: (el: React.ReactNode) => React.ReactNode
   website?: WebsiteProps
@@ -81,6 +83,7 @@ export interface BlogPostProps {
    */
   publisher?: OrganizationProps
   site?: {
+    // TODO refactor
     // "If your object is part of a larger web site, the name which should be displayed for the overall site. e.g., "IMDb"."
     siteName?: string // Used for og:site_name
     canonicalUrl?: string // The index URL of the website (eg https://google.com), used for blogPost's JSON-LD schema's "mainEntityOfPage".
