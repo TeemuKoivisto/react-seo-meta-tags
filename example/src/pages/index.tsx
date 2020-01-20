@@ -25,7 +25,7 @@ export default class FrontPage extends React.PureComponent<IFrontPageProps> {
         <Container>
           <h1>Hi there!</h1>
           <p>
-            This is an example blog to show how the functionality of <a href="https://github.com/TeemuKoivisto/react-seo-meta-tags" rel="noopener">
+            This is an example blog to show the functionality of <a href="https://github.com/TeemuKoivisto/react-seo-meta-tags" rel="noopener">
             react-seo-meta-tags</a>.
           </p>
 
@@ -33,7 +33,7 @@ export default class FrontPage extends React.PureComponent<IFrontPageProps> {
             You can try the different SEO tools to see what properties it adds.
           </p>
 
-          <h2>Frontpage</h2>
+          <h2>/ (frontpage)</h2>
           <ul>
             <li><a href="https://search.google.com/structured-data/testing-tool#url=https%3A%2F%2Fteemukoivisto.github.io%2Freact-seo-meta-tags" rel="noopener">
               Google Structured Data Testing Tool
@@ -49,7 +49,7 @@ export default class FrontPage extends React.PureComponent<IFrontPageProps> {
             </a></li>
           </ul>
 
-          <h2>/blog/hello-world blog page</h2>
+          <h2>/blog/hello-world</h2>
           <ul>
             <li><a href="https://search.google.com/structured-data/testing-tool#url=https%3A%2F%2Fteemukoivisto.github.io%2Freact-seo-meta-tags%2Fblog%2Fhello-world%2F" rel="noopener">
               Google Structured Data Testing Tool

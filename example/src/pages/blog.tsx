@@ -17,7 +17,7 @@ export default class BlogPage extends React.PureComponent<IBlogPageProps> {
     const { data: { allMarkdownRemark } } = this.props
     return (
       <DefaultLayout>
-        <div>
+        <Container>
           <h1>My blog posts</h1>
           <BlogList>
             { allMarkdownRemark.edges.map(({ node }: INode) =>
@@ -34,12 +34,15 @@ export default class BlogPage extends React.PureComponent<IBlogPageProps> {
             </li>
             )}
           </BlogList>
-        </div>
+        </Container>
       </DefaultLayout>
     )
   }
 }
 
+const Container = styled.div`
+  min-width: 600px;
+`
 const BlogList = styled.ul`
   margin: 0 0 3rem 0;
   & > li {

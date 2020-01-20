@@ -54,15 +54,13 @@ class DropdownClass extends React.PureComponent<IProps, IState> {
         :
         <SvgWrapper onClick={this.toggleMenu}><MdMenu size={32}/></SvgWrapper>}
         <MobileNav className={this.state.isOpen && 'visible'}>
-          <nav>
-            <DropdownList>
-              {options.map(option => (
-              <DropdownOption key={option.key}>
-                <Link to={option.key}>{option.title}</Link>
-              </DropdownOption>
-              ))}
-            </DropdownList>
-          </nav>
+          <DropdownList>
+            {options.map(option => (
+            <DropdownOption key={option.key}>
+              <Link to={option.key}>{option.title}</Link>
+            </DropdownOption>
+            ))}
+          </DropdownList>
         </MobileNav>
       </div>
     )
@@ -79,11 +77,12 @@ const SvgWrapper = styled.div`
 `
 const FixedCloseIcon = styled.div`
   color: #fff;
-  top: 30px;
+  right: 20px;
+  top: 20px;
   position: fixed;
   z-index: 501;
 `
-const MobileNav = styled.header`
+const MobileNav = styled.nav`
   background: rgba(0,0,0,.9);
   color: #fff;
   padding: 60px 0 0 0;

@@ -22,8 +22,13 @@ function NavBarEl(props: IProps) {
         <TitleLink to="/">
           <Title>{title}</Title>
         </TitleLink>
-        <NavLink className="blog-link" to="/blog">Blog</NavLink>
-        <ExternalLink href="https://www.npmjs.com/package/react-seo-meta-tags" rel="noopener">npm</ExternalLink>
+        <NavLink className="hide-in-mobile" to="/blog">Blog</NavLink>
+        <ExternalLink
+          className="hide-in-mobile"
+          href="https://www.npmjs.com/package/react-seo-meta-tags"
+          rel="noopener">
+            npm
+        </ExternalLink>
         <NavDropdown options={navDropdownOptions} onSelect={(e: any) => console.log(e)}/>
       </Nav>
     </NavBarContainer>
@@ -61,15 +66,14 @@ const Nav = styled.nav`
   position: relative;
   ${raise(2)}
   ${NavDropdown} {
-    visibility: hidden;
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
     margin-right: 20px;
+    position: absolute;
+    right: 0;
+    visibility: hidden;
   }
   @media screen and (max-width: 500px) {
     padding: 20px 0;
-    .blog-link {
+    .hide-in-mobile {
       display: none;
       visibility: hidden;
     }
