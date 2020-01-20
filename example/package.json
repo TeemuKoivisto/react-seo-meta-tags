@@ -31,7 +31,9 @@
     "react-icons": "^3.8.0",
     "react-seo-meta-tags": "file:../",
     "react-typography": "^0.16.19",
+    "sharp": "^0.24.0",
     "styled-components": "^5.0.0",
+    "typescript": "^3.7.5",
     "typography": "^0.16.19"
   },
   "devDependencies": {

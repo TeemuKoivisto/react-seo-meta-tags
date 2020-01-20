@@ -72,13 +72,31 @@ export default class BlogPostTemplate extends React.PureComponent<IProps> {
     const { data: { site, markdownRemark, seoImage }, pageContext } = this.props
     const baseUrl = process.env.NODE_ENV === 'development' ? this.props.location.origin : site.siteMetadata.siteUrl
     const postUrl = `${baseUrl}${markdownRemark.fields.slug}`
+    /**
+     * This is a super hacky looking method for picking some image incase the default sharp-image fails
+     */
+    const getImage = () => {
+      // In the seoImage -query I'm trying to fetch an optimized image (I think the size was scaled into different sizes)
+      // However at times this fails for no apparent reason so ehh, it kinda sucks ass
+      if (seoImage && seoImage.landscape) {
+        return `${baseUrl}${seoImage.landscape.fluid.src}`
+      }
+      // This is the image specified in the markdown images-block (and first one of that list)
+      // Not optimized so don't use 2 MB images
+      if (markdownRemark.frontmatter.images && markdownRemark.frontmatter.images.length > 0) {
+        return markdownRemark.frontmatter.images[0]
+      }
+      // If all else fails use the site image
+      return site.siteMetadata.image
+    }
+    const image = getImage()
     // This abomination is the combination of siteMetadata from gatsby-config.js,
     // data from the markdown file this blog-post is generated from and the beautifully
     // mushed together URLs of the blog-post & its image so that in development it picks up
     // the localhost address and in production the canonical URL defined in gatsby-config.js
     const blogPost = { ...site.siteMetadata, ...markdownRemark.frontmatter, ...{
       url: postUrl,
-      image: seoImage && seoImage.landscape && `${baseUrl}${seoImage.landscape.fluid.src}`,
+      image,
       publisher: site.siteMetadata.author,
     }} as ISEOBlogPost
     const title = markdownRemark.frontmatter.title

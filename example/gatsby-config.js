@@ -5,14 +5,14 @@ module.exports = {
     description: 'React SEO meta tag library for quickly adding the basic meta-tags for a Gatsby blog site',
     image: 'https://teemukoivisto.github.io/react-seo-meta-tags/img/logo.png',
     facebookAppId: '3006370309470889',
-    twitterUser: '@mickey_mouse',
+    twitterUser: '@tegurus',
     author: {
       name: 'Teemu Koivisto',
       image: 'https://teemukoivisto.xyz/images/avatar-460.jpeg',
     },
     siteUrl: 'https://teemukoivisto.github.io/react-seo-meta-tags', // Required by gatsby-plugin-sitemap
     site: {
-      siteName: 'Example Inc.', // This is not very necessary for a personal blog but whatever
+      siteName: 'React SEO Meta Tags npm library', // This is not very necessary for a personal blog but whatever
     },
   },
   plugins: [
