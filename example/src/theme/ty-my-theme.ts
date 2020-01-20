@@ -29,10 +29,11 @@ const theme = {
   boldWeight: 700,
   overrideStyles: ({ adjustFontSizeTo, scale, rhythm }, options) => ({
     a: {
-      textDecoration: 'none',
+      textDecoration: 'underline',
     },
     'a:hover,a:active': {
-      textDecoration: 'underline',
+      outline: '1px solid',
+      outlineStyle: 'dashed',
     },
     blockquote: {
       ...scale(1 / 5),

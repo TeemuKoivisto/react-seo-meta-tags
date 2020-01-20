@@ -23,6 +23,7 @@ function NavBarEl(props: IProps) {
           <Title>{title}</Title>
         </TitleLink>
         <NavLink className="blog-link" to="/blog">Blog</NavLink>
+        <ExternalLink href="https://www.npmjs.com/package/react-seo-meta-tags" rel="noopener">npm</ExternalLink>
         <NavDropdown options={navDropdownOptions} onSelect={(e: any) => console.log(e)}/>
       </Nav>
     </NavBarContainer>
@@ -77,7 +78,6 @@ const Nav = styled.nav`
     }
   }
 `
-
 const NavLink = styled(Link)`
   color: #fff;
   margin-right: 40px; // For spacing out the dividing bars
@@ -104,5 +104,8 @@ const NavLink = styled(Link)`
       right: -10px;
     }
   }
+`
+const ExternalLink = styled.a`
+  color: #fff;
 `
 export const NavBar = styled(NavBarEl)``

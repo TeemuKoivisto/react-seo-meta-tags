@@ -16,6 +16,7 @@ function FooterEl(props: IProps) {
         <Nav>
           <NavLink to="/" className="title"><h2>{title}</h2></NavLink>
           <NavLink to="/blog">Blog</NavLink>
+          <ExternalLink href="https://www.npmjs.com/package/react-seo-meta-tags" rel="noopener">npm</ExternalLink>
         </Nav>
         <SmallPrint>
           <CopyrightNotice>{`Copyright © ${new Date().getFullYear()}, Teemu Koivisto`}</CopyrightNotice>
@@ -88,6 +89,9 @@ const NavLink = styled(Link)`
       display: none;
     }
   }
+`
+const ExternalLink = styled.a`
+  color: #fff;
 `
 const SmallPrint = styled.div`
   align-items: center;

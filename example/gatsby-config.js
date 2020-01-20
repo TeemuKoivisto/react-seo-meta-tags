@@ -1,9 +1,10 @@
 module.exports = {
+  pathPrefix: '/react-seo-meta-tags',
   siteMetadata: {
-    title: 'My example site',
-    description: 'A more detailed description of my site, less than 100 characters long',
-    image: 'https://teemukoivisto.xyz/images/avatar-460.jpeg',
-    facebookAppId: 'abc123',
+    title: 'react-seo-meta-tags',
+    description: 'React SEO meta tag library for quickly adding the basic meta-tags for a Gatsby blog site',
+    image: 'https://teemukoivisto.github.io/react-seo-meta-tags/img/logo.png',
+    facebookAppId: '3006370309470889',
     twitterUser: '@mickey_mouse',
     author: {
       name: 'Teemu Koivisto',

@@ -104,6 +104,8 @@ const Tag = styled.li`
   ${raise(1)};
 `
 const Excerpt = styled.h6`
+  font-size: 1rem;
+  font-weight: 300;
   margin: 0 0 0 0;
 `
 export const BlogHeader = styled(BlogHeaderEl)``
