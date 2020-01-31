@@ -1,1 +1,1 @@
-{"componentChunkName":"component---cache-dev-404-page-js","path":"/dev-404-page/","result":{"data":{"allSitePage":{"nodes":[{"path":"/blog/another-post"},{"path":"/blog/hello-world"},{"path":"/blog/"},{"path":"/"}]}},"pageContext":{}}}
+{"componentChunkName":"component---cache-dev-404-page-js","path":"/dev-404-page/","result":{"data":{"allSitePage":{"nodes":[{"id":"SitePage /blog/another-post","path":"/blog/another-post"},{"id":"SitePage /blog/hello-world","path":"/blog/hello-world"},{"id":"SitePage /blog/","path":"/blog/"},{"id":"SitePage /","path":"/"}]}},"pageContext":{}}}
