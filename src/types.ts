@@ -42,7 +42,9 @@ export interface FacebookProps {
   title?: string // The title of your article without any branding such as your site name.
   description?: string // A brief description of the content, usually between 2 and 4 sentences.
   language?: string // Used for og:locale. Default "en-US"
-  image?: string // Facebook recommends 1200x630 size, ratio of 1.91:1. PNG, JPEG, or GIF.
+  // Facebook recommends 1200x630 size, ratio of 1.91:1. PNG, JPEG, or GIF.
+  // Note the "minimum size constraint of 200px by 200px".
+  image?: string
   facebookAppId?: string // "Insights lets you view analytics for traffic to your site from Facebook."
 }
 
@@ -122,7 +124,7 @@ export interface OrganizationProps {
   // List of other webpages referencing this organization, eg Wikipedia, Facebook, Twitter, Instagram etc.
   // Will show these sites alongside your website in Google search results and probably boost your SEO rank too.
   sameAs?: string[]
-  url?: string // URL to the organization, eg "https://abc.xyz"
+  url: string // URL to the organization, eg "https://abc.xyz"
   parentOrganization?: OrganizationProps // You can nest as many organizations as you'd like, dunno how useful it's
 }
 

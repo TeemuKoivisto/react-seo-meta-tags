@@ -27,6 +27,7 @@ const siteDataQuery = graphql`
       image
       facebookAppId
       twitterUser
+      imgSiteUrl
       siteUrl
       site {
         siteName
@@ -34,6 +35,11 @@ const siteDataQuery = graphql`
       author {
         name
         image
+      }
+      organization {
+        name
+        logo
+        url
       }
     }
   }
@@ -79,12 +85,7 @@ const DefaultContent = ({ children, seoBlogPost }: IProps) => ({ site }: { site:
         blogPost={seoBlogPost}
         facebook={{ facebookAppId: site.siteMetadata.facebookAppId }}
         twitter={{ twitterUser: site.siteMetadata.twitterUser }}
-        organization={{
-          name: 'react-seo-meta-tags',
-          url: 'https://teemukoivisto.github.io/react-seo-meta-tags',
-          logo: 'https://teemukoivisto.github.io/react-seo-meta-tags/img/logo.png'
-        }}
-
+        organization={site.siteMetadata.organization}
       />
       <Helmet>
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>

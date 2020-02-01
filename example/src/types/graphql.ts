@@ -6,6 +6,7 @@ export interface ISiteData {
     image: string
     facebookAppId: string
     twitterUser: string
+    imgSiteUrl: string
     siteUrl: string
     site: {
       siteName: string
@@ -14,11 +15,16 @@ export interface ISiteData {
       name: string
       image: string
     }
+    organization: {
+      name: string
+      logo: string
+      url: string
+    }
   }
 }
 
 export interface ISEOBlogPost {
-  url: string
+  // url: string
   image: string
   title: string
   datePublished: string
@@ -37,7 +43,8 @@ export interface ISEOBlogPost {
   }
   publisher: {
     name: string
-    image: string
+    logo: string
+    url: string
   }
 }
 

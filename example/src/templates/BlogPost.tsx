@@ -6,6 +6,7 @@ import styled from '../theme/styled'
 import { DefaultLayout } from '../layouts/DefaultLayout'
 import { BlogPager } from '../components/BlogPager'
 import { BlogHeader } from '../components/BlogHeader'
+import { ShareButtons } from '../components/ShareButtons'
 
 import { ISiteData, ISEOBlogPost, IBlogPostFrontmatter } from '../types/graphql'
 
@@ -70,6 +71,7 @@ interface IProps {
 export default class BlogPostTemplate extends React.PureComponent<IProps> {
   render() {
     const { data: { site, markdownRemark, seoImage }, pageContext } = this.props
+    const imgBaseUrl = process.env.NODE_ENV === 'development' ? this.props.location.origin : site.siteMetadata.imgSiteUrl
     const baseUrl = process.env.NODE_ENV === 'development' ? this.props.location.origin : site.siteMetadata.siteUrl
     const postUrl = `${baseUrl}${markdownRemark.fields.slug}`
     /**
@@ -79,7 +81,7 @@ export default class BlogPostTemplate extends React.PureComponent<IProps> {
       // In the seoImage -query I'm trying to fetch an optimized image (I think the size was scaled into different sizes)
       // However at times this fails for no apparent reason so ehh, it kinda sucks ass
       if (seoImage && seoImage.landscape) {
-        return `${baseUrl}${seoImage.landscape.fluid.src}`
+        return `${imgBaseUrl}${seoImage.landscape.fluid.src}`
       }
       // This is the image specified in the markdown images-block (and first one of that list)
       // Not optimized so don't use 2 MB images
@@ -95,9 +97,8 @@ export default class BlogPostTemplate extends React.PureComponent<IProps> {
     // mushed together URLs of the blog-post & its image so that in development it picks up
     // the localhost address and in production the canonical URL defined in gatsby-config.js
     const blogPost = { ...site.siteMetadata, ...markdownRemark.frontmatter, ...{
-      url: postUrl,
       image,
-      publisher: site.siteMetadata.author,
+      publisher: site.siteMetadata.organization
     }} as ISEOBlogPost
     const title = markdownRemark.frontmatter.title
     // Use markdown's description field if provided, otherwise just 100 first characters.
@@ -108,6 +109,7 @@ export default class BlogPostTemplate extends React.PureComponent<IProps> {
           <BlogHeader frontmatter={markdownRemark.frontmatter} excerpt={excerpt}/>
           <section className="blog-post" dangerouslySetInnerHTML={{ __html: markdownRemark.html }} />
           <BlogPager previous={pageContext.previous} next={pageContext.next}/>
+          <ShareButtons url={postUrl} title={title}/>
         </BlogContainer>
       </DefaultLayout>
     )

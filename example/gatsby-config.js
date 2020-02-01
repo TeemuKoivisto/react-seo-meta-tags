@@ -1,4 +1,5 @@
 module.exports = {
+  // For deploying to Github pages with a correct prefix -> https://teemukoivisto.github.io/react-seo-meta-tags/
   pathPrefix: '/react-seo-meta-tags',
   siteMetadata: {
     title: 'react-seo-meta-tags',
@@ -10,7 +11,13 @@ module.exports = {
       name: 'Teemu Koivisto',
       image: 'https://teemukoivisto.xyz/images/avatar-460.jpeg',
     },
-    siteUrl: 'https://teemukoivisto.github.io/react-seo-meta-tags', // Required by gatsby-plugin-sitemap
+    organization: {
+      name: 'react-seo-meta-tags',
+      logo: 'https://teemukoivisto.github.io/react-seo-meta-tags/img/logo.png',
+      url: 'https://teemukoivisto.github.io/react-seo-meta-tags'
+    },
+    imgSiteUrl: 'https://teemukoivisto.github.io',
+    siteUrl: 'https://teemukoivisto.github.io/react-seo-meta-tags',
     site: {
       siteName: 'React SEO Meta Tags npm library', // This is not very necessary for a personal blog but whatever
     },
