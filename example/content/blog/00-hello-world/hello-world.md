@@ -14,7 +14,7 @@ images:
 
 Hello there!
 
-You should pay close attention to the dimensions of your image, the 1.91:1 ratio is no joke and you should follow it. Otherwise images such as this get cropped weirdly.
+You should pay close attention to the dimensions of your image, the 1.91:1 ratio is no joke and you should follow it. Otherwise images such as this get cropped weirdly. Eg 440x220 fits pretty nicely a Twitter card.
 
 Funny thing also that .png images don't work with gatsby-plugin-sharp. I have no idea but they just don't.
 
