@@ -86,7 +86,7 @@ export default class BlogPostTemplate extends React.PureComponent<IProps> {
       // This is the image specified in the markdown images-block (and first one of that list)
       // Not optimized so don't use 2 MB images
       if (markdownRemark.frontmatter.images && markdownRemark.frontmatter.images.length > 0) {
-        return markdownRemark.frontmatter.images[0]
+        return markdownRemark.frontmatter.images[0].publicURL
       }
       // If all else fails use the site image
       return site.siteMetadata.image
