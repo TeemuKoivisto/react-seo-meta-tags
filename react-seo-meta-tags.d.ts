@@ -26,8 +26,6 @@ declare module 'react-seo-meta-tags' {
     site?: {
       // "If your object is part of a larger web site, the name which should be displayed for the overall site. e.g., "IMDb"."
       siteName?: string
-      // The index URL of the website (eg https://google.com), used for BlogPosting JSON-LD schema.
-      canonicalUrl?: string
       // If your website has a search functionality, enter the URL with parameter here eg "https://www.google.com/search?q="
       searchUrl?: string
     }
@@ -41,7 +39,9 @@ declare module 'react-seo-meta-tags' {
     title?: string // The title of your article without any branding such as your site name.
     description?: string // A brief description of the content, usually between 2 and 4 sentences.
     language?: string // Used for og:locale. Default "en-US"
-    image?: string // Facebook recommends 1200x630 size, ratio of 1.91:1. PNG, JPEG, or GIF.
+    // Facebook recommends 1200x630 size, ratio of 1.91:1. PNG, JPEG, or GIF.
+    // Note the "minimum size constraint of 200px by 200px".
+    image?: string
     facebookAppId?: string // "Insights lets you view analytics for traffic to your site from Facebook."
   }
   
@@ -83,8 +83,8 @@ declare module 'react-seo-meta-tags' {
     publisher?: OrganizationProps
     site?: {
       // "If your object is part of a larger web site, the name which should be displayed for the overall site. e.g., "IMDb"."
-      siteName?: string // Used for og:site_name
-      canonicalUrl?: string // The index URL of the website (eg https://google.com), used for blogPost's JSON-LD schema's "mainEntityOfPage".
+      // Used for og:site_name
+      siteName?: string
     }
   }
   
@@ -120,10 +120,10 @@ declare module 'react-seo-meta-tags' {
     // List of other webpages referencing this organization, eg Wikipedia, Facebook, Twitter, Instagram etc.
     // Will show these sites alongside your website in Google search results and probably boost your SEO rank too.
     sameAs?: string[]
-    url?: string // URL to the organization, eg "https://abc.xyz"
+    url: string // URL to the organization, eg "https://abc.xyz"
     parentOrganization?: OrganizationProps // You can nest as many organizations as you'd like, dunno how useful it's
   }
-  
+
   export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps> {}
   export default ReactSEOMetaTags
 }

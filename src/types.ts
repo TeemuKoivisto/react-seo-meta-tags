@@ -27,8 +27,6 @@ export interface WebsiteProps {
   site?: {
     // "If your object is part of a larger web site, the name which should be displayed for the overall site. e.g., "IMDb"."
     siteName?: string
-    // The index URL of the website (eg https://google.com), used for BlogPosting JSON-LD schema.
-    canonicalUrl?: string
     // If your website has a search functionality, enter the URL with parameter here eg "https://www.google.com/search?q="
     searchUrl?: string
   }
@@ -85,10 +83,9 @@ export interface BlogPostProps {
    */
   publisher?: OrganizationProps
   site?: {
-    // TODO refactor
     // "If your object is part of a larger web site, the name which should be displayed for the overall site. e.g., "IMDb"."
-    siteName?: string // Used for og:site_name
-    canonicalUrl?: string // The index URL of the website (eg https://google.com), used for blogPost's JSON-LD schema's "mainEntityOfPage".
+    // Used for og:site_name
+    siteName?: string
   }
 }
 
