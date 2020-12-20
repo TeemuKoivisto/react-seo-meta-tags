@@ -35,7 +35,7 @@ export default class FrontPage extends React.PureComponent<IFrontPageProps> {
 
           <h2>/ (frontpage)</h2>
           <ul>
-          <li><a href="https://search.google.com/test/rich-results" rel="noopener">
+            <li><a href="https://search.google.com/test/rich-results" rel="noopener">
               Google Rich Results
             </a></li>
             <li><a href="https://search.google.com/structured-data/testing-tool#url=https%3A%2F%2Fteemukoivisto.github.io%2Freact-seo-meta-tags" rel="noopener">
@@ -54,6 +54,9 @@ export default class FrontPage extends React.PureComponent<IFrontPageProps> {
 
           <h2>/blog/hello-world</h2>
           <ul>
+            <li><a href="https://search.google.com/test/rich-results" rel="noopener">
+              Google Rich Results
+            </a></li>
             <li><a href="https://search.google.com/structured-data/testing-tool#url=https%3A%2F%2Fteemukoivisto.github.io%2Freact-seo-meta-tags%2Fblog%2Fhello-world%2F" rel="noopener">
               Google Structured Data Testing Tool
             </a></li>
