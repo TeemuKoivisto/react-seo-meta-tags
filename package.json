@@ -1,6 +1,6 @@
 {
   "name": "react-seo-meta-tags",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "SEO metatags for React apps, mainly to be used with Gatsby + react-helmet",
   "main": "dist/index.js",
   "types": "react-seo-meta-tags.d.ts",
