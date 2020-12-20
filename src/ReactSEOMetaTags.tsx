@@ -52,7 +52,10 @@ export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps>
    * http://ogp.me/
    * @param props
    */
-  renderFacebook({ url, title, description, image, site, language = 'en-US', facebookAppId }: CombinedProps<FacebookProps>) {
+  renderFacebook(props: CombinedProps<FacebookProps>) {
+    const {
+      url, title, description, image, imageAlt, video, audio, site, language = 'en-US', facebookAppId
+    } = props
     return ([
       url && <meta key="og:url" property="og:url" content={url} />, // Important
       <meta property="og:locale" content={language}/>,
@@ -60,17 +63,25 @@ export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps>
       description && <meta key="og:description" property="og:description" content={description} />, // Somewhat important
       // Facebook recommends 1200x630 size, ratio of 1.91:1 but 1200x1200 is also fine
       image && <meta key="og:image" property="og:image" content={image} />, // Important
+      imageAlt && <meta key="og:image:alt" property="og:image:alt" content={imageAlt} />, // For visually impaired people
+      video && <meta key="og:video" property="og:video" content={video} />,
+      audio && <meta key="og:audio" property="og:audio" content={audio} />,
       site && site.siteName && <meta key="og:site_name" property="og:site_name" content={site!.siteName} />, // Eeh... can't hurt?
       facebookAppId && <meta key="fb:app_id" property="fb:app_id" content={facebookAppId}/>
     ])
   }
-  renderTwitter({ title, description, image, twitterUser }: CombinedProps<TwitterProps>) {
+  renderTwitter(props: CombinedProps<TwitterProps>) {
+    const {
+      title, description, image, imageAlt, cardType = 'summary_large_image', twitterUser, twitterSite
+    } = props
     return ([
-      image && <meta key="twitter:card" name="twitter:card" content="summary_large_image" />,
+      image && <meta key="twitter:card" name="twitter:card" content={cardType} />,
       twitterUser && <meta key="twitter:creator" name="twitter:creator" content={twitterUser} />,
+      twitterSite && <meta key="twitter:site" name="twitter:site" content={twitterSite} />,
       <meta key="twitter:title" name="twitter:title" content={title} />,
       description && <meta key="twitter:description" name="twitter:description" content={description} />,
-      image && <meta key="twitter:image" name="twitter:image" content={image} />
+      image && <meta key="twitter:image" name="twitter:image" content={image} />,
+      imageAlt && <meta key="twitter:image:alt" name="twitter:image:alt" content={imageAlt} />
     ])
   }
   renderBlogPostSEO(props: ReactSEOMetaTagsProps) {

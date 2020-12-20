@@ -22,10 +22,12 @@ export interface WebsiteProps {
   description?: string // Maximum 200 characters.
   language?: string // Default "en-US" https://en.wikipedia.org/wiki/IETF_language_tag and https://datahub.io/core/language-codes
   image?: string // URL to the image, PNG, JPEG, or GIF recommended.
+  imageAlt?: string // Alt for the image
   // Possibly redundant property. But at least bots can scrape your email and that's fun right? :)
   author?: PersonProps
   site?: {
     // "If your object is part of a larger web site, the name which should be displayed for the overall site. e.g., "IMDb"."
+    // At least Telegram uses this as gray text above the title when sharing links.
     siteName?: string
     // If your website has a search functionality, enter the URL with parameter here eg "https://www.google.com/search?q="
     searchUrl?: string
@@ -41,8 +43,14 @@ export interface FacebookProps {
   description?: string // A brief description of the content, usually between 2 and 4 sentences.
   language?: string // Used for og:locale. Default "en-US"
   // Facebook recommends 1200x630 size, ratio of 1.91:1. PNG, JPEG, or GIF.
+  // But if you want your image to be displayed as a smaller image (aka thumbnail, similar to 'summary' Twitter card),
+  // your image should be smaller than 400x209 and preferably with a ratio of 1:1. Unless your image can be cropped
+  // into a 1:1 box without making it look bad. So you probably want to use something like 200x200.
   // Note the "minimum size constraint of 200px by 200px".
   image?: string
+  imageAlt?: string // Alt for the image
+  video?: string // "A URL to a video file that complements this object."
+  audio?: string // "A URL to an audio file to accompany this object."
   facebookAppId?: string // "Insights lets you view analytics for traffic to your site from Facebook."
 }
 
@@ -53,7 +61,13 @@ export interface TwitterProps {
   title?: string // Title of content (max 70 characters). Fallback: og:title.
   description?: string // Description of content (maximum 200 characters). Fallback: og:description.
   image?: string // Twitter card image, optimal ratio 1.91:1. Recommended: 1200x628. PNG, JPEG, or GIF. Fallback: og:image.
+  imageAlt?: string // Alt for the image. Fallback: og:image:alt.
+  // So since I saw that the large image looked dumb if you are using your faceshot as the image, I added the smaller 'summary'
+  // type as an option. It should be in 1:1 scale. Also there exists 'player' and 'app' types but since I'm not using those,
+  // I'm not going to spend my precious time figuring out how they work for now.
+  cardType?: 'summary_large_image' | 'summary' // Default 'summary_large_image'
   twitterUser?: string // @username of content creator.
+  twitterSite?: string // @username of the site eg @nytimes
 }
 
 /**
@@ -66,6 +80,7 @@ export interface BlogPostProps {
   title: string // Title of the post. Max 70 characters.
   description?: string // Should be a short description about the topic, <=200 words. Mainly for SEO purposes.
   image: string // You should add this. Just use the same image as og/twitter eg 1200x630 with 1.91:1 ratio in PNG, JPEG, or GIF.
+  imageAlt?: string // Some SEO tools really want this so it's probably wise to add it
   datePublished?: string // The original publication date. Don't change arbitrarily, Google might downrank you.
   dateModified?: string // Google prefers recent content in search results and also users are more likely to click a recent article
   tags?: string[]
