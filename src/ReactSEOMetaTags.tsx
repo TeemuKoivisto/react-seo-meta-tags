@@ -96,7 +96,7 @@ export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps>
             breadcrumb && generateBreadcrumbList(breadcrumb),
             generateBlogPosting(blogPost),
             organization && generateOrganization(organization),
-          ])
+          ].filter(obj => obj !== undefined && obj !== null))
         }
       </script>,
       this.renderBlogOgTags(blogPost),
@@ -119,7 +119,7 @@ export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps>
             generateWebsite(website),
             breadcrumb && generateBreadcrumbList(breadcrumb),
             organization && generateOrganization(organization),
-          ])
+          ].filter(obj => obj !== undefined && obj !== null))
         }
       </script>,
       this.renderNonBlogOgTags(),
