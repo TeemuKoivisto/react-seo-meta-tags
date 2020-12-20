@@ -49,6 +49,10 @@ exports[`<ReactSEOMetaTags /> Renders correctly when placed inside head tag 1`] 
       property="og:image"
     />
     <meta
+      content="Alt of my website image"
+      property="og:image:alt"
+    />
+    <meta
       content="IMDb"
       property="og:site_name"
     />
@@ -67,6 +71,10 @@ exports[`<ReactSEOMetaTags /> Renders correctly when placed inside head tag 1`] 
     <meta
       content="http://website.com/image.png"
       name="twitter:image"
+    />
+    <meta
+      content="Alt of my website image"
+      name="twitter:image:alt"
     />
   </head>
   <body>
@@ -122,44 +130,64 @@ exports[`<ReactSEOMetaTags /> Renders correctly with all the metadata defined 1`
       property="og:locale"
     />
     <meta
-      content="Is it a bird, is it a plane? Or is it React?"
+      content="My facebook title"
       property="og:title"
     />
     <meta
-      content="This post explains everything you need to know about React."
+      content="My facebook description"
       property="og:description"
     />
     <meta
-      content="https://myblog.xyz/images/react.png"
+      content="https://example.com/my-facebook-image.png"
       property="og:image"
+    />
+    <meta
+      content="My facebook image alt"
+      property="og:image:alt"
+    />
+    <meta
+      content="https://example.com/my-facebook-video.mpeg"
+      property="og:video"
+    />
+    <meta
+      content="https://example.com/my-facebook-audio.mp3"
+      property="og:audio"
     />
     <meta
       content="Amazon Inc."
       property="og:site_name"
     />
     <meta
-      content="abc123"
+      content="my facebook app id"
       property="fb:app_id"
     />
     <meta
-      content="summary_large_image"
+      content="summary"
       name="twitter:card"
     />
     <meta
-      content="@mickey_mouse"
+      content="@michaelcaine"
       name="twitter:creator"
     />
     <meta
-      content="Is it a bird, is it a plane? Or is it React?"
+      content="@UK"
+      name="twitter:site"
+    />
+    <meta
+      content="My twitter title"
       name="twitter:title"
     />
     <meta
-      content="This post explains everything you need to know about React."
+      content="My twitter description"
       name="twitter:description"
     />
     <meta
-      content="https://myblog.xyz/images/react.png"
+      content="https://example.com/my-twitter-faceshot-image.png"
       name="twitter:image"
+    />
+    <meta
+      content="My twitter image alt"
+      name="twitter:image:alt"
     />
   </head>
   <body>
@@ -227,6 +255,10 @@ exports[`<ReactSEOMetaTags /> Renders correctly with blog post 1`] = `
       property="og:image"
     />
     <meta
+      content="Alt of my website image"
+      property="og:image:alt"
+    />
+    <meta
       content="Amazon Inc."
       property="og:site_name"
     />
@@ -249,6 +281,10 @@ exports[`<ReactSEOMetaTags /> Renders correctly with blog post 1`] = `
     <meta
       content="https://myblog.xyz/images/react.png"
       name="twitter:image"
+    />
+    <meta
+      content="Alt of my website image"
+      name="twitter:image:alt"
     />
   </head>
   <body>

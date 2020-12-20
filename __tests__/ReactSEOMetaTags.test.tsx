@@ -7,7 +7,7 @@ import { ReactSEOMetaTags } from '../src/ReactSEOMetaTags'
 
 import {
   fullWebsiteData, fullWebsiteMetaTags, fullWebsiteJSONLD,
-  fullBlogPost, breadcrumb
+  fullBlogPost, facebookData, twitterData, breadcrumb
 } from './examples'
 
 describe('<ReactSEOMetaTags />', () => {
@@ -79,8 +79,8 @@ describe('<ReactSEOMetaTags />', () => {
               url: 'https://google.com',
               logo: 'https://google.com/logo.jpg'
             }}
-            facebook={{ facebookAppId: 'abc123' }}
-            twitter={{ twitterUser: '@mickey_mouse' }}
+            facebook={facebookData}
+            twitter={twitterData}
           />
         </head>
         <body>

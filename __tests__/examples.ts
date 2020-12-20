@@ -5,6 +5,7 @@ export const fullWebsiteData = {
   description: 'This is a 200 character long description of this web page which is quite interesting and which describes its contents well with a lot of relevant keywords and isn\'t just general marketing mumbo-jumbo.',
   language: 'en-US',
   image: 'http://website.com/image.png',
+  imageAlt: 'Alt of my website image',
   author: {
     email: 'person@gmail.com',
     name: 'John Smith',
@@ -34,6 +35,7 @@ export const fullWebsiteMetaTags = [
     content: "This is a 200 character long description of this web page which is quite interesting and which describes its contents well with a lot of relevant keywords and isn't just general marketing mumbo-jumbo."
   },
   { property: 'og:image', content: 'http://website.com/image.png' },
+  { property: 'og:image:alt', content: 'Alt of my website image' },
   { property: 'og:site_name', content: 'IMDb' },
   { name: 'twitter:card', content: 'summary_large_image' },
   {
@@ -44,7 +46,11 @@ export const fullWebsiteMetaTags = [
     name: 'twitter:description',
     content: "This is a 200 character long description of this web page which is quite interesting and which describes its contents well with a lot of relevant keywords and isn't just general marketing mumbo-jumbo."
   },
-  { name: 'twitter:image', content: 'http://website.com/image.png' }
+  { name: 'twitter:image', content: 'http://website.com/image.png' },
+  {
+    content: "Alt of my website image",
+    name: "twitter:image:alt",
+  },
 ]
 
 export const fullWebsiteJSONLD = [
@@ -105,6 +111,27 @@ export const fullBlogPost = {
   site: {
     siteName: 'Amazon Inc.'
   }
+}
+
+export const facebookData = {
+  title: 'My facebook title',
+  description: 'My facebook description',
+  language: 'en-US',
+  image: 'https://example.com/my-facebook-image.png',
+  imageAlt: 'My facebook image alt',
+  video: 'https://example.com/my-facebook-video.mpeg',
+  audio: 'https://example.com/my-facebook-audio.mp3',
+  facebookAppId: 'my facebook app id',
+}
+
+export const twitterData = {
+  title: 'My twitter title',
+  description: 'My twitter description',
+  image: 'https://example.com/my-twitter-faceshot-image.png',
+  imageAlt: 'My twitter image alt',
+  cardType: ('summary' as 'summary'),
+  twitterUser: '@michaelcaine',
+  twitterSite: '@UK',
 }
 
 export const breadcrumb = [
