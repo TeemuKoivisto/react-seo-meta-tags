@@ -1,6 +1,6 @@
 # [react-seo-meta-tags](https://teemukoivisto.github.io/react-seo-meta-tags/) [![npm version](https://badge.fury.io/js/react-seo-meta-tags.svg)](https://badge.fury.io/js/react-seo-meta-tags)
 
-SEO metatags for React apps, originally designed for a Gatsby blog site with react-helmet.
+SEO metatags for React apps, originally designed for a Gatsby blog site with react-helmet. But it should work with any React setup, such as Next.js apps.
 
 The motive behind it was the infuriating complexity of SEO coupled with the fact there wasn't any simple and understandable SEO packages out there for React.
 
@@ -8,7 +8,7 @@ The motive behind it was the infuriating complexity of SEO coupled with the fact
 
 # How to install
 
-Requires `react`, `react-dom` >=16. You might also want to use `react-helmet`.
+Requires `react >=16.2.0`. You might also want to use `react-helmet`.
 ```
 npm i react-seo-meta-tags
 ```
@@ -16,7 +16,7 @@ npm i react-seo-meta-tags
 # How to use
 
 With react-helmet:
-```ts
+```tsx
 import React from 'react'
 import Helmet from 'react-helmet'
 import { ReactSEOMetaTags } from 'react-seo-meta-tags'
@@ -26,6 +26,18 @@ import ReactSEOMetaTags from 'react-seo-meta-tags'
 ...
     <ReactSEOMetaTags
       render={(el: React.ReactNode) => <Helmet>{el}</Helmet>}
+      website={{ ...siteMetadata }}
+    />
+```
+
+Next.js:
+```tsx
+import Head from 'next/head'
+import { ReactSEOMetaTags } from 'react-seo-meta-tags'
+
+...
+    <ReactSEOMetaTags
+      render={(el: React.ReactNode) => <Head>{el}</Head>}
       website={{ ...siteMetadata }}
     />
 ```
@@ -52,11 +64,10 @@ where siteMetadata could be:
 }
 ```
 
-The use of `render` function instead of normal `children` is because `react-helmet` doesn't allow nesting of components,
-everything has to be directly rendered under ReactHelmet. It's a bit annoying.
+It appears both `react-helmet` and Next.js are a bit picky how they accept meta tags. ReactHelmet being the more choosy as it doesn't accept any nesting. Next.js works for some children but not all and therefore using the `render` function is required.
 
 Without:
-```ts
+```tsx
 import React from 'react'
 import { ReactSEOMetaTags } from 'react-seo-meta-tags'
 
