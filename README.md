@@ -1,14 +1,14 @@
 # [react-seo-meta-tags](https://teemukoivisto.github.io/react-seo-meta-tags/) [![npm version](https://badge.fury.io/js/react-seo-meta-tags.svg)](https://badge.fury.io/js/react-seo-meta-tags)
 
-SEO metatags for React apps, best used with Gatsby + react-helmet.
+SEO metatags for React apps, originally designed for a Gatsby blog site with react-helmet.
 
-Motive for this was the infuriating complexity of SEO coupled with the fact there wasn't really any good SEO packages out there for React.
+The motive behind it was the infuriating complexity of SEO coupled with the fact there wasn't any simple and understandable SEO packages out there for React.
 
 <u>[Example Gatsby site](https://teemukoivisto.github.io/react-seo-meta-tags/)</u>
 
 # How to install
 
-Requires `react`, `react-dom` >=16. Probably you want to use `react-helmet` also.
+Requires `react`, `react-dom` >=16. You might also want to use `react-helmet`.
 ```
 npm i react-seo-meta-tags
 ```
@@ -30,7 +30,30 @@ import ReactSEOMetaTags from 'react-seo-meta-tags'
     />
 ```
 
-Reason for that is because `react-helmet` doesn't allow nesting of components, everything has to be directly rendered under ReactHelmet. It's ... silly.
+where siteMetadata could be:
+
+```js
+{
+  url: 'https://google.com/about',
+  title:  'This is a 70 character long title with a lot of padding to make it so!',
+  datePublished: '2019-10-06T13:56:03.123Z',
+  description: 'This is a 200 character long description of this web page which is quite interesting and which describes its contents well with a lot of relevant keywords and isn\'t just general marketing mumbo-jumbo.',
+  language: 'en-US',
+  image: 'http://website.com/image.png',
+  author: {
+    email: 'person@gmail.com',
+    name: 'John Smith',
+    image: 'http://john.me/my-face.jpg',
+  },
+  site: {
+    siteName: 'IMDb',
+    searchUrl: 'https://www.google.com/search?q=',
+  }
+}
+```
+
+The use of `render` function instead of normal `children` is because `react-helmet` doesn't allow nesting of components,
+everything has to be directly rendered under ReactHelmet. It's a bit annoying.
 
 Without:
 ```ts
@@ -62,7 +85,7 @@ The current properties shown are the ones I've seen websites use the most. Most 
 
 ## General page
 
-Like front page or about or whatever. I recommend adding just the website property with an organization if you have one. In that case remember to add good enough list of sameAs URLs (they seem to be helpful). Breadcrumb if you feel it makes sense. **NOTE**: Always remember to add the title of the page, it's used also to render a `<title>` tag so be aware!
+For example a front or about page. I recommend adding just the website property with an organization if you have one. In that case remember to add good enough list of sameAs URLs (they seem to be helpful). Breadcrumb if you feel it makes sense. **NOTE**: Always remember to add the title of the page, it's used also to render a `<title>` tag so be aware!
 
 For the image of a general page I just used the logo for my example site. I strongly recommend having that image in 2:1 ratio eg 440x220 in order to make it appear nicely when sharing.
 

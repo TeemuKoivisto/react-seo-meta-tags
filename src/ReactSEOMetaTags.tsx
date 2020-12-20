@@ -17,9 +17,9 @@ import {
 } from './types'
 
 /**
- * General SEO element that renders meta tags with react-helmet
- * Which is kinda shitty library, as it doesn't allow nested components inside of it.
- * So instead everything is rendered here as methods of this SEO. Sigh.
+ * Compact and comprehensive SEO meta tag component for general web pages and blog articles.
+ * Includes basic meta tags as well as Facebook and Twitter tags and JSON-LD schema.
+ * Originally designed for a Gatsby blog. Can be used in conjunction with react-helmet.
  */
 export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps> {
   /**
