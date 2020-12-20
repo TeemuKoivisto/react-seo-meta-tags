@@ -134,6 +134,8 @@ export const pageQuery = graphql`
         dateModified(formatString: "YYYY-MM-DD")
         tags
         description
+        imageAlt
+        slug
         images {
           publicURL
         }

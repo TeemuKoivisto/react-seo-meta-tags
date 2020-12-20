@@ -27,7 +27,7 @@ describe('<ReactSEOMetaTags />', () => {
     expect(json).toMatchSnapshot()
   })
   test('Renders correctly with react-helmet', () => {
-    // https://github.com/nfl/react-helmet/issues/381
+    // https://github.com/nfl/react-helmet/issues/381#issuecomment-470824081
     // https://github.com/nfl/react-helmet/issues/168#issuecomment-245349049
     mount(
       <div>

@@ -16,5 +16,9 @@ Requires Node >= 8.
 
 ## How to install
 
-1) Install dependencies with: `npm i`
-2) Start the Gatsby development server with: `npm start`
+For some reason the file based import `"react-seo-meta-tags": "file:../",` doesn't work so we use link instead.
+
+1) In the root of the repo, link the library as a local dependency: `yarn link react-seo-meta-tags`
+2) Build it: `yarn build`
+3) Go to this folder and install dependencies: `cd example && yarn`
+4) Start the Gatsby development server with: `yarn start`

@@ -60,7 +60,6 @@ exports.createPages = async ({ graphql, actions }) => {
     const getSlug = (node) => node ? node.fields.slug : undefined
     const getPostAttribute = (node, attr) => node ? node.frontmatter[attr] : undefined
     const image = node.frontmatter.images && node.frontmatter.images[0].name || undefined
-    // console.log(image)
     createPage({
       path: getSlug(node),
       component: path.resolve(`./src/templates/BlogPost.tsx`),

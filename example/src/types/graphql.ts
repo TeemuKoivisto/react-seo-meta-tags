@@ -60,6 +60,8 @@ export interface IBlogPostFrontmatter {
   description: string // Should be a short description about the topic, <=200 words. Mainly for SEO purposes.
   tags: string[]
   images: IImage[]
+  imageAlt: string | null
+  slug: string
 }
 
 export interface IImage {

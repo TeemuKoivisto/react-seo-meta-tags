@@ -9,7 +9,7 @@ module.exports = {
     twitterUser: '@tegurus',
     author: {
       name: 'Teemu Koivisto',
-      image: 'https://teemukoivisto.xyz/images/avatar-460.jpeg',
+      image: 'https://teemukoivisto.xyz/img/avatar-460.jpeg',
     },
     organization: {
       name: 'react-seo-meta-tags',
