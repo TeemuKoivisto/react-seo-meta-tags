@@ -4,11 +4,19 @@ import { graphql } from 'gatsby'
 import { Layout } from '../components/Layout'
 import SEO from '../components/SEO'
 
-const NotFoundPage = ({ data, location }) => {
-  const siteTitle = data.site.siteMetadata.title
+import { SiteData } from '../types/graphql'
 
+interface Props {
+  data: {
+    site: SiteData
+  }
+  location: any
+}
+
+const NotFoundPage = ({ data, location }: Props) => {
+  const siteTitle = data.site.siteMetadata.title
   return (
-    <Layout title={siteTitle}>
+    <Layout site={data.site} title={siteTitle}>
       <h1>404: Not Found</h1>
       <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
     </Layout>
@@ -22,9 +30,7 @@ export default NotFoundPage
 export const pageQuery = graphql`
   query {
     site {
-      siteMetadata {
-        title
-      }
+      ...SiteData
     }
   }
 `

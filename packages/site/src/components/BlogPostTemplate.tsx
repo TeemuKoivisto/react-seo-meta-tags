@@ -9,9 +9,27 @@ import { BlogHeader } from './BlogHeader'
 import SEO from './SEO'
 import { ShareButtons } from './ShareButtons'
 
-import { ISiteData, ISEOBlogPost, IBlogPostFrontmatter } from '../types/graphql'
+import { SiteData, ISEOBlogPost, IBlogPostFrontmatter } from '../types/graphql'
 
-const BlogPostTemplate = ({ data: { previous, next, site, markdownRemark }, location }) => {
+interface Props {
+  data: {
+    previous: {
+      slug?: string
+      title?: string
+      datePublished?: string
+    }
+    next: {
+      slug?: string
+      title?: string
+      datePublished?: string
+    }
+    site: SiteData
+    markdownRemark: any
+  }
+  location: any
+}
+
+const BlogPostTemplate = ({ data: { previous, next, site, markdownRemark }, location }: Props) => {
   // const imgBaseUrl =
   //   process.env.NODE_ENV === 'development'
   //     ? this.props.location.origin

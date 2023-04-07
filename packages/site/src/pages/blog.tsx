@@ -5,7 +5,19 @@ import Bio from '../components/bio'
 import { Layout } from '../components/Layout'
 import SEO from '../components/SEO'
 
-const BlogIndex = ({ data, location }) => {
+import { SiteData } from '../types/graphql'
+
+interface Props {
+  data: {
+    site: SiteData
+    allMarkdownRemark: {
+      nodes: any[]
+    }
+  }
+  location: any
+}
+
+const BlogIndex = ({ data, location }: Props) => {
   const site = data.site
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMarkdownRemark.nodes
@@ -23,7 +35,7 @@ const BlogIndex = ({ data, location }) => {
   }
 
   return (
-    <Layout title={siteTitle} site={site}>
+    <Layout title={siteTitle} site={data.site}>
       <Bio />
       <ol style={{ listStyle: `none` }}>
         {posts.map(post => {

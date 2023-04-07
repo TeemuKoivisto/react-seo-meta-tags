@@ -4,11 +4,22 @@ import styled from 'styled-components'
 
 import { Layout } from '../components/Layout'
 
-const FrontPage = ({ data, location }) => {
-  const site = data.site
+import { SiteData } from '../types/graphql'
+
+interface Props {
+  data: {
+    site: SiteData
+    allMarkdownRemark: {
+      nodes: any[]
+    }
+  }
+  location: any
+}
+
+const FrontPage = ({ data, location }: Props) => {
   const posts = data.allMarkdownRemark.nodes
   return (
-    <Layout site={site}>
+    <Layout site={data.site}>
       <Container>
         <h1>Hi there!</h1>
         <p>

@@ -2,10 +2,10 @@ import * as React from 'react'
 import { Link } from 'gatsby'
 
 import styled from '../theme/styled'
-import { ISiteData } from '../types/graphql'
+import { SiteData } from '../types/graphql'
 
 interface IProps {
-  site: ISiteData
+  site: SiteData
 }
 
 function FooterEl(props: IProps) {

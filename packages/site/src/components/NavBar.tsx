@@ -2,12 +2,12 @@ import * as React from 'react'
 import { Link } from 'gatsby'
 
 import styled, { raise } from '../theme/styled'
-import { ISiteData } from '../types/graphql'
+import { SiteData } from '../types/graphql'
 
 import { NavDropdown } from './NavDropdown'
 
 interface IProps {
-  site: ISiteData
+  site: SiteData
 }
 
 function NavBarEl(props: IProps) {
@@ -32,7 +32,7 @@ function NavBarEl(props: IProps) {
         >
           npm
         </ExternalLink>
-        <NavDropdown options={navDropdownOptions} onSelect={(e: any) => console.log(e)} />
+        <NavDropdown options={navDropdownOptions} />
       </Nav>
     </NavBarContainer>
   )

@@ -1,10 +1,12 @@
-export interface ISiteData {
+export interface SiteData {
   siteMetadata: {
     title: string
     description: string
     image: string
-    facebookAppId: string
-    twitterUser: string
+    social: {
+      facebookAppId: string
+      twitter: string
+    }
     imgSiteUrl: string
     siteUrl: string
     site: {
