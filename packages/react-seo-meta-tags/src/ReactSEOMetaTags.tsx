@@ -4,7 +4,7 @@ import {
   generateWebsite,
   generateBreadcrumbList,
   generateBlogPosting,
-  generateOrganization,
+  generateOrganization
 } from './SchemaOrg'
 
 import {
@@ -13,7 +13,7 @@ import {
   BlogPostProps,
   FacebookProps,
   TwitterProps,
-  CombinedProps,
+  CombinedProps
 } from './types'
 
 /**
@@ -29,23 +29,29 @@ export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps>
    * @param props
    */
   renderGeneral({ title, description, image }: CombinedProps<{}>) {
-    return ([
-      <title key="title">{ title }</title>,
+    return [
+      <title key="title">{title}</title>,
       description && <meta key="description" name="description" content={description} />,
       image && <meta key="image" name="image" content={image} />
-    ])
+    ]
   }
   renderNonBlogOgTags() {
-    return ([
-      <meta key="og:type" property="og:type" content="website" />,
-    ])
+    return [<meta key="og:type" property="og:type" content="website" />]
   }
-  renderBlogOgTags({ datePublished, dateModified } : BlogPostProps) {
-    return ([
+  renderBlogOgTags({ datePublished, dateModified }: BlogPostProps) {
+    return [
       <meta key="og:type" property="og:type" content="article" />,
-      datePublished && <meta key="article:published_time" property="article:published_time" content={datePublished} />,
-      dateModified && <meta key="article:modified_time" property="article:modified_time" content={dateModified} />,
-    ])
+      datePublished && (
+        <meta
+          key="article:published_time"
+          property="article:published_time"
+          content={datePublished}
+        />
+      ),
+      dateModified && (
+        <meta key="article:modified_time" property="article:modified_time" content={dateModified} />
+      )
+    ]
   }
   /**
    * https://developers.facebook.com/docs/sharing/webmasters/
@@ -54,11 +60,20 @@ export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps>
    */
   renderFacebook(props: CombinedProps<FacebookProps>) {
     const {
-      url, title, description, image, imageAlt, video, audio, site, language = 'en-US', facebookAppId
+      url,
+      title,
+      description,
+      image,
+      imageAlt,
+      video,
+      audio,
+      site,
+      language = 'en-US',
+      facebookAppId
     } = props
-    return ([
+    return [
       url && <meta key="og:url" property="og:url" content={url} />, // Important
-      <meta property="og:locale" content={language}/>,
+      <meta property="og:locale" content={language} />,
       <meta key="og:title" property="og:title" content={title} />, // Important
       description && <meta key="og:description" property="og:description" content={description} />, // Somewhat important
       // Facebook recommends 1200x630 size, ratio of 1.91:1 but 1200x1200 is also fine
@@ -66,66 +81,78 @@ export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps>
       imageAlt && <meta key="og:image:alt" property="og:image:alt" content={imageAlt} />, // For visually impaired people
       video && <meta key="og:video" property="og:video" content={video} />,
       audio && <meta key="og:audio" property="og:audio" content={audio} />,
-      site && site.siteName && <meta key="og:site_name" property="og:site_name" content={site!.siteName} />, // Eeh... can't hurt?
-      facebookAppId && <meta key="fb:app_id" property="fb:app_id" content={facebookAppId}/>
-    ])
+      site && site.siteName && (
+        <meta key="og:site_name" property="og:site_name" content={site!.siteName} />
+      ), // Eeh... can't hurt?
+      facebookAppId && <meta key="fb:app_id" property="fb:app_id" content={facebookAppId} />
+    ]
   }
   renderTwitter(props: CombinedProps<TwitterProps>) {
     const {
-      title, description, image, imageAlt, cardType = 'summary_large_image', twitterUser, twitterSite
+      title,
+      description,
+      image,
+      imageAlt,
+      cardType = 'summary_large_image',
+      twitterUser,
+      twitterSite
     } = props
-    return ([
+    return [
       image && <meta key="twitter:card" name="twitter:card" content={cardType} />,
       twitterUser && <meta key="twitter:creator" name="twitter:creator" content={twitterUser} />,
       twitterSite && <meta key="twitter:site" name="twitter:site" content={twitterSite} />,
       <meta key="twitter:title" name="twitter:title" content={title} />,
-      description && <meta key="twitter:description" name="twitter:description" content={description} />,
+      description && (
+        <meta key="twitter:description" name="twitter:description" content={description} />
+      ),
       image && <meta key="twitter:image" name="twitter:image" content={image} />,
       imageAlt && <meta key="twitter:image:alt" name="twitter:image:alt" content={imageAlt} />
-    ])
+    ]
   }
   renderBlogPostSEO(props: ReactSEOMetaTagsProps) {
     const { website, breadcrumb, facebook, twitter, organization } = props
     const blogPost = props.blogPost as BlogPostProps
-    return ([
+    return [
       this.renderGeneral({ ...website, ...blogPost }),
       <script key="application/ld+json" type="application/ld+json">
-        {
-          JSON.stringify([
+        {JSON.stringify(
+          [
             generateWebsite(blogPost),
             breadcrumb && generateBreadcrumbList(breadcrumb),
             generateBlogPosting(blogPost),
-            organization && generateOrganization(organization),
-          ].filter(obj => obj !== undefined && obj !== null))
-        }
+            organization && generateOrganization(organization)
+          ].filter(obj => obj !== undefined && obj !== null)
+        )}
       </script>,
       this.renderBlogOgTags(blogPost),
       this.renderFacebook({ ...website, ...blogPost, ...facebook }),
       this.renderTwitter({ ...website, ...blogPost, ...twitter })
-    ])
+    ]
   }
   renderWebsiteSEO(props: ReactSEOMetaTagsProps) {
     const { facebook, breadcrumb, twitter, organization } = props
     const website = props.website as WebsiteProps
-    return ([
+    return [
       this.renderGeneral(website),
       <script key="application/ld+json" type="application/ld+json">
         {
-        /**
-         * Stringifying eliminates the undefined values, which keeps the JSON-LD somewhat tidy.
-         * Some empty objects might remain, but that shouldn't be a problem.
-         */
-          JSON.stringify([
-            generateWebsite(website),
-            breadcrumb && generateBreadcrumbList(breadcrumb),
-            organization && generateOrganization(organization),
-          ].filter(obj => obj !== undefined && obj !== null))
+          /**
+           * Stringifying eliminates the undefined values, which keeps the JSON-LD somewhat tidy.
+           * Some empty objects might remain, but that shouldn't be a problem.
+           */
+          JSON.stringify(
+            [
+              generateWebsite(website),
+              breadcrumb && generateBreadcrumbList(breadcrumb),
+              organization && generateOrganization(organization)
+            ].filter(obj => obj !== undefined && obj !== null)
+          )
         }
       </script>,
       this.renderNonBlogOgTags(),
       this.renderFacebook({ ...website, ...facebook }),
       this.renderTwitter({ ...website, ...twitter })
-    ])
+    ]
   }
   render() {
     let el: React.ReactNode

@@ -11,7 +11,7 @@ import {
   BlogPostProps,
   OrganizationProps,
   BreadcrumbList,
-  PersonProps,
+  PersonProps
 } from './types'
 
 /**
@@ -28,8 +28,8 @@ export function generateWebsite({
   title,
   url,
   image,
-  site,
-} : WebsiteProps) {
+  site
+}: WebsiteProps) {
   return {
     '@context': 'http://schema.org',
     '@type': 'WebPage',
@@ -40,24 +40,24 @@ export function generateWebsite({
     name: title,
     url,
     author: author && generatePerson(author),
-    potentialAction: site && site.searchUrl && {
-      '@type': 'SearchAction',
-      target: `${site.searchUrl}{search_term_string}`, // Eg "https://www.google.com/search?q=asdf"
-      'query-input': 'required name=search_term_string',
-    },
+    potentialAction: site &&
+      site.searchUrl && {
+        '@type': 'SearchAction',
+        /**
+         * @example  "https://www.google.com/search?q=asdf"
+         */
+        target: `${site.searchUrl}{search_term_string}`,
+        'query-input': 'required name=search_term_string'
+      }
   }
 }
 
-function generatePerson({
-  email,
-  name,
-  image,
-}: PersonProps) {
+function generatePerson({ email, name, image }: PersonProps) {
   return {
     '@type': 'Person',
     name,
     email,
-    image,
+    image
   }
 }
 
@@ -72,19 +72,17 @@ export function generateBreadcrumbList(breadcrumbList: BreadcrumbList) {
   return {
     '@context': 'http://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: breadcrumbList.map((b, i) => (
-      {
-        '@type': 'ListItem',
-        position: i,
-        item: {
-          '@id': b.url,
-          '@type': 'WebPage',
-          url: b.url,
-          name: b.title,
-          image: b.image,
-        }
+    itemListElement: breadcrumbList.map((b, i) => ({
+      '@type': 'ListItem',
+      position: i,
+      item: {
+        '@id': b.url,
+        '@type': 'WebPage',
+        url: b.url,
+        name: b.title,
+        image: b.image
       }
-    ))
+    }))
   }
 }
 
@@ -98,7 +96,8 @@ export function generateOrganization(organization: OrganizationProps): Object {
     sameAs: organization.sameAs,
     url: organization.url,
     logo: organization.logo,
-    parentOrganization: organization.parentOrganization && generateOrganization(organization.parentOrganization),
+    parentOrganization:
+      organization.parentOrganization && generateOrganization(organization.parentOrganization)
   }
 }
 
@@ -115,33 +114,47 @@ export function generateBlogPosting({
   dateModified,
   tags,
   author,
-  publisher,
-} : WebsiteProps & BlogPostProps) {
+  publisher
+}: WebsiteProps & BlogPostProps) {
   return {
     '@context': 'http://schema.org',
     '@type': 'BlogPosting',
     url,
     name: title,
-    // From https://developers.google.com/search/docs/data-types/article#article_types
-    // "The headline of the article. Headlines should not exceed 110 characters."
+    /**
+     * From https://developers.google.com/search/docs/data-types/article#article_types
+     * "The headline of the article. Headlines should not exceed 110 characters."
+     */
     headline: title,
     keywords: tags,
     description,
     author: author && generatePerson(author),
     publisher: publisher && generateOrganization(publisher),
-    mainEntityOfPage: { // From example markup of JSON-LD https://developers.google.com/search/docs/data-types/article
+    mainEntityOfPage: {
+      /**
+       * From example markup of JSON-LD https://developers.google.com/search/docs/data-types/article
+       */
       '@type': 'WebPage',
-      '@id': url, // Indicates that this BlogPosting is the main thing in this URL.
+      /**
+       * Indicates that this BlogPosting is the main thing in this URL.
+       */
+      '@id': url
     },
-    // From https://developers.google.com/search/docs/data-types/article#article_types
-    // "Images should be at least 1200 pixels wide."
+    /**
+     * From https://developers.google.com/search/docs/data-types/article#article_types
+     * "Images should be at least 1200 pixels wide."
+     */
     image,
     // thumbnailUrl ?
     datePublished,
-    dateModified, // Recommended by https://search.google.com/structured-data/testing-tool
-    // Reasoning https://bts.nomadgate.com/medium-evergreen-content
-    // Not only does Google prefer to feature more recent content in its search results, but
-    // users are also more likely to click an article with a recent date listed next to it.
-    // Does it make sense as you can just manipulate the date? Eeeh... Perhaps Google is aware of that.
+    /**
+     * Recommended by https://search.google.com/structured-data/testing-tool
+     *
+     * Reasoning https://bts.nomadgate.com/medium-evergreen-content ->
+     * Not only does Google prefer to feature more recent content in its search results, but
+     * users are also more likely to click an article with a recent date listed next to it.
+     * Does it make sense as you can just manipulate the date? Eeeh... Perhaps Google is aware of that.
+     */
+    dateModified
   }
 }

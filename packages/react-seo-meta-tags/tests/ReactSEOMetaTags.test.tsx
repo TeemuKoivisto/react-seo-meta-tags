@@ -6,8 +6,13 @@ import { create } from 'react-test-renderer'
 import { ReactSEOMetaTags } from '../src/ReactSEOMetaTags'
 
 import {
-  fullWebsiteData, fullWebsiteMetaTags, fullWebsiteJSONLD,
-  fullBlogPost, facebookData, twitterData, breadcrumb
+  fullWebsiteData,
+  fullWebsiteMetaTags,
+  fullWebsiteJSONLD,
+  fullBlogPost,
+  facebookData,
+  twitterData,
+  breadcrumb
 } from './examples'
 
 describe('<ReactSEOMetaTags />', () => {
@@ -16,7 +21,7 @@ describe('<ReactSEOMetaTags />', () => {
       <html lang="en">
         <head>
           <meta charSet="utf-8" />
-          <ReactSEOMetaTags website={fullWebsiteData}/>
+          <ReactSEOMetaTags website={fullWebsiteData} />
         </head>
         <body>
           <main>Body</main>
@@ -44,9 +49,12 @@ describe('<ReactSEOMetaTags />', () => {
     expect(helmet.title).toEqual(fullWebsiteData.title)
     expect(metaTags).toEqual(fullWebsiteMetaTags)
     const JSONLD = scriptTags.find(t => t.type === 'application/ld+json')
-    expect({ type: JSONLD?.type, innerHTML: JSON.parse(JSONLD?.innerHTML || '') }).toEqual({
+    expect({
+      type: JSONLD?.type,
+      innerHTML: JSON.parse(JSONLD?.innerHTML || '')
+    }).toEqual({
       type: 'application/ld+json',
-      innerHTML: fullWebsiteJSONLD,
+      innerHTML: fullWebsiteJSONLD
     })
   })
   test('Renders correctly with blog post', () => {
@@ -54,7 +62,7 @@ describe('<ReactSEOMetaTags />', () => {
       <html lang="en">
         <head>
           <meta charSet="utf-8" />
-          <ReactSEOMetaTags website={fullWebsiteData} blogPost={fullBlogPost}/>
+          <ReactSEOMetaTags website={fullWebsiteData} blogPost={fullBlogPost} />
         </head>
         <body>
           <main>Body</main>

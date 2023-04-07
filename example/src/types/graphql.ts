@@ -1,4 +1,3 @@
-
 export interface ISiteData {
   siteMetadata: {
     title: string

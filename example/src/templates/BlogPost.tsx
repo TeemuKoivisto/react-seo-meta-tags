@@ -70,9 +70,18 @@ interface IProps {
 
 export default class BlogPostTemplate extends React.PureComponent<IProps> {
   render() {
-    const { data: { site, markdownRemark, seoImage }, pageContext } = this.props
-    const imgBaseUrl = process.env.NODE_ENV === 'development' ? this.props.location.origin : site.siteMetadata.imgSiteUrl
-    const baseUrl = process.env.NODE_ENV === 'development' ? this.props.location.origin : site.siteMetadata.siteUrl
+    const {
+      data: { site, markdownRemark, seoImage },
+      pageContext
+    } = this.props
+    const imgBaseUrl =
+      process.env.NODE_ENV === 'development'
+        ? this.props.location.origin
+        : site.siteMetadata.imgSiteUrl
+    const baseUrl =
+      process.env.NODE_ENV === 'development'
+        ? this.props.location.origin
+        : site.siteMetadata.siteUrl
     const postUrl = `${baseUrl}${markdownRemark.fields.slug}`
     /**
      * This is a super hacky looking method for picking some image incase the default sharp-image fails
@@ -96,29 +105,34 @@ export default class BlogPostTemplate extends React.PureComponent<IProps> {
     // data from the markdown file this blog-post is generated from and the beautifully
     // mushed together URLs of the blog-post & its image so that in development it picks up
     // the localhost address and in production the canonical URL defined in gatsby-config.js
-    const blogPost = { ...site.siteMetadata, ...markdownRemark.frontmatter, ...{
-      image,
-      publisher: site.siteMetadata.organization
-    }} as ISEOBlogPost
+    const blogPost = {
+      ...site.siteMetadata,
+      ...markdownRemark.frontmatter,
+      ...{
+        image,
+        publisher: site.siteMetadata.organization
+      }
+    } as ISEOBlogPost
     const title = markdownRemark.frontmatter.title
     // Use markdown's description field if provided, otherwise just 100 first characters.
     const excerpt = markdownRemark.frontmatter.description || markdownRemark.excerpt
     return (
       <DefaultLayout title={title} seoBlogPost={blogPost}>
         <BlogContainer>
-          <BlogHeader frontmatter={markdownRemark.frontmatter} excerpt={excerpt}/>
-          <section className="blog-post" dangerouslySetInnerHTML={{ __html: markdownRemark.html }} />
-          <BlogPager previous={pageContext.previous} next={pageContext.next}/>
-          <ShareButtons url={postUrl} title={title}/>
+          <BlogHeader frontmatter={markdownRemark.frontmatter} excerpt={excerpt} />
+          <section
+            className="blog-post"
+            dangerouslySetInnerHTML={{ __html: markdownRemark.html }}
+          />
+          <BlogPager previous={pageContext.previous} next={pageContext.next} />
+          <ShareButtons url={postUrl} title={title} />
         </BlogContainer>
       </DefaultLayout>
     )
   }
 }
 
-const BlogContainer = styled.div`
-
-`
+const BlogContainer = styled.div``
 
 export const pageQuery = graphql`
   query BlogPostBySlug($imageRegex: String!, $slug: String!) {

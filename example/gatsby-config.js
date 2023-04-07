@@ -3,13 +3,14 @@ module.exports = {
   pathPrefix: '/react-seo-meta-tags',
   siteMetadata: {
     title: 'react-seo-meta-tags',
-    description: 'React SEO meta tag library for quickly adding the basic meta-tags for eg a Gatsby website',
+    description:
+      'React SEO meta tag library for quickly adding the basic meta-tags for eg a Gatsby website',
     image: 'https://teemukoivisto.github.io/react-seo-meta-tags/img/logo.png',
     facebookAppId: '3006370309470889',
     twitterUser: '@tegurus',
     author: {
       name: 'Teemu Koivisto',
-      image: 'https://teemukoivisto.xyz/img/avatar-460.jpeg',
+      image: 'https://teemukoivisto.xyz/img/avatar-460.jpeg'
     },
     organization: {
       name: 'react-seo-meta-tags',
@@ -19,8 +20,8 @@ module.exports = {
     imgSiteUrl: 'https://teemukoivisto.github.io',
     siteUrl: 'https://teemukoivisto.github.io/react-seo-meta-tags',
     site: {
-      siteName: 'React SEO Meta Tags npm library', // This is not very necessary for a personal blog but whatever
-    },
+      siteName: 'React SEO Meta Tags npm library' // This is not very necessary for a personal blog but whatever
+    }
   },
   plugins: [
     'gatsby-plugin-typescript',
@@ -38,16 +39,16 @@ module.exports = {
               maxWidth: 1380,
               linkImagesToOriginal: false,
               showCaptions: true
-            },
-          },
+            }
+          }
         ]
       }
     },
     {
       resolve: 'gatsby-plugin-typography',
       options: {
-        pathToConfigModule: 'src/theme/typography',
-      },
+        pathToConfigModule: 'src/theme/typography'
+      }
     },
     {
       resolve: 'gatsby-source-filesystem',
@@ -55,6 +56,6 @@ module.exports = {
         name: 'blog-pages',
         path: `${__dirname}/content/blog`
       }
-    },
-  ],
+    }
+  ]
 }

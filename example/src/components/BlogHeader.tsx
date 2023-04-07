@@ -11,22 +11,29 @@ interface IProps {
 }
 
 function BlogHeaderEl(props: IProps) {
-  const { excerpt, frontmatter: { title, datePublished, tags } } = props
+  const {
+    excerpt,
+    frontmatter: { title, datePublished, tags }
+  } = props
   return (
     <>
       <BlogHeaderContainer>
-        <h1>{ title }</h1>
+        <h1>{title}</h1>
         <Info>
           <BlogDate>
-            <SvgWrapper><MdEvent size={24}/></SvgWrapper>
-            <Time>{ datePublished }</Time>
+            <SvgWrapper>
+              <MdEvent size={24} />
+            </SvgWrapper>
+            <Time>{datePublished}</Time>
           </BlogDate>
           <TagsContainer>
-            <SvgWrapper><MdLocalOffer size={24}/></SvgWrapper>
+            <SvgWrapper>
+              <MdLocalOffer size={24} />
+            </SvgWrapper>
             <Tags>
-              { tags.map((t, i) =>
-              <Tag key={i}>{t}</Tag>
-              )}
+              {tags.map((t, i) => (
+                <Tag key={i}>{t}</Tag>
+              ))}
             </Tags>
           </TagsContainer>
         </Info>

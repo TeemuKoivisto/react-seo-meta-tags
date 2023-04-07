@@ -9,6 +9,7 @@ The motive behind it was the infuriating complexity of SEO coupled with the fact
 # How to install
 
 Requires `react >=16.2.0`. You might also want to use `react-helmet`.
+
 ```
 npm i react-seo-meta-tags
 ```
@@ -16,6 +17,7 @@ npm i react-seo-meta-tags
 # How to use
 
 With react-helmet:
+
 ```tsx
 import React from 'react'
 import Helmet from 'react-helmet'
@@ -31,6 +33,7 @@ import ReactSEOMetaTags from 'react-seo-meta-tags'
 ```
 
 Next.js:
+
 ```tsx
 import Head from 'next/head'
 import { ReactSEOMetaTags } from 'react-seo-meta-tags'
@@ -67,6 +70,7 @@ where siteMetadata could be:
 It appears both `react-helmet` and Next.js are a bit picky how they accept meta tags. ReactHelmet being the more choosy as it doesn't accept any nesting. Next.js works for some children but not all and therefore using the `render` function is required.
 
 Without:
+
 ```tsx
 import React from 'react'
 import { ReactSEOMetaTags } from 'react-seo-meta-tags'
@@ -112,7 +116,7 @@ Website is a general page with some added Facebook (og) and Twitter tags for bet
 
 BlogPost is a page for a blogpost (og:type article) that can have quite a few properties. I made only `title` to be required but you probably want at least `description`, `image`, `datePublished` and `author` to be specified. Well in general it's probably best for SEO purposes to include most of them, if not all. Each bit helps, but real traffic will always boost your SEO much more than these types of meta tags.
 
-For more custom tags you either have to render them by yourself or, and I hope you will, create a PR that includes the missing features in a compact and *well documented* way. There's so much boilerplate already with these tags so I don't want to include some random tags without knowing what they are for.
+For more custom tags you either have to render them by yourself or, and I hope you will, create a PR that includes the missing features in a compact and _well documented_ way. There's so much boilerplate already with these tags so I don't want to include some random tags without knowing what they are for.
 
 ```ts
 export interface ReactSEOMetaTagsProps {
@@ -270,12 +274,12 @@ Requires: Node.js >= 8.
 
 This one is more for the maintainers such as me. All the changes should go through PRs. But because there's no automatic CI such as Travis set up (yet), the new versions are published locally.
 
-1) Login to your npm account: `npm login`.
-2) After making changes to the code (*cough* pulling from master I mean), run `npm run compile`.
-3) Depending on the changes you have made, use either `npm version patch|minor|major` to update the version in `package.json`. Do it semantically\*.
-4) It should automatically tag it, but if it didn't tag it yourself: `git tag v1.5.1`.
-5) Push the changes to GitHub: `git push origin master && git push origin master --tags`.
-6) Publish to npm: `npm publish`. This will push the files specified in `package.json` `"files"`-block + default files (package.json, README, LICENSE).
+1. Login to your npm account: `npm login`.
+2. After making changes to the code (_cough_ pulling from master I mean), run `npm run compile`.
+3. Depending on the changes you have made, use either `npm version patch|minor|major` to update the version in `package.json`. Do it semantically\*.
+4. It should automatically tag it, but if it didn't tag it yourself: `git tag v1.5.1`.
+5. Push the changes to GitHub: `git push origin master && git push origin master --tags`.
+6. Publish to npm: `npm publish`. This will push the files specified in `package.json` `"files"`-block + default files (package.json, README, LICENSE).
 
 \***Semantically**: big breaking changes is a major release, general changes or bug fixes are minor releases and patches are just some general maintenance or refactoring.
 
@@ -285,24 +289,23 @@ Create issues or PRs for bug reports/feedback/feature requests.
 
 # SEO Tools
 
-* https://search.google.com/test/rich-results
-* https://search.google.com/structured-data/testing-tool
-* https://developers.facebook.com/tools/debug/sharing/
-* https://cards-dev.twitter.com/validator
-* https://developers.google.com/speed/pagespeed/insights
+- https://search.google.com/test/rich-results
+- https://search.google.com/structured-data/testing-tool
+- https://developers.facebook.com/tools/debug/sharing/
+- https://cards-dev.twitter.com/validator
+- https://developers.google.com/speed/pagespeed/insights
 
 # Other resources about SEO in general
 
-* https://blog.realmacsoftware.com/which-meta-tags-matter-for-seo-in-2018/
-* https://developers.facebook.com/docs/sharing/webmasters#markup
-* https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/markup.html
-* https://developers.google.com/search/docs/data-types/article
-* https://salon.thefamily.co/the-google-seo-bible-everything-a-startup-needs-to-know-a60dbac2d060
-* https://htmlhead.dev
+- https://blog.realmacsoftware.com/which-meta-tags-matter-for-seo-in-2018/
+- https://developers.facebook.com/docs/sharing/webmasters#markup
+- https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/markup.html
+- https://developers.google.com/search/docs/data-types/article
+- https://salon.thefamily.co/the-google-seo-bible-everything-a-startup-needs-to-know-a60dbac2d060
+- https://htmlhead.dev
 
 ## Open Graph
 
 Metadata format developed by Facebook.
 
 http://ogp.me/
-

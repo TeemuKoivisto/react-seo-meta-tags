@@ -14,25 +14,27 @@ interface IBlogPageProps {
 
 export default class BlogPage extends React.PureComponent<IBlogPageProps> {
   render() {
-    const { data: { allMarkdownRemark } } = this.props
+    const {
+      data: { allMarkdownRemark }
+    } = this.props
     return (
       <DefaultLayout>
         <Container>
           <h1>My blog posts</h1>
           <BlogList>
-            { allMarkdownRemark.edges.map(({ node }: INode) =>
-            <li key={node.frontmatter.title}>
-              <BlogLink to={node.fields.slug}>
-                <Date>{node.frontmatter.datePublished}</Date>
-                <Title>{node.frontmatter.title}</Title>
-              </BlogLink>
-              <Tags>
-                { node.frontmatter.tags.map((t, i) =>
-                <Tag key={i}>{t}</Tag>
-                )}
-              </Tags>
-            </li>
-            )}
+            {allMarkdownRemark.edges.map(({ node }: INode) => (
+              <li key={node.frontmatter.title}>
+                <BlogLink to={node.fields.slug}>
+                  <Date>{node.frontmatter.datePublished}</Date>
+                  <Title>{node.frontmatter.title}</Title>
+                </BlogLink>
+                <Tags>
+                  {node.frontmatter.tags.map((t, i) => (
+                    <Tag key={i}>{t}</Tag>
+                  ))}
+                </Tags>
+              </li>
+            ))}
           </BlogList>
         </Container>
       </DefaultLayout>

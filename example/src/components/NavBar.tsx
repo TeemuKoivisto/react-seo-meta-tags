@@ -14,7 +14,7 @@ function NavBarEl(props: IProps) {
   const { title } = props.site.siteMetadata
   const navDropdownOptions = [
     { key: '/', title: 'Frontpage' },
-    { key: '/blog', title: 'Blog' },
+    { key: '/blog', title: 'Blog' }
   ]
   return (
     <NavBarContainer>
@@ -22,21 +22,24 @@ function NavBarEl(props: IProps) {
         <TitleLink to="/">
           <Title>{title}</Title>
         </TitleLink>
-        <NavLink className="hide-in-mobile" to="/blog">Blog</NavLink>
+        <NavLink className="hide-in-mobile" to="/blog">
+          Blog
+        </NavLink>
         <ExternalLink
           className="hide-in-mobile"
           href="https://www.npmjs.com/package/react-seo-meta-tags"
-          rel="noopener">
-            npm
+          rel="noopener"
+        >
+          npm
         </ExternalLink>
-        <NavDropdown options={navDropdownOptions} onSelect={(e: any) => console.log(e)}/>
+        <NavDropdown options={navDropdownOptions} onSelect={(e: any) => console.log(e)} />
       </Nav>
     </NavBarContainer>
   )
 }
 
 const NavBarContainer = styled.header`
-  background: linear-gradient(#ff5f72 -59%,#ff5864);
+  background: linear-gradient(#ff5f72 -59%, #ff5864);
   position: relative;
   z-index: 1;
 `
@@ -95,7 +98,7 @@ const NavLink = styled(Link)`
     right: 5px;
   }
   &:not(:last-child):before {
-    content: " ";
+    content: ' ';
     cursor: auto;
     display: block;
     height: 1rem;

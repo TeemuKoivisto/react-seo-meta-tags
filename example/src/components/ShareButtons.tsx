@@ -7,7 +7,6 @@ import {
   EmailShareButton,
   TelegramShareButton,
   WhatsappShareButton,
-
   FacebookIcon,
   TwitterIcon,
   LinkedinIcon,
@@ -29,72 +28,32 @@ function ShareButtonsEl(props: IProps) {
   const { className, url, title } = props
   return (
     <Container className={className}>
-      <FacebookShareButton
-        url={url}
-        quote={title}
-      >
-        <FacebookIcon
-          size={40}
-        />
+      <FacebookShareButton url={url} quote={title}>
+        <FacebookIcon size={40} />
       </FacebookShareButton>
 
-      <TwitterShareButton
-        url={url}
-        title={title}
-      >
-        <TwitterIcon
-          size={40}
-        />
+      <TwitterShareButton url={url} title={title}>
+        <TwitterIcon size={40} />
       </TwitterShareButton>
 
-      <LinkedinShareButton
-        url={url}
-        title={title}
-        windowWidth={750}
-        windowHeight={600}
-      >
-        <LinkedinIcon
-          size={40}
-        />
+      <LinkedinShareButton url={url} title={title} windowWidth={750} windowHeight={600}>
+        <LinkedinIcon size={40} />
       </LinkedinShareButton>
 
-      <RedditShareButton
-        url={url}
-        title={title}
-        windowWidth={660}
-        windowHeight={460}
-      >
-        <RedditIcon
-          size={40}
-        />
+      <RedditShareButton url={url} title={title} windowWidth={660} windowHeight={460}>
+        <RedditIcon size={40} />
       </RedditShareButton>
 
-      <WhatsappShareButton
-        url={url}
-        title={title}
-      >
-        <WhatsappIcon
-          size={40}
-        />
+      <WhatsappShareButton url={url} title={title}>
+        <WhatsappIcon size={40} />
       </WhatsappShareButton>
 
-      <TelegramShareButton
-        url={url}
-        title={title}
-      >
-        <TelegramIcon
-          size={40}
-        />
+      <TelegramShareButton url={url} title={title}>
+        <TelegramIcon size={40} />
       </TelegramShareButton>
 
-      <EmailShareButton
-        url={url}
-        subject={title}
-        body={url}
-      >
-        <EmailIcon
-          size={40}
-        />
+      <EmailShareButton url={url} subject={title} body={url}>
+        <EmailIcon size={40} />
       </EmailShareButton>
     </Container>
   )

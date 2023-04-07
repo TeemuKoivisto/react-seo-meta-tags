@@ -14,9 +14,13 @@ function FooterEl(props: IProps) {
     <FooterContainer>
       <NavWrapper>
         <Nav>
-          <NavLink to="/" className="title"><h2>{title}</h2></NavLink>
+          <NavLink to="/" className="title">
+            <h2>{title}</h2>
+          </NavLink>
           <NavLink to="/blog">Blog</NavLink>
-          <ExternalLink href="https://www.npmjs.com/package/react-seo-meta-tags" rel="noopener">npm</ExternalLink>
+          <ExternalLink href="https://www.npmjs.com/package/react-seo-meta-tags" rel="noopener">
+            npm
+          </ExternalLink>
         </Nav>
         <SmallPrint>
           <CopyrightNotice>{`Copyright © ${new Date().getFullYear()}, Teemu Koivisto`}</CopyrightNotice>
@@ -30,7 +34,7 @@ function FooterEl(props: IProps) {
 }
 
 const FooterContainer = styled.footer`
-  background: linear-gradient(#ff5f72 -59%,#ff5864);
+  background: linear-gradient(#ff5f72 -59%, #ff5864);
   /* border-top: 1px solid hsla(0,0%,0%,0.2); */
   bottom: 0;
   position: absolute;
@@ -76,7 +80,7 @@ const NavLink = styled(Link)`
     right: 5px;
   }
   &:not(:last-child):before {
-    content: " ";
+    content: ' ';
     cursor: auto;
     display: block;
     height: 1rem;

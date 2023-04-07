@@ -21,21 +21,28 @@ function BlogPagerEl(props: IProps) {
   const { previous, next } = props
   return (
     <BlogPagerContainer>
-      { previous.slug ?
-      <IconLink to={previous.slug}>
-        <FiChevronsLeft size={24}/>
-        <LinkText className="m-left">
-          <p>{previous.title}</p>
-          <p>{previous.datePublished}</p>
-        </LinkText>
-      </IconLink> : <div></div>}
-      { next.slug ? <IconLink to={next.slug}>
-        <LinkText className="m-right">
-          <p>{next.title}</p>
-          <p>{next.datePublished}</p>
-        </LinkText>
-        <FiChevronsRight size={24}/>
-      </IconLink> : <div></div>}
+      {previous.slug ? (
+        <IconLink to={previous.slug}>
+          <FiChevronsLeft size={24} />
+          <LinkText className="m-left">
+            <p>{previous.title}</p>
+            <p>{previous.datePublished}</p>
+          </LinkText>
+        </IconLink>
+      ) : (
+        <div></div>
+      )}
+      {next.slug ? (
+        <IconLink to={next.slug}>
+          <LinkText className="m-right">
+            <p>{next.title}</p>
+            <p>{next.datePublished}</p>
+          </LinkText>
+          <FiChevronsRight size={24} />
+        </IconLink>
+      ) : (
+        <div></div>
+      )}
     </BlogPagerContainer>
   )
 }
@@ -57,7 +64,7 @@ const BlogPagerContainer = styled.div`
     padding: 0;
   }
   ${IconLink}:last-child {
-    margin-left: auto
+    margin-left: auto;
   }
 `
 const LinkText = styled.div`

@@ -16,13 +16,15 @@ interface IState {
   targetElement: HTMLElement | null
 }
 class DropdownClass extends React.PureComponent<IProps, IState> {
-
   readonly state: IState = {
     isOpen: false,
     targetElement: null
   }
   componentDidMount() {
-    this.setState({ ...this.state, targetElement: document.querySelector('html') })
+    this.setState({
+      ...this.state,
+      targetElement: document.querySelector('html')
+    })
   }
   componentWillUnmount() {
     this.setScrollLock(false)
@@ -47,18 +49,23 @@ class DropdownClass extends React.PureComponent<IProps, IState> {
     const { className, options } = this.props
     return (
       <div className={className}>
-        { this.state.isOpen ?
-        <FixedCloseIcon>
-          <SvgWrapper onClick={this.toggleMenu}><MdClose size={32}/></SvgWrapper>
-        </FixedCloseIcon>
-        :
-        <SvgWrapper onClick={this.toggleMenu}><MdMenu size={32}/></SvgWrapper>}
+        {this.state.isOpen ? (
+          <FixedCloseIcon>
+            <SvgWrapper onClick={this.toggleMenu}>
+              <MdClose size={32} />
+            </SvgWrapper>
+          </FixedCloseIcon>
+        ) : (
+          <SvgWrapper onClick={this.toggleMenu}>
+            <MdMenu size={32} />
+          </SvgWrapper>
+        )}
         <MobileNav className={this.state.isOpen && 'visible'}>
           <DropdownList>
             {options.map(option => (
-            <DropdownOption key={option.key}>
-              <Link to={option.key}>{option.title}</Link>
-            </DropdownOption>
+              <DropdownOption key={option.key}>
+                <Link to={option.key}>{option.title}</Link>
+              </DropdownOption>
             ))}
           </DropdownList>
         </MobileNav>
@@ -66,8 +73,7 @@ class DropdownClass extends React.PureComponent<IProps, IState> {
     )
   }
 }
-export const NavDropdown = styled(DropdownClass)`
-`
+export const NavDropdown = styled(DropdownClass)``
 // Keeps svgs from resizing themselves into oblivion
 const SvgWrapper = styled.div`
   color: #fff;
@@ -83,7 +89,7 @@ const FixedCloseIcon = styled.div`
   z-index: 501;
 `
 const MobileNav = styled.nav`
-  background: rgba(0,0,0,.9);
+  background: rgba(0, 0, 0, 0.9);
   color: #fff;
   padding: 60px 0 0 0;
   position: fixed;
@@ -115,7 +121,7 @@ const DropdownOption = styled.li`
     cursor: default;
   }
   &:not(.icon-links):hover {
-    background-color: rgba(100,100,100,0.1);
+    background-color: rgba(100, 100, 100, 0.1);
   }
   > a {
     color: #fff;

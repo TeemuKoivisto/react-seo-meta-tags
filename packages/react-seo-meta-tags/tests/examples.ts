@@ -1,26 +1,28 @@
 export const fullWebsiteData = {
   url: 'https://google.com/about',
-  title:  'This is a 70 character long title with a lot of padding to make it so!',
+  title: 'This is a 70 character long title with a lot of padding to make it so!',
   datePublished: '2019-10-06T13:56:03.123Z',
-  description: 'This is a 200 character long description of this web page which is quite interesting and which describes its contents well with a lot of relevant keywords and isn\'t just general marketing mumbo-jumbo.',
+  description:
+    "This is a 200 character long description of this web page which is quite interesting and which describes its contents well with a lot of relevant keywords and isn't just general marketing mumbo-jumbo.",
   language: 'en-US',
   image: 'http://website.com/image.png',
   imageAlt: 'Alt of my website image',
   author: {
     email: 'person@gmail.com',
     name: 'John Smith',
-    image: 'http://john.me/my-face.jpg',
+    image: 'http://john.me/my-face.jpg'
   },
   site: {
     siteName: 'IMDb',
-    searchUrl: 'https://www.google.com/search?q=',
+    searchUrl: 'https://www.google.com/search?q='
   }
 }
 
 export const fullWebsiteMetaTags = [
   {
     name: 'description',
-    content: "This is a 200 character long description of this web page which is quite interesting and which describes its contents well with a lot of relevant keywords and isn't just general marketing mumbo-jumbo."
+    content:
+      "This is a 200 character long description of this web page which is quite interesting and which describes its contents well with a lot of relevant keywords and isn't just general marketing mumbo-jumbo."
   },
   { name: 'image', content: 'http://website.com/image.png' },
   { property: 'og:type', content: 'website' },
@@ -32,7 +34,8 @@ export const fullWebsiteMetaTags = [
   },
   {
     property: 'og:description',
-    content: "This is a 200 character long description of this web page which is quite interesting and which describes its contents well with a lot of relevant keywords and isn't just general marketing mumbo-jumbo."
+    content:
+      "This is a 200 character long description of this web page which is quite interesting and which describes its contents well with a lot of relevant keywords and isn't just general marketing mumbo-jumbo."
   },
   { property: 'og:image', content: 'http://website.com/image.png' },
   { property: 'og:image:alt', content: 'Alt of my website image' },
@@ -44,35 +47,37 @@ export const fullWebsiteMetaTags = [
   },
   {
     name: 'twitter:description',
-    content: "This is a 200 character long description of this web page which is quite interesting and which describes its contents well with a lot of relevant keywords and isn't just general marketing mumbo-jumbo."
+    content:
+      "This is a 200 character long description of this web page which is quite interesting and which describes its contents well with a lot of relevant keywords and isn't just general marketing mumbo-jumbo."
   },
   { name: 'twitter:image', content: 'http://website.com/image.png' },
   {
-    content: "Alt of my website image",
-    name: "twitter:image:alt",
-  },
+    content: 'Alt of my website image',
+    name: 'twitter:image:alt'
+  }
 ]
 
 export const fullWebsiteJSONLD = [
   {
-    "@context": "http://schema.org",
-    "@type": "WebPage",
-    "datePublished": "2019-10-06T13:56:03.123Z",
-    "description": "This is a 200 character long description of this web page which is quite interesting and which describes its contents well with a lot of relevant keywords and isn't just general marketing mumbo-jumbo.",
-    "image": "http://website.com/image.png",
-    "inLanguage": "en-US",
-    "name": "This is a 70 character long title with a lot of padding to make it so!",
-    "url": "https://google.com/about",
-    "author": {
-      "@type": "Person",
-      "name": "John Smith",
-      "email": "person@gmail.com",
-      "image": "http://john.me/my-face.jpg"
+    '@context': 'http://schema.org',
+    '@type': 'WebPage',
+    datePublished: '2019-10-06T13:56:03.123Z',
+    description:
+      "This is a 200 character long description of this web page which is quite interesting and which describes its contents well with a lot of relevant keywords and isn't just general marketing mumbo-jumbo.",
+    image: 'http://website.com/image.png',
+    inLanguage: 'en-US',
+    name: 'This is a 70 character long title with a lot of padding to make it so!',
+    url: 'https://google.com/about',
+    author: {
+      '@type': 'Person',
+      name: 'John Smith',
+      email: 'person@gmail.com',
+      image: 'http://john.me/my-face.jpg'
     },
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://www.google.com/search?q={search_term_string}",
-      "query-input": "required name=search_term_string"
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: 'https://www.google.com/search?q={search_term_string}',
+      'query-input': 'required name=search_term_string'
     }
   }
 ]
@@ -80,7 +85,7 @@ export const fullWebsiteJSONLD = [
 export const fullPerson = {
   email: 'person@gmail.com',
   name: 'John Smith',
-  image: 'http://john.me/my-face.jpg',
+  image: 'http://john.me/my-face.jpg'
 }
 
 export const fullOrganization = {
@@ -92,7 +97,7 @@ export const fullOrganization = {
   // List of other webpages referencing this organization, eg Wikipedia, Facebook, Twitter, Instagram etc.
   // Will show these sites alongside your website in Google search results and probably boost your SEO rank too.
   sameAs: ['https://en.wikipedia.org/wiki/Enron'],
-  url: 'https://bugsandcode.com',
+  url: 'https://bugsandcode.com'
 }
 
 export const fullBlogPost = {
@@ -119,7 +124,7 @@ export const facebookData = {
   imageAlt: 'My facebook image alt',
   video: 'https://example.com/my-facebook-video.mpeg',
   audio: 'https://example.com/my-facebook-audio.mp3',
-  facebookAppId: 'my facebook app id',
+  facebookAppId: 'my facebook app id'
 }
 
 export const twitterData = {
@@ -127,20 +132,20 @@ export const twitterData = {
   description: 'My twitter description',
   image: 'https://example.com/my-twitter-faceshot-image.png',
   imageAlt: 'My twitter image alt',
-  cardType: ('summary' as 'summary'),
+  cardType: 'summary' as const,
   twitterUser: '@michaelcaine',
-  twitterSite: '@UK',
+  twitterSite: '@UK'
 }
 
 export const breadcrumb = [
   {
     url: 'https://example.com/dresses',
     title: 'Dresses',
-    image: 'https://example.com/dresses.jpg',
+    image: 'https://example.com/dresses.jpg'
   },
   {
     url: 'https://example.com/dresses-real',
     title: 'Real Dresses',
-    image: 'https://example.com/real-dresses.gif',
+    image: 'https://example.com/real-dresses.gif'
   }
 ]

@@ -1,7 +1,7 @@
 import { ITheme } from '../types/theme'
 import { createGlobalStyle } from 'styled-components'
 
-export const defaultTheme : ITheme = {
+export const defaultTheme: ITheme = {
   color: {
     textLight: '#666',
     textDark: '#222',
@@ -10,7 +10,7 @@ export const defaultTheme : ITheme = {
     white: '#fff',
     primary: '#ff5864', // medium red
     secondary: '#82B1FF',
-    danger: '#ff3354c9',
+    danger: '#ff3354c9'
   },
   fontSize: {
     small: '16px',
@@ -20,7 +20,7 @@ export const defaultTheme : ITheme = {
     largeIcon: '50px'
   },
   margins: {
-    default: '2rem',
+    default: '2rem'
   }
 }
 
