@@ -2,8 +2,8 @@
   "compilerOptions": {
     "outDir": "dist",
     "module": "commonjs",
-    "target": "es5",
-    "lib": ["es5", "es6", "dom"],
+    "target": "es6",
+    "lib": ["esnext", "dom", "dom.iterable"],
     "sourceMap": true,
     "allowJs": false,
     "jsx": "react",
