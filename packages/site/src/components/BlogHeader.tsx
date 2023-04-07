@@ -1,6 +1,7 @@
 import * as React from 'react'
+import styled from 'styled-components'
 
-import styled, { raise } from '../theme/styled'
+import { raise } from '../theme/styled'
 import { MdEvent, MdLocalOffer } from 'react-icons/md'
 
 import { IBlogPostFrontmatter } from '../types/graphql'

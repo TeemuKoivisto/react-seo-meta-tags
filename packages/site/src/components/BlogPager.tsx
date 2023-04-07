@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Link } from 'gatsby'
+import styled from 'styled-components'
 
-import styled from '../theme/styled'
 import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
 
 interface IProps {

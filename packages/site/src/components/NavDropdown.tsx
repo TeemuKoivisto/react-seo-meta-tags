@@ -1,7 +1,7 @@
 import * as React from 'react'
-import styled from '../theme/styled'
 import { MdMenu, MdClose } from 'react-icons/md'
 import { Link } from 'gatsby'
+import styled from 'styled-components'
 
 export interface IDropdownOption {
   key: string
@@ -15,6 +15,7 @@ interface IState {
   isOpen: boolean
   targetElement: HTMLElement | null
 }
+
 class DropdownClass extends React.PureComponent<IProps, IState> {
   readonly state: IState = {
     isOpen: false,

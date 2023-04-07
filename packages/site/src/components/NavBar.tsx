@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { Link } from 'gatsby'
+import styled from 'styled-components'
 
-import styled, { raise } from '../theme/styled'
+import { raise } from '../theme/styled'
 import { SiteData } from '../types/graphql'
 
 import { NavDropdown } from './NavDropdown'

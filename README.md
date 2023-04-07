@@ -8,7 +8,7 @@ The motive behind it was the infuriating complexity of SEO coupled with the fact
 
 # How to install
 
-Requires `react >=16.2.0`. You might also want to use `react-helmet`.
+Requires `react >=16.2.0`. You might also want to use `react-helmet` (although as of 2023 this seems rare).
 
 ```
 npm i react-seo-meta-tags

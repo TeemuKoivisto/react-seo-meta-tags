@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
-
-import styled from '../theme/styled'
+import styled from 'styled-components'
 
 import { Layout } from './Layout'
 import { BlogPager } from './BlogPager'

@@ -3,12 +3,12 @@ import styled, { ThemeProvider } from 'styled-components'
 // import Helmet from 'react-helmet'
 // import ReactSEOMetaTags from 'react-seo-meta-tags'
 
-import { defaultTheme } from '../theme/sc-default-theme'
+import { defaultTheme } from '../theme/theme'
 
 import { NavBar } from './NavBar'
 import { Footer } from './Footer'
 
-import { LARGE_DISPLAY_WIDTH } from '../theme/theme-breakpoints'
+import { LARGE_DISPLAY_WIDTH } from '../theme/breakpoints'
 
 // import { ISiteData, ISEOBlogPost } from './src/types/graphql'
 

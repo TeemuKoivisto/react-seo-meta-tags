@@ -15,8 +15,7 @@ import {
   TelegramIcon,
   WhatsappIcon
 } from 'react-share'
-
-import styled from '../theme/styled'
+import styled from 'styled-components'
 
 interface IProps {
   className?: string
