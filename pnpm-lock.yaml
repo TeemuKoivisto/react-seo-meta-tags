@@ -112,12 +112,6 @@ importers:
 
   packages/site:
     dependencies:
-      '@fontsource/merriweather':
-        specifier: ^4.5.14
-        version: 4.5.14
-      '@fontsource/montserrat':
-        specifier: ^4.5.14
-        version: 4.5.14
       '@types/styled-components':
         specifier: ^5.1.26
         version: 5.1.26
@@ -160,9 +154,6 @@ importers:
       gray-percentage:
         specifier: ^2.0.0
         version: 2.0.0
-      prismjs:
-        specifier: ^1.29.0
-        version: 1.29.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1806,14 +1797,6 @@ packages:
   /@eslint/js@8.37.0:
     resolution: {integrity: sha512-x5vzdtOOGgFVDCUs81QRB2+liax8rFg3+7hqM+QhBG0/G3F1ZsoYl97UrqgHgQ9KKT7G6c4V+aTUCgu/n22v1A==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-
-  /@fontsource/merriweather@4.5.14:
-    resolution: {integrity: sha512-kDMIAokOvE9bYf+CDmEWzV3xtR8cRJlw/BipjhxqD9MIRZfU348cZ8xhHhmPXmxRiEjZLor4xxHXqps7eCvGQg==}
-    dev: false
-
-  /@fontsource/montserrat@4.5.14:
-    resolution: {integrity: sha512-fTvrteVzuFUePhr4QYBGoK8G/YHLJ3IhF1HhKg0AxcFvZajJT7rM7ULdmKLSd2PkX44R3aaFZq1zDbmjbGGI+w==}
-    dev: false
 
   /@gatsbyjs/parcel-namer-relative-to-cwd@2.8.0(@parcel/core@2.8.3):
     resolution: {integrity: sha512-qVzeFdfCP8gDR2HEHjfg38TuB/smgx0y6Ip914lyF+v/tmlPv/2ukrc7+nre4YLWQ7GTV7P2Jt76IwxFwMu72w==}

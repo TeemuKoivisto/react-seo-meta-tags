@@ -4,9 +4,13 @@
   "version": "0.1.0",
   "homepage": "https://teemukoivisto.github.io/react-seo-meta-tags",
   "type": "commonjs",
+  "scripts": {
+    "build": "gatsby build",
+    "start": "gatsby develop",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
   "dependencies": {
-    "@fontsource/merriweather": "^4.5.14",
-    "@fontsource/montserrat": "^4.5.14",
     "@types/styled-components": "^5.1.26",
     "gatsby": "^5.8.1",
     "gatsby-link": "^5.8.0",
@@ -21,7 +25,6 @@
     "gatsby-transformer-remark": "^6.8.0",
     "gatsby-transformer-sharp": "^5.8.0",
     "gray-percentage": "^2.0.0",
-    "prismjs": "^1.29.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
@@ -29,11 +32,5 @@
     "react-share": "^4.4.1",
     "styled-components": "^5.3.9",
     "typography": "^0.16.19"
-  },
-  "scripts": {
-    "build": "gatsby build",
-    "start": "gatsby develop",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean"
   }
 }

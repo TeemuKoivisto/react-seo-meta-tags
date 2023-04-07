@@ -5,7 +5,6 @@ import { ITheme } from '../types/theme'
 const {
   default: styled,
   css,
-  injectGlobal,
   keyframes,
   ThemeProvider
 } = styledComponents as styledComponents.ThemedStyledComponentsModule<ITheme>
@@ -27,5 +26,5 @@ export function raise(level: number): string {
   }
 }
 
-export { css, injectGlobal, keyframes, ThemeProvider }
+export { css, keyframes, ThemeProvider }
 export default styled

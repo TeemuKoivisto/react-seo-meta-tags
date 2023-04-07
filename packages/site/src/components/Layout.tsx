@@ -3,7 +3,7 @@ import styled, { ThemeProvider } from 'styled-components'
 // import Helmet from 'react-helmet'
 // import ReactSEOMetaTags from 'react-seo-meta-tags'
 
-import { defaultTheme, GlobalStyle } from '../theme/sc-default-theme'
+import { defaultTheme } from '../theme/sc-default-theme'
 
 import { NavBar } from './NavBar'
 import { Footer } from './Footer'
@@ -64,31 +64,31 @@ const DefaultContainer = styled.main`
   border-radius: 20px;
   /* box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
   height: 100%;
-  margin: 2rem 0.5rem 16rem 0.5rem; // Massive bottom margin for footer which breaks here into column-wise form
+  margin: 2rem 0.5rem 16rem 0.5rem; /* Massive bottom margin for footer which breaks here into column-wise form */
   max-width: 600px;
   position: relative;
-  & > div:first-child {
-    min-height: 400px; // Required to keep the footer at the bottom of the screen (otherwise empty space appears, a long story..)
+  & > *:first-child {
+    min-height: 400px; /* Required to keep the footer at the bottom of the screen (otherwise empty space appears, a long story..) */
     padding: 0rem 3vw 0 4vw;
   }
   @media screen and (min-width: 500px) {
     margin: 2rem 1rem 10rem 1rem;
-    & > div:first-child {
+    & > *:first-child {
       padding: 1rem 3vw 0 4vw;
     }
   }
   @media screen and (min-width: 650px) {
-    margin: 4rem auto 12rem auto; // Massive margin-bottom again to keep the footer from getting funky
+    margin: 4rem auto 12rem auto; /* Massive margin-bottom again to keep the footer from getting funky */
   }
   @media screen and (min-width: 900px) {
     max-width: 800px;
     width: 100%;
-    & > div:first-child {
+    & > *:first-child {
       padding: 2rem 8vw 0 8vw;
     }
   }
   @media screen and (min-width: ${LARGE_DISPLAY_WIDTH}) {
-    & > div:first-child {
+    & > *:first-child {
       padding: 2rem 6rem 0 6rem;
     }
   }

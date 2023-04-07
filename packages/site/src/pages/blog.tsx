@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { Link, graphql } from 'gatsby'
 
-import Bio from '../components/bio'
 import { Layout } from '../components/Layout'
 import SEO from '../components/SEO'
 
@@ -25,7 +24,6 @@ const BlogIndex = ({ data, location }: Props) => {
   if (posts.length === 0) {
     return (
       <Layout title={siteTitle} site={site}>
-        <Bio />
         <p>
           No blog posts found. Add markdown posts to "content/blog" (or the directory you specified
           for the "gatsby-source-filesystem" plugin in gatsby-config.js).
@@ -36,7 +34,6 @@ const BlogIndex = ({ data, location }: Props) => {
 
   return (
     <Layout title={siteTitle} site={data.site}>
-      <Bio />
       <ol style={{ listStyle: `none` }}>
         {posts.map(post => {
           const title = post.frontmatter.title || post.fields.slug

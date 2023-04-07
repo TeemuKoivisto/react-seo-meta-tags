@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { graphql } from 'gatsby'
 
 import styled from '../theme/styled'
@@ -82,7 +82,7 @@ const BlogPostTemplate = ({ data: { previous, next, site, markdownRemark }, loca
   )
 }
 
-export const Head = ({ data: { markdownRemark: post } }) => {
+export const Head = ({ data: { markdownRemark: post } }: any) => {
   return (
     <SEO
       title={post.frontmatter.title}

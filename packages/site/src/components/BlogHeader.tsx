@@ -48,7 +48,6 @@ const BlogHeaderContainer = styled.header`
   display: flex;
   flex-direction: column;
   & > h1 {
-    color: ${({ theme }) => theme.color.primary};
     font-size: 3rem;
     line-height: 3.25rem;
     margin-bottom: 0;
