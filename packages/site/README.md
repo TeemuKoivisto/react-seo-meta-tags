@@ -1,4 +1,4 @@
-# Simple Gatsby Site
+# Gatsby site
 
 I've used my own blog site's code as the basis of the app. Yes it's quite contrived but sadly this is quite necessary when you start customizing the Gatsby setup heavily. It's supposed to be a minimal setup to show how the react-seo-meta-tags work.
 
@@ -12,13 +12,9 @@ I don't really understand why (as of now 2020.2.2) the Google structured tool gi
 
 ## Requirements
 
-Requires Node >= 8.
+Requires Node >= 16.
 
-## How to install
+## How to run
 
-For some reason the file based import `"react-seo-meta-tags": "file:../",` doesn't work so we use link instead.
-
-1. In the root of the repo, link the library as a local dependency: `yarn link react-seo-meta-tags`
-2. Build it: `yarn build`
-3. Go to this folder and install dependencies: `cd example && yarn`
-4. Start the Gatsby development server with: `yarn start`
+1. `pnpm i`
+2. `pnpm site`
