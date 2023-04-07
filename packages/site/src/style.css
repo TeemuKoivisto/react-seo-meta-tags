@@ -15,6 +15,7 @@
 
 html {
   font-size: 16px;
+  line-height: 1.625;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -24,7 +25,7 @@ html.scroll-lock {
 }
 
 body {
-  color: hsla(0, 0%, 0%, 0.9);
+  color: #000;
   font-family: var(--serif);
   font-weight: 400;
   margin: 0;
@@ -47,31 +48,68 @@ h5,
 h6 {
   font-family: var(--sans);
   font-weight: 700;
-  margin: 2rem 0 1rem;
+  margin: 2rem 0 1rem 0;
 }
 
 h1 {
-  font-size: 4rem;
+  font-size: 3rem;
+  /* margin: 2rem 0 1.5rem 0; */
 }
 
 h2 {
-  font-size: 2.5rem;
-}
-
-h3 {
   font-size: 2rem;
 }
 
-h4 {
+h3 {
   font-size: 1.75rem;
 }
 
+h4 {
+  font-size: 1.6rem;
+}
+
 h5 {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 h6 {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
+}
+
+p {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0.8125rem;
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0;
+  margin-bottom: 0.8125rem;
+}
+
+hr {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 2.03125rem;
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0;
+  margin-bottom: 2.03125rem;
+  background: hsla(0, 0%, 0%, 0.2);
+  border: none;
+  height: 1px;
+}
+
+figure {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0;
+  margin-bottom: 2.4375rem;
 }
 
 li {

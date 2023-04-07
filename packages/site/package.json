@@ -24,13 +24,11 @@
     "gatsby-source-filesystem": "^5.8.0",
     "gatsby-transformer-remark": "^6.8.0",
     "gatsby-transformer-sharp": "^5.8.0",
-    "gray-percentage": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.8.0",
     "react-share": "^4.4.1",
-    "styled-components": "^5.3.9",
-    "typography": "^0.16.19"
+    "styled-components": "^5.3.9"
   }
 }
