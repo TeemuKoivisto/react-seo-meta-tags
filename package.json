@@ -3,9 +3,10 @@
   "type": "module",
   "scripts": {
     "lib": "pnpm --filter react-seo-meta-tags watch",
+    "site": "pnpm --filter site start",
     "format": "pnpm pretty && pnpm lint",
     "pretty": "prettier --write \"**/*.+(js|jsx|json|html|css|less|scss|ts|tsx|yml|yaml|md|graphql|mdx)\" .",
-    "lint": "eslint --ignore-path .gitignore --fix --ext .js,.cjs,.ts,.tsx,.svelte ."
+    "lint": "eslint --ignore-path .gitignore --fix --ext .js,.cjs,.ts,.tsx ."
   },
   "engines": {
     "node": ">=16",
