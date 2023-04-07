@@ -3,11 +3,11 @@ import { graphql } from 'gatsby'
 
 import styled from '../theme/styled'
 
-import { Layout } from '../layouts/Layout'
-import { BlogPager } from '../components/BlogPager'
-import { BlogHeader } from '../components/BlogHeader'
-import SEO from '../components/SEO'
-import { ShareButtons } from '../components/ShareButtons'
+import { Layout } from './Layout'
+import { BlogPager } from './BlogPager'
+import { BlogHeader } from './BlogHeader'
+import SEO from './SEO'
+import { ShareButtons } from './ShareButtons'
 
 import { ISiteData, ISEOBlogPost, IBlogPostFrontmatter } from '../types/graphql'
 
@@ -53,7 +53,7 @@ const BlogPostTemplate = ({ data: { previous, next, site, markdownRemark }, loca
   // Use markdown's description field if provided, otherwise just 100 first characters.
   const excerpt = markdownRemark.frontmatter.description || markdownRemark.excerpt
   return (
-    <Layout title={title} seoBlogPost={blogPost}>
+    <Layout title={title} site={site} seoBlogPost={blogPost}>
       <article>
         <BlogHeader frontmatter={markdownRemark.frontmatter} excerpt={excerpt} />
         <section className="blog-post" dangerouslySetInnerHTML={{ __html: markdownRemark.html }} />

@@ -23,7 +23,7 @@ function FooterEl(props: IProps) {
           </ExternalLink>
         </Nav>
         <SmallPrint>
-          <CopyrightNotice>{`Copyright © ${new Date().getFullYear()}, Teemu Koivisto`}</CopyrightNotice>
+          <CopyrightNotice>{`${new Date().getFullYear()}, Teemu Koivisto`}</CopyrightNotice>
           <SourceLink href="https://github.com/TeemuKoivisto/react-seo-meta-tags">
             This site's code is Open Source
           </SourceLink>

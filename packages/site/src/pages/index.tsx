@@ -2,13 +2,13 @@ import * as React from 'react'
 import { graphql, Link } from 'gatsby'
 import styled from 'styled-components'
 
-import { Layout } from '../layouts/Layout'
+import { Layout } from '../components/Layout'
 
 const FrontPage = ({ data, location }) => {
+  const site = data.site
   const posts = data.allMarkdownRemark.nodes
-
   return (
-    <Layout>
+    <Layout site={site}>
       <Container>
         <h1>Hi there!</h1>
         <p>
@@ -140,6 +140,50 @@ export const query = graphql`
           description
         }
       }
+    }
+  }
+  fragment SiteData on Site {
+    siteMetadata {
+      title
+      description
+      image
+      social {
+        facebookAppId
+        twitter
+      }
+      imgSiteUrl
+      siteUrl
+      site {
+        siteName
+      }
+      author {
+        name
+        image
+      }
+      organization {
+        name
+        logo
+        url
+      }
+    }
+  }
+  fragment BlogPost on MarkdownRemarkEdge {
+    node {
+      id
+      frontmatter {
+        title
+        description
+        datePublished(formatString: "YYYY-MM-DD")
+        dateModified(formatString: "YYYY-MM-DD")
+        tags
+        images {
+          publicURL
+        }
+      }
+      fields {
+        slug
+      }
+      excerpt
     }
   }
 `
