@@ -2,13 +2,13 @@ import * as React from 'react'
 import { graphql, Link } from 'gatsby'
 import styled from 'styled-components'
 
-import { DefaultLayout } from '../layouts/DefaultLayout'
+import { Layout } from '../layouts/Layout'
 
 const FrontPage = ({ data, location }) => {
   const posts = data.allMarkdownRemark.nodes
 
   return (
-    <DefaultLayout>
+    <Layout>
       <Container>
         <h1>Hi there!</h1>
         <p>
@@ -113,7 +113,7 @@ const FrontPage = ({ data, location }) => {
           </ul>
         </div>
       </Container>
-    </DefaultLayout>
+    </Layout>
   )
 }
 

@@ -86,11 +86,11 @@ interface IProps {
 
 // This kinda boilerplatish wrapping is because StaticQuery only offers render-method
 // for rendering children
-export const DefaultLayout: React.FC<IProps> = (props: IProps) => (
-  <StaticQuery query={siteDataQuery} render={DefaultContent(props)} />
+export const Layout: React.FC<IProps> = (props: IProps) => (
+  <StaticQuery query={siteDataQuery} render={Content(props)} />
 )
 
-export const DefaultContent =
+export const Content =
   ({ children, seoBlogPost }: IProps) =>
   ({ site }: any) =>
     (
