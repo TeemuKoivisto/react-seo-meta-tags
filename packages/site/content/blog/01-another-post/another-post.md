@@ -1,7 +1,6 @@
 ---
 datePublished: 2020-01-21
 dateModified: 2020-01-21
-date: '2015-05-01T22:12:03.284Z'
 title: Another post
 description: I'm another post, which is quite something. Yes this description is quite bad and it probably should include couple keywords such as awesome, SEO, meta-tags, open-graph, facebook, twitter
 slug: this-is-a-seo-optimized-slug

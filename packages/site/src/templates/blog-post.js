@@ -13,7 +13,7 @@ const BlogPostTemplate = ({ data: { previous, next, site, markdownRemark: post }
       <article className="blog-post" itemScope itemType="http://schema.org/Article">
         <header>
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
-          <p>{post.frontmatter.date}</p>
+          <p>{post.frontmatter.datePublished}</p>
         </header>
         <section dangerouslySetInnerHTML={{ __html: post.html }} itemProp="articleBody" />
         <hr />
@@ -75,8 +75,15 @@ export const pageQuery = graphql`
       html
       frontmatter {
         title
-        date(formatString: "MMMM DD, YYYY")
+        datePublished(formatString: "YYYY-MM-DD")
+        dateModified(formatString: "YYYY-MM-DD")
+        tags
         description
+        imageAlt
+        slug
+        images {
+          publicURL
+        }
       }
     }
     previous: markdownRemark(id: { eq: $previousPostId }) {
