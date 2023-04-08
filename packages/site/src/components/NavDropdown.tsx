@@ -17,7 +17,7 @@ interface IState {
 }
 
 class DropdownClass extends React.PureComponent<IProps, IState> {
-  readonly state: IState = {
+  state: IState = {
     isOpen: false,
     targetElement: null
   }
@@ -61,7 +61,7 @@ class DropdownClass extends React.PureComponent<IProps, IState> {
             <MdMenu size={32} />
           </SvgWrapper>
         )}
-        <MobileNav className={this.state.isOpen && 'visible'}>
+        <MobileNav className={this.state.isOpen ? 'visible' : ''}>
           <DropdownList>
             {options.map(option => (
               <DropdownOption key={option.key}>

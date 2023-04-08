@@ -33,14 +33,12 @@ const SEO = ({ description, title, blogPost, children }: Props) => {
   const website = {
     ...siteMetadata,
     description,
-    title
-  } as any
+    ...(title && { title })
+  }
   const post = {
     ...siteMetadata,
-    ...blogPost?.frontmatter,
-    image: 'poop',
-    imageAlt: 'poop2'
-  } as any
+    ...blogPost?.frontmatter
+  }
   return (
     <>
       <ReactSEOMetaTags
@@ -50,16 +48,6 @@ const SEO = ({ description, title, blogPost, children }: Props) => {
         twitter={{ twitterUser: siteMetadata.social.twitter }}
         organization={siteMetadata.organization}
       />
-
-      {/* <title>{defaultTitle ? `${title} | ${defaultTitle}` : title}</title>
-      <meta name="description" content={metaDescription} />
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={metaDescription} />
-      <meta property="og:type" content="website" />
-      <meta name="twitter:card" content="summary" />
-      <meta name="twitter:creator" content={site.siteMetadata?.social?.twitter || ``} />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={metaDescription} /> */}
       {children}
     </>
   )

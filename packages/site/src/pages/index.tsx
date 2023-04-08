@@ -3,14 +3,15 @@ import { graphql, Link } from 'gatsby'
 import styled from 'styled-components'
 
 import { Layout } from '../components/Layout'
+import SEO from '../components/SEO'
 
-import { SiteData } from '../types/graphql'
+import { BlogPost, SiteData } from '../types/graphql'
 
 interface Props {
   data: {
     site: SiteData
     allMarkdownRemark: {
-      nodes: any[]
+      nodes: BlogPost[]
     }
   }
   location: any
@@ -129,6 +130,8 @@ const FrontPage = ({ data, location }: Props) => {
 }
 
 export default FrontPage
+
+export const Head = () => <SEO />
 
 const Container = styled.div`
   margin-bottom: 3rem;

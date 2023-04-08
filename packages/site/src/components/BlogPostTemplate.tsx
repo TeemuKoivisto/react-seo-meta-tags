@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
-import styled from 'styled-components'
 
 import { Layout } from './Layout'
 import { BlogPager } from './BlogPager'
@@ -76,8 +75,8 @@ const BlogPostTemplate = ({ data: { previous, next, site, markdownRemark }, loca
       <article>
         <BlogHeader frontmatter={markdownRemark.frontmatter} excerpt={excerpt} />
         <section className="blog-post" dangerouslySetInnerHTML={{ __html: markdownRemark.html }} />
-        <BlogPager previous={previous} next={next} />
         <ShareButtons url={postUrl} title={title} />
+        <BlogPager previous={previous} next={next} />
       </article>
     </Layout>
   )

@@ -24,35 +24,31 @@ export interface SiteData {
   }
 }
 
-export interface ISEOBlogPost {
-  // url: string
-  image: string
-  title: string
-  datePublished: string
-  dateModified: string
-  description: string
-  tags: string[]
-  facebookAppId: string
-  twitterUser: string
-  siteUrl: string
-  site: {
-    siteName: string
-  }
-  author: {
-    name: string
-    image: string
-  }
-  publisher: {
-    name: string
-    logo: string
-    url: string
-  }
-}
+// export interface ISEOBlogPost {
+//   // url: string
+//   image: string
+//   title: string
+//   datePublished: string
+//   dateModified: string
+//   description: string
+//   tags: string[]
+//   facebookAppId: string
+//   twitterUser: string
+//   siteUrl: string
+//   site: {
+//     siteName: string
+//   }
+//   author: {
+//     name: string
+//     image: string
+//   }
+//   publisher: {
+//     name: string
+//     logo: string
+//     url: string
+//   }
+// }
 
-export interface IBlogPosts {
-  totalCount: number
-  edges: INode[]
-}
 /**
  * @example
   {
@@ -87,20 +83,11 @@ export interface Frontmatter {
   dateModified: string
   description: string
   tags: string[] | null
-  images: IImage[] | null
+  images: Image[] | null
   imageAlt: string | null
   slug: string
 }
 
-export interface IImage {
+export interface Image {
   publicURL: string
-}
-
-export interface INode {
-  node: {
-    frontmatter: Frontmatter
-    fields: {
-      slug: string
-    }
-  }
 }
