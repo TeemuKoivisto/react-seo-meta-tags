@@ -1,0 +1,40 @@
+{
+  "name": "mongodb-extended-json",
+  "description": "MongoDB Extended JSON.",
+  "version": "1.11.1",
+  "author": "Lucas Hrabovsky <hrabovsky.lucas@gmail.com> (http://imlucas.com)",
+  "license": "Apache-2.0",
+  "homepage": "http://github.com/mongodb-js/extended-json",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mongodb-js/extended-json.git"
+  },
+  "keywords": [
+    "mongodb",
+    "mongodb-js",
+    "ejson",
+    "bson",
+    "extended-json"
+  ],
+  "scripts": {
+    "test": "mocha",
+    "check": "mongodb-js-precommit"
+  },
+  "dependencies": {
+    "JSONStream": "^1.1.1",
+    "async": "^3.1.0",
+    "bson": "^1.0.1",
+    "event-stream": "^4.0.1",
+    "lodash.isfunction": "^3.0.6",
+    "lodash.transform": "^4.6.0",
+    "moment": "^2.10.6",
+    "raf": "^3.1.0"
+  },
+  "devDependencies": {
+    "debug": "^4.1.1",
+    "eslint-config-mongodb-js": "^5.0.3",
+    "mocha": "~7.0.0",
+    "mongodb-js-precommit": "^2.2.0",
+    "mongodb-schema": "^8.2.1"
+  }
+}

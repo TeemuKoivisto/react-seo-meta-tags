@@ -1,0 +1,95 @@
+{
+  "user": {
+    "name": {
+      "first": {
+        "$choose": {
+          "from": ["Liam", "Noah", "Ethan", "Mason", "Logan", "Jacob", "Lucas", "Jackson", "Aiden", "Jack", "James", "Elijah", "Luke", "William", "Michael", "Alexander", "Oliver", "Owen", "Daniel", "Gabriel", "Henry", "Matthew", "Carter", "Ryan", "Wyatt", "Andrew", "Connor", "Caleb", "Jayden", "Nathan", "Dylan", "Isaac", "Hunter", "Joshua", "Landon", "Samuel", "David", "Sebastian", "Olivia", "Emma", "Sophia", "Ava", "Isabella", "Mia", "Charlotte", "Emily", "Abigail", "Avery", "Harper", "Ella", "Madison", "Amelie", "Lily", "Chloe", "Sofia", "Evelyn", "Hannah", "Addison", "Grace", "Aubrey", "Zoey", "Aria", "Ellie", "Natalie", "Zoe", "Audrey", "Elizabeth", "Scarlett", "Layla", "Victoria", "Brooklyn", "Lucy", "Lillian", "Claire", "Nora", "Riley", "Leah"]
+        }
+      },
+      "last": {
+        "$choose": {
+          "from": ["Smith", "Jones", "Williams", "Brown", "Taylor", "Davies", "Wilson", "Evans", "Thomas", "Johnson", "Roberts", "Walker", "Wright", "Robinson", "Thompson", "White", "Hughes", "Edwards", "Green", "Hall", "Wood", "Harris", "Lewis", "Martin", "Jackson", "Clarke", "Clark", "Turner", "Hill", "Scott", "Cooper", "Morris", "Ward", "Moore", "King", "Watson", "Baker", "Harrison", "Morgan", "Patel", "Young", "Allen", "Mitchell", "James", "Anderson", "Phillips", "Lee", "Bell", "Parker", "Davis"]
+        }
+      }
+    },
+    "gender": {
+      "$choose": {
+        "from": ["female", "male"]
+      }
+    },
+    "age": "$number",
+    "address": {
+      "street": {
+        "$string": {
+          "length": 10
+        }
+      },
+      "house_no": "$number",
+      "zip_code": {
+        "$number": {
+          "min": 10000,
+          "max": 99999
+        }
+      },
+      "city": {
+        "$choose": {
+          "from": ["Manhattan", "Brooklyn", "New Jersey", "Queens", "Bronx"]
+        }
+      }
+    },
+    "phone_no": {
+      "$missing": {
+        "percent": 30,
+        "ifnot": {
+          "$number": {
+            "min": 1000000000,
+            "max": 9999999999
+          }
+        }
+      }
+    },
+    "created_at": {
+      "$date": {
+        "min": "2010-01-01",
+        "max": "2014-07-24"
+      }
+    },
+    "is_active": {
+      "$choose": {
+        "from": [true, false]
+      }
+    }
+  },
+  "tags": {
+    "$array": {
+      "of": {
+        "label": "$string",
+        "id": "$oid",
+        "subtags": {
+          "$choose": {
+            "from": [{
+              "$array": {
+                "of": {
+                  "$word": null
+                },
+                "number": {
+                  "$number": {
+                    "min": 2,
+                    "max": 5
+                  }
+                }
+              }
+            }, "$missing"],
+            "weights": [20, 80]
+          }
+        }
+      },
+      "number": {
+        "$number": {
+          "min": 0,
+          "max": 10
+        }
+      }
+    }
+  }
+}

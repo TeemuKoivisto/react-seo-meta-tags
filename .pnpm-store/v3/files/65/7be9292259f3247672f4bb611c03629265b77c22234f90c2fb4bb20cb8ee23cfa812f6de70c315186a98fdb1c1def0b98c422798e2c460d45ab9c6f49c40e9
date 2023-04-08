@@ -1,0 +1,154 @@
+{
+  "name": "graphql-http",
+  "version": "1.17.1",
+  "description": "Simple, pluggable, zero-dependency, GraphQL over HTTP spec compliant server, client and audit suite.",
+  "keywords": [
+    "graphql",
+    "client",
+    "relay",
+    "express",
+    "apollo",
+    "server",
+    "http",
+    "transport",
+    "observables",
+    "fastify"
+  ],
+  "author": "Denis Badurina <badurinadenis@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/graphql/graphql-http#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/graphql/graphql-http.git"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "packageManager": "yarn@3.5.0",
+  "main": "lib/index.js",
+  "module": "lib/index.mjs",
+  "browser": "umd/graphql-http.js",
+  "exports": {
+    ".": {
+      "require": "./lib/index.js",
+      "import": "./lib/index.mjs",
+      "types": "./lib/index.d.ts",
+      "browser": "./umd/graphql-http.js"
+    },
+    "./lib/use/fetch": {
+      "types": "./lib/use/fetch.d.ts",
+      "require": "./lib/use/fetch.js",
+      "import": "./lib/use/fetch.mjs"
+    },
+    "./lib/use/node": {
+      "types": "./lib/use/node.d.ts",
+      "require": "./lib/use/node.js",
+      "import": "./lib/use/node.mjs"
+    },
+    "./lib/use/http": {
+      "types": "./lib/use/http.d.ts",
+      "require": "./lib/use/http.js",
+      "import": "./lib/use/http.mjs"
+    },
+    "./lib/use/http2": {
+      "types": "./lib/use/http2.d.ts",
+      "require": "./lib/use/http2.js",
+      "import": "./lib/use/http2.mjs"
+    },
+    "./lib/use/express": {
+      "types": "./lib/use/express.d.ts",
+      "require": "./lib/use/express.js",
+      "import": "./lib/use/express.mjs"
+    },
+    "./lib/use/fastify": {
+      "types": "./lib/use/fastify.d.ts",
+      "require": "./lib/use/fastify.js",
+      "import": "./lib/use/fastify.mjs"
+    },
+    "./lib/use/koa": {
+      "types": "./lib/use/koa.d.ts",
+      "require": "./lib/use/koa.js",
+      "import": "./lib/use/koa.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "umd",
+    "README.md",
+    "LICENSE.md"
+  ],
+  "sideEffects": [
+    "umd/*"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "gendocs": "typedoc --options typedoc.js src/",
+    "lint:eslint": "eslint 'src'",
+    "lint:prettier": "prettier --check .",
+    "lint:fix": "yarn lint:eslint --fix && yarn lint:prettier --write",
+    "lint": "yarn lint:eslint && yarn lint:prettier",
+    "type-check": "tsc --noEmit",
+    "test": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 jest",
+    "build:esm": "tsc -b tsconfig.esm.json && node scripts/esm-post-process.mjs",
+    "build:cjs": "tsc -b tsconfig.cjs.json",
+    "build:umd": "rollup --configPlugin typescript --config rollup.config.ts",
+    "build": "yarn build:esm && yarn build:cjs && yarn build:umd",
+    "release": "semantic-release"
+  },
+  "workspaces": [
+    "implementations/**/*"
+  ],
+  "peerDependencies": {
+    "graphql": ">=0.11 <=16"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.4",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.18.6",
+    "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
+    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
+    "@babel/preset-env": "^7.21.4",
+    "@babel/preset-typescript": "^7.21.4",
+    "@rollup/plugin-terser": "^0.4.0",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@types/eslint": "^8.37.0",
+    "@types/express": "^4.17.17",
+    "@types/glob": "^8.1.0",
+    "@types/html-validator": "^5.0.3",
+    "@types/jest": "^29.5.0",
+    "@types/koa": "^2.13.6",
+    "@types/koa-mount": "^4.0.2",
+    "@typescript-eslint/eslint-plugin": "^5.57.0",
+    "@typescript-eslint/parser": "^5.57.0",
+    "@whatwg-node/fetch": "^0.8.4",
+    "babel-jest": "^29.5.0",
+    "eslint": "^8.37.0",
+    "eslint-config-prettier": "^8.8.0",
+    "express": "^4.18.2",
+    "fastify": "^4.15.0",
+    "graphql": "^16.6.0",
+    "html-validator": "^6.0.1",
+    "jest": "^29.5.0",
+    "jest-jasmine2": "^29.5.0",
+    "koa": "^2.14.1",
+    "koa-mount": "^4.0.0",
+    "node-fetch": "^3.3.1",
+    "prettier": "^2.8.7",
+    "rollup": "^3.20.2",
+    "rollup-plugin-gzip": "^3.1.0",
+    "semantic-release": "^21.0.0",
+    "tslib": "^2.5.0",
+    "typedoc": "^0.23.28",
+    "typedoc-plugin-markdown": "^3.14.0",
+    "typescript": "^5.0.3"
+  },
+  "resolutions": {
+    "npm/libnpmversion": "^3.0.6"
+  }
+}

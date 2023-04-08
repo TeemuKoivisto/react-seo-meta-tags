@@ -1,0 +1,959 @@
+import type { TrailingSlash } from "gatsby-page-utils";
+import { IProgram, Stage } from "../commands/types";
+import { GraphQLFieldExtensionDefinition } from "../schema/extensions";
+import { DocumentNode, GraphQLSchema, DefinitionNode, SourceLocation } from "graphql";
+import { SchemaComposer } from "graphql-compose";
+import { IGatsbyCLIState } from "gatsby-cli/src/reporter/redux/types";
+import { ThunkAction } from "redux-thunk";
+import { InternalJob, JobResultInterface } from "../utils/jobs/manager";
+import { ITypeMetadata } from "../schema/infer/inference-metadata";
+import { Span } from "opentracing";
+import { ICollectedSlices } from "../utils/babel/find-slices";
+type SystemPath = string;
+type Identifier = string;
+export interface IRedirect {
+    fromPath: string;
+    toPath: string;
+    isPermanent?: boolean;
+    redirectInBrowser?: boolean;
+    ignoreCase: boolean;
+    [key: string]: any;
+}
+export declare enum ProgramStatus {
+    BOOTSTRAP_FINISHED = "BOOTSTRAP_FINISHED",
+    BOOTSTRAP_QUERY_RUNNING_FINISHED = "BOOTSTRAP_QUERY_RUNNING_FINISHED"
+}
+export type PageMode = "SSG" | "DSG" | "SSR";
+export interface IGatsbyPage {
+    internalComponentName: string;
+    path: string;
+    matchPath: undefined | string;
+    component: SystemPath;
+    componentChunkName: string;
+    isCreatedByStatefulCreatePages: boolean;
+    context: Record<string, unknown>;
+    updatedAt: number;
+    pluginCreator___NODE: Identifier;
+    pluginCreatorId: Identifier;
+    componentPath: SystemPath;
+    ownerNodeId: Identifier;
+    manifestId?: string;
+    defer?: boolean;
+    /**
+     * INTERNAL. Do not use `page.mode`, it can be removed at any time
+     * `page.mode` is currently reliable only in engines and `onPostBuild` hook
+     * (in develop it is dynamic and can change at any time)
+     * TODO: remove, see comments in utils/page-mode:materializePageMode
+     *
+     * @internal
+     */
+    mode: PageMode;
+    slices: Record<string, string>;
+}
+export interface IGatsbySlice {
+    componentPath: string;
+    componentChunkName: string;
+    context: Record<string, unknown>;
+    name: string;
+    updatedAt: number;
+}
+export interface IGatsbyFunction {
+    /** The route in the browser to access the function **/
+    functionRoute: string;
+    /** The absolute path to the original function **/
+    originalAbsoluteFilePath: string;
+    /** The relative path to the original function **/
+    originalRelativeFilePath: string;
+    /** The relative path to the compiled function (always ends with .js) **/
+    relativeCompiledFilePath: string;
+    /** The absolute path to the compiled function (doesn't transfer across machines) **/
+    absoluteCompiledFilePath: string;
+    /** The matchPath regex created by path-to-regexp. Only created if the function is dynamic. **/
+    matchPath: string | undefined;
+    /** The plugin that owns this function route **/
+    pluginName: string;
+}
+export interface IGraphQLTypegenOptions {
+    typesOutputPath: string;
+    documentSearchPaths: Array<string>;
+    generateOnBuild: boolean;
+}
+export interface IGatsbyConfig {
+    plugins?: Array<{
+        resolve: string;
+        options: {
+            [key: string]: unknown;
+        };
+    }>;
+    siteMetadata?: {
+        title?: string;
+        author?: string;
+        description?: string;
+        siteUrl?: string;
+        [key: string]: unknown;
+    };
+    polyfill?: boolean;
+    developMiddleware?: any;
+    proxy?: any;
+    partytownProxiedURLs?: Array<string>;
+    pathPrefix?: string;
+    assetPrefix?: string;
+    mapping?: Record<string, string>;
+    jsxRuntime?: "classic" | "automatic";
+    jsxImportSource?: string;
+    trailingSlash?: TrailingSlash;
+    graphqlTypegen?: IGraphQLTypegenOptions;
+}
+export interface IGatsbyNode {
+    id: Identifier;
+    parent: Identifier;
+    children: Array<Identifier>;
+    internal: {
+        type: string;
+        counter: number;
+        owner: string;
+        contentDigest: string;
+        mediaType?: string;
+        content?: string;
+        description?: string;
+    };
+    [key: string]: unknown;
+    fields: Array<string>;
+}
+export interface IGatsbyPlugin {
+    id: Identifier;
+    name: string;
+    version: string;
+    [key: string]: any;
+}
+export interface IGatsbyPluginContext {
+    [key: string]: (...args: Array<any>) => any;
+}
+export interface IGatsbyStaticQueryComponents {
+    name: string;
+    componentPath: SystemPath;
+    id: Identifier;
+    query: string;
+    hash: string;
+}
+export interface IGatsbyPageComponent {
+    componentPath: SystemPath;
+    componentChunkName: string;
+    query: string;
+    pages: Set<string>;
+    isInBootstrap: boolean;
+    serverData: boolean;
+    config: boolean;
+    isSlice: boolean;
+    Head: boolean;
+}
+export interface IDefinitionMeta {
+    name: string;
+    def: DefinitionNode;
+    filePath: string;
+    text: string;
+    templateLoc: SourceLocation;
+    printedAst: string | null;
+    isHook: boolean;
+    isStaticQuery: boolean;
+    isFragment: boolean;
+    isConfigQuery: boolean;
+    hash: number;
+}
+type GatsbyNodes = Map<string, IGatsbyNode>;
+export interface IGatsbyIncompleteJobV2 {
+    job: InternalJob;
+}
+export interface IGatsbyIncompleteJob {
+    job: InternalJob;
+    plugin: IGatsbyPlugin;
+}
+export interface IGatsbyCompleteJobV2 {
+    result: JobResultInterface;
+    inputPaths: InternalJob["inputPaths"];
+}
+export interface IPlugin {
+    name: string;
+    options: Record<string, unknown>;
+}
+export interface IBabelStage {
+    plugins: Array<IPlugin>;
+    presets: Array<IPlugin>;
+    options?: {
+        cacheDirectory: boolean;
+        sourceType: string;
+        sourceMaps?: string;
+    };
+}
+export interface IStateProgram extends IProgram {
+    extensions: Array<string>;
+    browserslist: Array<string>;
+}
+export interface IQueryState {
+    dirty: number;
+    running: number;
+}
+export interface IComponentState {
+    componentPath: string;
+    query: string;
+    pages: Set<Identifier>;
+    errors: number;
+}
+export interface IHtmlFileState {
+    dirty: number;
+    isDeleted: boolean;
+    pageDataHash: string;
+}
+export interface IStaticQueryResultState {
+    dirty: number;
+    staticQueryResultHash: string;
+}
+export type GatsbyNodeAPI = "onPreBoostrap" | "onPostBoostrap" | "onCreateWebpackConfig" | "onCreatePage" | "onCreateNode" | "sourceNodes" | "createPagesStatefully" | "createPages" | "onPostBuild";
+export interface IGatsbyState {
+    program: IStateProgram;
+    nodes: GatsbyNodes;
+    nodesByType: Map<string, GatsbyNodes>;
+    resolvedNodesCache: Map<string, any>;
+    nodesTouched: Set<string>;
+    nodeManifests: Array<INodeManifest>;
+    requestHeaders: Map<string, {
+        [header: string]: string;
+    }>;
+    telemetry: ITelemetry;
+    lastAction: ActionsUnion;
+    flattenedPlugins: Array<{
+        resolve: SystemPath;
+        id: Identifier;
+        name: string;
+        version: string;
+        pluginOptions: {
+            plugins: [];
+            [key: string]: unknown;
+        };
+        nodeAPIs: Array<GatsbyNodeAPI>;
+        browserAPIs: Array<"onRouteUpdate" | "registerServiceWorker" | "onServiceWorkerActive" | "onPostPrefetchPathname">;
+        ssrAPIs: Array<"onRenderBody" | "onPreRenderHTML">;
+        pluginFilepath: SystemPath;
+        subPluginPaths?: Array<string>;
+        modulePath?: string;
+    }>;
+    config: IGatsbyConfig;
+    functions: Array<IGatsbyFunction>;
+    pages: Map<string, IGatsbyPage>;
+    schema: GraphQLSchema;
+    definitions: Map<string, IDefinitionMeta>;
+    status: {
+        plugins: Record<string, IGatsbyPlugin>;
+        PLUGINS_HASH: Identifier;
+        LAST_NODE_COUNTER: number;
+    };
+    queries: {
+        byNode: Map<Identifier, Set<Identifier>>;
+        byConnection: Map<string, Set<Identifier>>;
+        queryNodes: Map<Identifier, Set<Identifier>>;
+        trackedQueries: Map<Identifier, IQueryState>;
+        trackedComponents: Map<string, IComponentState>;
+        deletedQueries: Set<Identifier>;
+        dirtyQueriesListToEmitViaWebsocket: Array<string>;
+    };
+    components: Map<IGatsbyPageComponent["componentPath"], IGatsbyPageComponent>;
+    staticQueryComponents: Map<IGatsbyStaticQueryComponents["id"], IGatsbyStaticQueryComponents>;
+    staticQueriesByTemplate: Map<SystemPath, Array<Identifier>>;
+    pendingPageDataWrites: {
+        pagePaths: Set<string>;
+        sliceNames: Set<string>;
+    };
+    jobs: {
+        active: Array<any>;
+        done: Array<any>;
+    };
+    jobsV2: {
+        incomplete: Map<Identifier, IGatsbyIncompleteJobV2>;
+        complete: Map<Identifier, IGatsbyCompleteJobV2>;
+        jobsByRequest: Map<string, Set<Identifier>>;
+    };
+    webpack: any;
+    webpackCompilationHash: string;
+    redirects: Array<IRedirect>;
+    babelrc: {
+        stages: {
+            [key in Stage]: IBabelStage;
+        };
+    };
+    schemaCustomization: {
+        composer: null | SchemaComposer<any>;
+        context: Record<string, any>;
+        fieldExtensions: GraphQLFieldExtensionDefinition;
+        printConfig: {
+            path?: string;
+            include?: {
+                types?: Array<string>;
+                plugins?: Array<string>;
+            };
+            exclude?: {
+                types?: Array<string>;
+                plugins?: Array<string>;
+            };
+            withFieldTypes?: boolean;
+        } | null;
+        thirdPartySchemas: Array<GraphQLSchema>;
+        types: Array<string | {
+            typeOrTypeDef: DocumentNode;
+            plugin: IGatsbyPlugin;
+        }>;
+    };
+    logs: IGatsbyCLIState;
+    inferenceMetadata: {
+        step: string;
+        typeMap: {
+            [key: string]: ITypeMetadata;
+        };
+    };
+    pageDataStats: Map<SystemPath, number>;
+    visitedPages: Map<string, Set<string>>;
+    html: {
+        trackedHtmlFiles: Map<Identifier, IHtmlFileState>;
+        browserCompilationHash: string;
+        ssrCompilationHash: string;
+        trackedStaticQueryResults: Map<string, IStaticQueryResultState>;
+        unsafeBuiltinWasUsedInSSR: boolean;
+        templateCompilationHashes: Record<string, string>;
+        slicesProps: {
+            bySliceId: Map<string, {
+                pages: Set<string>;
+                props: Record<string, unknown>;
+                sliceName: string;
+                hasChildren: boolean;
+                dirty: number;
+            }>;
+            byPagePath: Map<string, Set<string>>;
+            bySliceName: Map<string, {
+                sliceDataHash: string;
+                dirty: number;
+                props: Set<string>;
+            }>;
+        };
+        pagesThatNeedToStitchSlices: Set<string>;
+    };
+    slices: Map<string, IGatsbySlice>;
+    componentsUsingSlices: Map<string, ICollectedSlices>;
+    slicesByTemplate: Map<SystemPath, ICollectedSlices>;
+}
+export type GatsbyStateKeys = keyof IGatsbyState;
+export interface ICachedReduxState {
+    nodes?: IGatsbyState["nodes"];
+    status: IGatsbyState["status"];
+    components: IGatsbyState["components"];
+    jobsV2: IGatsbyState["jobsV2"];
+    staticQueryComponents: IGatsbyState["staticQueryComponents"];
+    webpackCompilationHash: IGatsbyState["webpackCompilationHash"];
+    pageDataStats: IGatsbyState["pageDataStats"];
+    pages?: IGatsbyState["pages"];
+    staticQueriesByTemplate: IGatsbyState["staticQueriesByTemplate"];
+    pendingPageDataWrites: IGatsbyState["pendingPageDataWrites"];
+    queries: IGatsbyState["queries"];
+    html: IGatsbyState["html"];
+    slices: IGatsbyState["slices"];
+    slicesByTemplate: IGatsbyState["slicesByTemplate"];
+}
+export type ActionsUnion = IAddChildNodeToParentNodeAction | IAddFieldToNodeAction | IAddThirdPartySchema | IApiFinishedAction | ICreateFieldExtension | ICreateNodeAction | ICreatePageAction | ICreatePageDependencyAction | ICreateTypes | IDeleteCacheAction | IDeleteNodeAction | IDeletePageAction | IPageQueryRunAction | IPrintTypeDefinitions | IQueryClearDirtyQueriesListToEmitViaWebsocket | IQueryExtractedAction | IQueryExtractedBabelSuccessAction | IQueryExtractionBabelErrorAction | IQueryExtractionGraphQLErrorAction | IQueryStartAction | IRemoveStaticQuery | IReplaceComponentQueryAction | IReplaceStaticQueryAction | IReplaceWebpackConfigAction | ISetPluginStatusAction | ISetProgramStatusAction | ISetResolvedNodesAction | ISetSchemaAction | ISetGraphQLDefinitionsAction | ISetSiteFlattenedPluginsAction | ISetWebpackCompilationHashAction | ISetSSRGlobalSharedWebpackCompilationHashAction | ISetWebpackConfigAction | ITouchNodeAction | IUpdatePluginsHashAction | ICreateJobV2Action | IEndJobV2Action | IRemoveStaleJobV2Action | IAddPageDataStatsAction | IAddSliceDataStatsAction | IRemoveTemplateComponentAction | ISetBabelPluginAction | ISetBabelPresetAction | ISetBabelOptionsAction | ICreateJobAction | ISetJobAction | IEndJobAction | ISetStaticQueriesByTemplateAction | IAddPendingPageDataWriteAction | IAddPendingTemplateDataWriteAction | IAddPendingSliceDataWriteAction | IAddPendingSliceTemplateDataWriteAction | IClearPendingPageDataWriteAction | IClearPendingSliceDataWriteAction | ICreateResolverContext | IClearSchemaCustomizationAction | ISetSchemaComposerAction | IStartIncrementalInferenceAction | IBuildTypeMetadataAction | IDisableTypeInferenceAction | ISetProgramAction | ISetProgramExtensions | IRemovedHtml | ITrackedHtmlCleanup | IGeneratedHtml | IMarkHtmlDirty | ISSRUsedUnsafeBuiltin | ISetSiteConfig | IMergeWorkerQueryState | ISetComponentFeatures | IMaterializePageMode | ISetJobV2Context | IClearJobV2Context | ISetDomainRequestHeaders | ICreateSliceAction | IDeleteSliceAction | ISetSSRTemplateWebpackCompilationHashAction | ISetComponentsUsingSlicesAction | ISetSlicesByTemplateAction | ISetSlicesProps | ISlicesPropsRemoveStale | ISlicesPropsRendered | ISlicesStitched | ISlicesScriptsRegenerated | IProcessGatsbyImageSourceUrlAction | IClearGatsbyImageSourceUrlAction;
+export interface ISetComponentFeatures {
+    type: `SET_COMPONENT_FEATURES`;
+    payload: {
+        componentPath: string;
+        serverData: boolean;
+        config: boolean;
+        Head: boolean;
+    };
+}
+export interface IApiFinishedAction {
+    type: `API_FINISHED`;
+    payload: {
+        apiName: GatsbyNodeAPI;
+    };
+}
+interface ISetBabelPluginAction {
+    type: `SET_BABEL_PLUGIN`;
+    payload: {
+        stage: Stage;
+        name: IPlugin["name"];
+        options: IPlugin["options"];
+    };
+}
+interface ISetBabelPresetAction {
+    type: `SET_BABEL_PRESET`;
+    payload: {
+        stage: Stage;
+        name: IPlugin["name"];
+        options: IPlugin["options"];
+    };
+}
+interface ISetBabelOptionsAction {
+    type: `SET_BABEL_OPTIONS`;
+    payload: {
+        stage: Stage;
+        name: IPlugin["name"];
+        options: IPlugin["options"];
+    };
+}
+export interface ICreateJobV2Action {
+    type: `CREATE_JOB_V2`;
+    payload: {
+        job: IGatsbyIncompleteJobV2["job"];
+    };
+    plugin: {
+        name: string;
+    };
+}
+export interface IEndJobV2Action {
+    type: `END_JOB_V2`;
+    payload: {
+        jobContentDigest: string;
+        result: JobResultInterface;
+    };
+    plugin: {
+        name: string;
+    };
+}
+export interface IRemoveStaleJobV2Action {
+    type: `REMOVE_STALE_JOB_V2`;
+    payload: {
+        contentDigest: string;
+    };
+}
+export type ICreateJobV2FromInternalAction = ThunkAction<Promise<Record<string, unknown>>, IGatsbyState, void, ActionsUnion>;
+interface ICreateJobAction {
+    type: `CREATE_JOB`;
+    payload: {
+        id: string;
+        job: IGatsbyIncompleteJob["job"];
+    };
+    plugin: IGatsbyIncompleteJob["plugin"];
+}
+interface ISetJobAction {
+    type: `SET_JOB`;
+    payload: {
+        id: string;
+        job: IGatsbyIncompleteJob["job"];
+    };
+    plugin: IGatsbyIncompleteJob["plugin"];
+}
+interface IEndJobAction {
+    type: `END_JOB`;
+    payload: {
+        id: string;
+        job: IGatsbyIncompleteJob["job"];
+    };
+    plugin: IGatsbyIncompleteJob["plugin"];
+}
+export interface ICreatePageDependencyActionPayloadType {
+    path: string;
+    nodeId?: string;
+    connection?: string;
+}
+export interface ICreatePageDependencyAction {
+    type: `CREATE_COMPONENT_DEPENDENCY`;
+    plugin?: string;
+    payload: Array<ICreatePageDependencyActionPayloadType>;
+}
+export interface IDeleteComponentDependenciesAction {
+    type: "DELETE_COMPONENTS_DEPENDENCIES";
+    payload: {
+        paths: Array<string>;
+    };
+}
+export interface IReplaceComponentQueryAction {
+    type: "REPLACE_COMPONENT_QUERY";
+    payload: {
+        query: string;
+        componentPath: string;
+    };
+}
+export interface IReplaceStaticQueryAction {
+    type: `REPLACE_STATIC_QUERY`;
+    plugin: IGatsbyPlugin | null | undefined;
+    payload: {
+        name: string;
+        componentPath: string;
+        id: string;
+        query: string;
+        hash: string;
+    };
+}
+export interface IQueryClearDirtyQueriesListToEmitViaWebsocket {
+    type: `QUERY_CLEAR_DIRTY_QUERIES_LIST_TO_EMIT_VIA_WEBSOCKET`;
+}
+export interface IQueryExtractedAction {
+    type: `QUERY_EXTRACTED`;
+    plugin: IGatsbyPlugin;
+    traceId: string | undefined;
+    payload: {
+        componentPath: string;
+        query: string;
+    };
+}
+export interface IQueryExtractionGraphQLErrorAction {
+    type: `QUERY_EXTRACTION_GRAPHQL_ERROR`;
+    plugin: IGatsbyPlugin;
+    traceId: string | undefined;
+    payload: {
+        componentPath: string;
+        error: string;
+    };
+}
+export interface IQueryExtractedBabelSuccessAction {
+    type: `QUERY_EXTRACTION_BABEL_SUCCESS`;
+    plugin: IGatsbyPlugin;
+    traceId: string | undefined;
+    payload: {
+        componentPath: string;
+    };
+}
+export interface IQueryExtractionBabelErrorAction {
+    type: `QUERY_EXTRACTION_BABEL_ERROR`;
+    plugin: IGatsbyPlugin;
+    traceId: string | undefined;
+    payload: {
+        componentPath: string;
+        error: Error;
+    };
+}
+export interface ISetProgramStatusAction {
+    type: `SET_PROGRAM_STATUS`;
+    plugin: IGatsbyPlugin;
+    traceId: string | undefined;
+    payload: ProgramStatus;
+}
+export interface IPageQueryRunAction {
+    type: `PAGE_QUERY_RUN`;
+    plugin: IGatsbyPlugin;
+    traceId: string | undefined;
+    payload: {
+        path: string;
+        componentPath: string;
+        queryType: "page" | "static" | "slice";
+        resultHash: string;
+        queryHash: string;
+    };
+}
+export interface IQueryStartAction {
+    type: `QUERY_START`;
+    plugin: IGatsbyPlugin;
+    traceId: string | undefined;
+    payload: {
+        path: string;
+        componentPath: string;
+        isPage: boolean;
+    };
+}
+export interface IRemoveStaleJobAction {
+    type: `REMOVE_STALE_JOB_V2`;
+    plugin: IGatsbyPlugin | undefined;
+    traceId?: string;
+    payload: {
+        contentDigest: string;
+    };
+}
+export interface IAddThirdPartySchema {
+    type: `ADD_THIRD_PARTY_SCHEMA`;
+    plugin: IGatsbyPlugin;
+    traceId?: string;
+    payload: GraphQLSchema;
+}
+export interface ICreateTypes {
+    type: `CREATE_TYPES`;
+    plugin: IGatsbyPlugin;
+    traceId?: string;
+    payload: DocumentNode | Array<DocumentNode>;
+}
+export interface ICreateFieldExtension {
+    type: `CREATE_FIELD_EXTENSION`;
+    plugin: IGatsbyPlugin;
+    traceId?: string;
+    payload: {
+        name: string;
+        extension: GraphQLFieldExtensionDefinition;
+    };
+}
+export interface IPrintTypeDefinitions {
+    type: `PRINT_SCHEMA_REQUESTED`;
+    plugin: IGatsbyPlugin;
+    traceId?: string;
+    payload: {
+        path?: string;
+        include?: {
+            types?: Array<string>;
+            plugins?: Array<string>;
+        };
+        exclude?: {
+            types?: Array<string>;
+            plugins?: Array<string>;
+        };
+        withFieldTypes?: boolean;
+    };
+}
+export interface ICreateResolverContext {
+    type: `CREATE_RESOLVER_CONTEXT`;
+    plugin: IGatsbyPlugin;
+    traceId?: string;
+    payload: IGatsbyPluginContext | {
+        [camelCasedPluginNameWithoutPrefix: string]: IGatsbyPluginContext;
+    };
+}
+interface IClearSchemaCustomizationAction {
+    type: `CLEAR_SCHEMA_CUSTOMIZATION`;
+}
+interface ISetSchemaComposerAction {
+    type: `SET_SCHEMA_COMPOSER`;
+    payload: SchemaComposer<any>;
+}
+export interface ICreateServerVisitedPage {
+    type: `CREATE_SERVER_VISITED_PAGE`;
+    payload: IGatsbyPage;
+    plugin?: IGatsbyPlugin;
+}
+export interface ICreatePageAction {
+    type: `CREATE_PAGE`;
+    payload: IGatsbyPage;
+    plugin?: IGatsbyPlugin;
+    contextModified?: boolean;
+    componentModified?: boolean;
+    slicesModified?: boolean;
+}
+export interface ICreateSliceAction {
+    type: `CREATE_SLICE`;
+    payload: IGatsbySlice;
+    plugin?: IGatsbyPlugin;
+    traceId: string | undefined;
+    componentModified?: boolean;
+    contextModified?: boolean;
+}
+export interface IDeleteSliceAction {
+    type: `DELETE_SLICE`;
+    payload: {
+        name: string;
+        componentPath: string;
+    };
+}
+export interface ISetComponentsUsingSlicesAction {
+    type: `SET_COMPONENTS_USING_PAGE_SLICES`;
+    payload: Map<string, ICollectedSlices>;
+}
+export interface ISetSlicesByTemplateAction {
+    type: `SET_SLICES_BY_TEMPLATE`;
+    payload: {
+        componentPath: string;
+        slices: ICollectedSlices;
+    };
+}
+export interface ISetSlicesProps {
+    type: `SET_SLICES_PROPS`;
+    payload: Record<string, Record<string, {
+        props: Record<string, unknown>;
+        sliceName: string;
+        hasChildren: boolean;
+    }>>;
+}
+export interface ISlicesPropsRemoveStale {
+    type: `SLICES_PROPS_REMOVE_STALE`;
+}
+export interface ISlicesPropsRendered {
+    type: `SLICES_PROPS_RENDERED`;
+    payload: Array<{
+        sliceId: string;
+    }>;
+}
+export interface ISlicesStitched {
+    type: `SLICES_STITCHED`;
+}
+export interface ISlicesScriptsRegenerated {
+    type: `SLICES_SCRIPTS_REGENERATED`;
+}
+export interface ICreateRedirectAction {
+    type: `CREATE_REDIRECT`;
+    payload: IRedirect;
+}
+export interface IDeleteCacheAction {
+    type: `DELETE_CACHE`;
+    cacheIsCorrupt?: boolean;
+}
+export interface IRemoveTemplateComponentAction {
+    type: `REMOVE_STATIC_QUERIES_BY_TEMPLATE`;
+    payload: {
+        componentPath: string;
+    };
+}
+export interface ISetStaticQueriesByTemplateAction {
+    type: `SET_STATIC_QUERIES_BY_TEMPLATE`;
+    payload: {
+        componentPath: string;
+        staticQueryHashes: Array<Identifier>;
+    };
+}
+export interface IAddPendingPageDataWriteAction {
+    type: `ADD_PENDING_PAGE_DATA_WRITE`;
+    payload: {
+        path: string;
+    };
+}
+export interface IAddPendingTemplateDataWriteAction {
+    type: `ADD_PENDING_TEMPLATE_DATA_WRITE`;
+    payload: {
+        componentPath: SystemPath;
+        pages: Array<string>;
+    };
+}
+export interface IAddPendingSliceDataWriteAction {
+    type: `ADD_PENDING_SLICE_DATA_WRITE`;
+    payload: {
+        name: string;
+    };
+}
+export interface IAddPendingSliceTemplateDataWriteAction {
+    type: `ADD_PENDING_SLICE_TEMPLATE_DATA_WRITE`;
+    payload: {
+        componentPath: SystemPath;
+        sliceNames: Array<string>;
+    };
+}
+export interface IClearPendingPageDataWriteAction {
+    type: `CLEAR_PENDING_PAGE_DATA_WRITE`;
+    payload: {
+        page: string;
+    };
+}
+export interface IClearPendingSliceDataWriteAction {
+    type: `CLEAR_PENDING_SLICE_DATA_WRITE`;
+    payload: {
+        name: string;
+    };
+}
+export interface IDeletePageAction {
+    type: `DELETE_PAGE`;
+    payload: IGatsbyPage;
+}
+export interface IRemoveStaticQuery {
+    type: `REMOVE_STATIC_QUERY`;
+    payload: IGatsbyStaticQueryComponents["id"];
+}
+export interface ISetWebpackCompilationHashAction {
+    type: `SET_WEBPACK_COMPILATION_HASH`;
+    payload: IGatsbyState["webpackCompilationHash"];
+}
+export interface ISetSSRGlobalSharedWebpackCompilationHashAction {
+    type: `SET_SSR_WEBPACK_COMPILATION_HASH`;
+    payload: string;
+}
+export interface ISetSSRTemplateWebpackCompilationHashAction {
+    type: `SET_SSR_TEMPLATE_WEBPACK_COMPILATION_HASH`;
+    payload: {
+        templateHash: string;
+        templatePath: string;
+        isSlice: boolean;
+        pages: Array<string>;
+    };
+}
+export interface IUpdatePluginsHashAction {
+    type: `UPDATE_PLUGINS_HASH`;
+    payload: Identifier;
+}
+export interface ISetPluginStatusAction {
+    type: `SET_PLUGIN_STATUS`;
+    plugin: IGatsbyPlugin;
+    payload: {
+        [key: string]: any;
+    };
+}
+export interface IReplaceWebpackConfigAction {
+    type: `REPLACE_WEBPACK_CONFIG`;
+    payload: IGatsbyState["webpack"];
+}
+export interface ISetWebpackConfigAction {
+    type: `SET_WEBPACK_CONFIG`;
+    payload: Partial<IGatsbyState["webpack"]>;
+}
+export interface ISetSchemaAction {
+    type: `SET_SCHEMA`;
+    payload: IGatsbyState["schema"];
+}
+export interface ISetGraphQLDefinitionsAction {
+    type: `SET_GRAPHQL_DEFINITIONS`;
+    payload: IGatsbyState["definitions"];
+}
+export interface ISetSiteConfig {
+    type: `SET_SITE_CONFIG`;
+    payload: IGatsbyState["config"];
+}
+export interface ISetSiteFunctions {
+    type: `SET_SITE_FUNCTIONS`;
+    payload: IGatsbyState["functions"];
+}
+export interface ICreateNodeAction {
+    type: `CREATE_NODE`;
+    payload: IGatsbyNode;
+    oldNode?: IGatsbyNode;
+    traceId: string;
+    parentSpan: Span;
+    followsSpan: Span;
+}
+export interface IAddFieldToNodeAction {
+    type: `ADD_FIELD_TO_NODE`;
+    payload: IGatsbyNode;
+    addedField: string;
+}
+export interface IAddChildNodeToParentNodeAction {
+    type: `ADD_CHILD_NODE_TO_PARENT_NODE`;
+    payload: IGatsbyNode;
+}
+export interface IDeleteNodeAction {
+    type: `DELETE_NODE`;
+    payload: IGatsbyNode | void;
+}
+export interface ISetSiteFlattenedPluginsAction {
+    type: `SET_SITE_FLATTENED_PLUGINS`;
+    payload: IGatsbyState["flattenedPlugins"];
+}
+export interface ISetResolvedNodesAction {
+    type: `SET_RESOLVED_NODES`;
+    payload: {
+        key: string;
+        nodes: IGatsbyState["resolvedNodesCache"];
+    };
+}
+export interface IAddPageDataStatsAction {
+    type: `ADD_PAGE_DATA_STATS`;
+    payload: {
+        pagePath: string;
+        filePath: SystemPath;
+        size: number;
+        pageDataHash: string;
+    };
+}
+export interface IAddSliceDataStatsAction {
+    type: `ADD_SLICE_DATA_STATS`;
+    payload: {
+        sliceName: string;
+        filePath: SystemPath;
+        size: number;
+        sliceDataHash: string;
+    };
+}
+export interface ITouchNodeAction {
+    type: `TOUCH_NODE`;
+    payload: Identifier;
+}
+interface IStartIncrementalInferenceAction {
+    type: `START_INCREMENTAL_INFERENCE`;
+}
+interface IBuildTypeMetadataAction {
+    type: `BUILD_TYPE_METADATA`;
+    payload: {
+        nodes: Array<IGatsbyNode>;
+        clearExistingMetadata: boolean;
+        typeName: string;
+    };
+}
+interface IDisableTypeInferenceAction {
+    type: `DISABLE_TYPE_INFERENCE`;
+    payload: Array<string>;
+}
+interface ISetProgramAction {
+    type: `SET_PROGRAM`;
+    payload: IStateProgram;
+}
+interface ISetProgramExtensions {
+    type: `SET_PROGRAM_EXTENSIONS`;
+    payload: Array<string>;
+}
+interface IRemovedHtml {
+    type: `HTML_REMOVED`;
+    payload: string;
+}
+interface ITrackedHtmlCleanup {
+    type: `HTML_TRACKED_PAGES_CLEANUP`;
+    payload: Set<string>;
+}
+interface IGeneratedHtml {
+    type: `HTML_GENERATED`;
+    payload: Array<string>;
+}
+interface IMarkHtmlDirty {
+    type: `HTML_MARK_DIRTY_BECAUSE_STATIC_QUERY_RESULT_CHANGED`;
+    payload: {
+        pages: Set<string>;
+        slices: Set<string>;
+        staticQueryHashes: Set<string>;
+    };
+}
+interface ISSRUsedUnsafeBuiltin {
+    type: `SSR_USED_UNSAFE_BUILTIN`;
+}
+export interface ICreateNodeManifest {
+    type: `CREATE_NODE_MANIFEST`;
+    payload: {
+        manifestId: string;
+        node: IGatsbyNode;
+        pluginName: string;
+        updatedAtUTC?: string | number;
+    };
+}
+export interface IDeleteNodeManifests {
+    type: `DELETE_NODE_MANIFESTS`;
+}
+export interface INodeManifest {
+    manifestId: string;
+    pluginName: string;
+    node: {
+        id: string;
+    };
+}
+export interface ISetDomainRequestHeaders {
+    type: `SET_REQUEST_HEADERS`;
+    payload: {
+        domain: string;
+        headers: {
+            [header: string]: string;
+        };
+    };
+}
+export interface IProcessGatsbyImageSourceUrlAction {
+    type: `PROCESS_GATSBY_IMAGE_SOURCE_URL`;
+    payload: {
+        sourceUrl: string;
+    };
+}
+export interface IClearGatsbyImageSourceUrlAction {
+    type: `CLEAR_GATSBY_IMAGE_SOURCE_URL`;
+}
+export interface ITelemetry {
+    gatsbyImageSourceUrls: Set<string>;
+}
+export interface IMergeWorkerQueryState {
+    type: `MERGE_WORKER_QUERY_STATE`;
+    payload: {
+        workerId: number;
+        queryStateChunk: IGatsbyState["queries"];
+        queryStateTelemetryChunk: IGatsbyState["telemetry"];
+    };
+}
+export interface IMaterializePageMode {
+    type: `MATERIALIZE_PAGE_MODE`;
+    payload: {
+        path: string;
+        pageMode: PageMode;
+    };
+}
+export interface ISetJobV2Context {
+    type: `SET_JOB_V2_CONTEXT`;
+    payload: {
+        job: IGatsbyIncompleteJobV2["job"];
+        requestId: string;
+    };
+}
+export interface IClearJobV2Context {
+    type: `CLEAR_JOB_V2_CONTEXT`;
+    payload: {
+        requestId: string;
+    };
+}
+export {};
