@@ -41,13 +41,13 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_PAT }}
           HOME: ${{ github.workspace }}
 
-      # - name: Create and publish versions
-      #   uses: changesets/action@v1
-      #   with:
-      #     version: pnpm ci:version
-      #     commit: 'chore(changeset): version update'
-      #     title: 'chore(changeset): version update'
-      #     publish: pnpm ci:publish
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     HOME: ${{ github.workspace }}
+      - name: Create and publish versions
+        uses: changesets/action@v1
+        with:
+          version: pnpm ci:version
+          commit: 'chore(changeset): version update'
+          title: 'chore(changeset): version update'
+          publish: pnpm ci:publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HOME: ${{ github.workspace }}
