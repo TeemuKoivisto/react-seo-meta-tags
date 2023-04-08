@@ -6,6 +6,13 @@
   "module": "dist/index.js",
   "type": "module",
   "types": "dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
   "scripts": {
     "build": "rimraf dist && vite build",
     "watch": "rimraf dist && vite dev",
@@ -16,6 +23,9 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/teemukoivisto/react-seo-meta-tags.git"
