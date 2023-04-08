@@ -29,3 +29,8 @@ tmp/
 # Gatsby
 public
 .cache
+
+# Github actions
+.pnpm-store
+.cache
+.netrc
