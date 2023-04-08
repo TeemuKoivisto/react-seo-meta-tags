@@ -28,7 +28,7 @@ export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps>
    * they'll always be defined or undefined.
    * @param props
    */
-  renderGeneral({ title, description, image }: CombinedProps<{}>) {
+  renderGeneral({ title, description, image }: CombinedProps<Record<string, any>>) {
     return [
       <title key="title">{title}</title>,
       description && <meta key="description" name="description" content={description} />,

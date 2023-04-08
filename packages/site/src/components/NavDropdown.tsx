@@ -32,9 +32,9 @@ class DropdownClass extends React.PureComponent<IProps, IState> {
   }
   setScrollLock(disable: boolean) {
     if (disable) {
-      this.state.targetElement!.classList.add('scroll-lock')
+      this.state.targetElement?.classList.add('scroll-lock')
     } else {
-      this.state.targetElement!.classList.remove('scroll-lock')
+      this.state.targetElement?.classList.remove('scroll-lock')
     }
   }
   private toggleMenu = () => {
