@@ -1,7 +1,7 @@
 {
   "name": "react-seo-meta-tags",
   "version": "1.2.1",
-  "description": "SEO metatags for React apps, mainly to be used with Gatsby + react-helmet",
+  "description": "SEO metatags for React apps, especially blogs built with Gatsby or NextJS",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "type": "module",
@@ -24,7 +24,7 @@
     "blog",
     "gatsby",
     "jsonld",
-    "next",
+    "nextjs",
     "opengraph",
     "react",
     "react-helmet",

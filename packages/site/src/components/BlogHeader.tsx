@@ -4,10 +4,10 @@ import styled from 'styled-components'
 import { raise } from '../theme/styled'
 import { MdEvent, MdLocalOffer } from 'react-icons/md'
 
-import { IBlogPostFrontmatter } from '../types/graphql'
+import { Frontmatter } from '../types/graphql'
 
 interface IProps {
-  frontmatter: IBlogPostFrontmatter
+  frontmatter: Frontmatter
   excerpt: string
 }
 
@@ -32,7 +32,7 @@ function BlogHeaderEl(props: IProps) {
               <MdLocalOffer size={24} />
             </SvgWrapper>
             <Tags>
-              {tags.map((t, i) => (
+              {(tags || []).map((t, i) => (
                 <Tag key={i}>{t}</Tag>
               ))}
             </Tags>

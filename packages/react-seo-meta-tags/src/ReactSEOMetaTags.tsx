@@ -68,12 +68,12 @@ export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps>
       video,
       audio,
       site,
-      language = 'en-US',
+      language,
       facebookAppId
     } = props
     return [
       url && <meta key="og:url" property="og:url" content={url} />, // Important
-      <meta property="og:locale" content={language} />,
+      <meta key="og:locale" property="og:locale" content={language || 'en-US'} />,
       <meta key="og:title" property="og:title" content={title} />, // Important
       description && <meta key="og:description" property="og:description" content={description} />, // Somewhat important
       // Facebook recommends 1200x630 size, ratio of 1.91:1 but 1200x1200 is also fine
@@ -88,17 +88,11 @@ export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps>
     ]
   }
   renderTwitter(props: CombinedProps<TwitterProps>) {
-    const {
-      title,
-      description,
-      image,
-      imageAlt,
-      cardType = 'summary_large_image',
-      twitterUser,
-      twitterSite
-    } = props
+    const { title, description, image, imageAlt, cardType, twitterUser, twitterSite } = props
     return [
-      image && <meta key="twitter:card" name="twitter:card" content={cardType} />,
+      image && (
+        <meta key="twitter:card" name="twitter:card" content={cardType || 'summary_large_image'} />
+      ),
       twitterUser && <meta key="twitter:creator" name="twitter:creator" content={twitterUser} />,
       twitterSite && <meta key="twitter:site" name="twitter:site" content={twitterSite} />,
       <meta key="twitter:title" name="twitter:title" content={title} />,
@@ -109,9 +103,12 @@ export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps>
       imageAlt && <meta key="twitter:image:alt" name="twitter:image:alt" content={imageAlt} />
     ]
   }
-  renderBlogPostSEO(props: ReactSEOMetaTagsProps) {
-    const { website, breadcrumb, facebook, twitter, organization } = props
-    const blogPost = props.blogPost as BlogPostProps
+  renderBlogPostSEO(
+    website: WebsiteProps | undefined,
+    blogPost: BlogPostProps,
+    props: Omit<ReactSEOMetaTagsProps, 'website' | 'blogPost'>
+  ) {
+    const { breadcrumb, facebook, twitter, organization } = props
     return [
       this.renderGeneral({ ...website, ...blogPost }),
       <script key="application/ld+json" type="application/ld+json">
@@ -129,9 +126,11 @@ export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps>
       this.renderTwitter({ ...website, ...blogPost, ...twitter })
     ]
   }
-  renderWebsiteSEO(props: ReactSEOMetaTagsProps) {
+  renderWebsiteSEO(
+    website: WebsiteProps,
+    props: Omit<ReactSEOMetaTagsProps, 'website' | 'blogPost'>
+  ) {
     const { facebook, breadcrumb, twitter, organization } = props
-    const website = props.website as WebsiteProps
     return [
       this.renderGeneral(website),
       <script key="application/ld+json" type="application/ld+json">
@@ -156,13 +155,14 @@ export class ReactSEOMetaTags extends React.PureComponent<ReactSEOMetaTagsProps>
   }
   render() {
     let el: React.ReactNode
-    if (this.props.blogPost) {
-      el = this.renderBlogPostSEO(this.props)
-    } else if (this.props.website) {
-      el = this.renderWebsiteSEO(this.props)
+    const { website, blogPost, render, ...rest } = this.props
+    if (blogPost) {
+      el = this.renderBlogPostSEO(website, blogPost, rest)
+    } else if (website) {
+      el = this.renderWebsiteSEO(website, rest)
     }
-    if (this.props.render) {
-      return this.props.render(el)
+    if (render) {
+      return render(el)
     }
     return el
   }

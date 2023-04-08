@@ -1,7 +1,5 @@
 import * as React from 'react'
 import styled, { ThemeProvider } from 'styled-components'
-// import Helmet from 'react-helmet'
-// import ReactSEOMetaTags from 'react-seo-meta-tags'
 
 import { defaultTheme } from '../theme/theme'
 
@@ -9,40 +7,16 @@ import { NavBar } from './NavBar'
 import { Footer } from './Footer'
 
 import { LARGE_DISPLAY_WIDTH } from '../theme/breakpoints'
-
-// import { ISiteData, ISEOBlogPost } from './src/types/graphql'
+import { SiteData } from '../types/graphql'
 
 interface Props {
   children: React.ReactNode
-  title?: string
-  site: any
-  seoBlogPost?: any
+  site: SiteData
 }
 
-// This kinda boilerplatish wrapping is because StaticQuery only offers render-method
-// for rendering children
-// export const Layout: React.FC<Props> = (props: Props) => (
-//   <StaticQuery query={siteDataQuery} render={Content(props)} />
-// )
-
-export const Layout = ({ seoBlogPost, site, title, children }: Props) => (
+export const Layout = ({ site, children }: Props) => (
   <ThemeProvider theme={defaultTheme}>
     <DefaultWrapper>
-      {/* <ReactSEOMetaTags
-            render={(el: any) => <Helmet>{el}</Helmet>}
-            website={site.siteMetadata}
-            blogPost={seoBlogPost}
-            facebook={{ facebookAppId: site.siteMetadata.facebookAppId }}
-            twitter={{ twitterUser: site.siteMetadata.twitterUser }}
-            organization={site.siteMetadata.organization}
-          /> */}
-      {/* <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-            <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-            <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-            <link rel="manifest" href="/site.webmanifest" />
-            <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
-            <meta name="msapplication-TileColor" content="#2d89ef" />
-            <meta name="theme-color" content="#ffffff" /> */}
       <NavBar site={site} />
       <DefaultContainer>{children}</DefaultContainer>
       <Footer site={site} />

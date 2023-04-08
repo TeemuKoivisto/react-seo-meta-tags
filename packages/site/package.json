@@ -28,6 +28,7 @@
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.8.0",
+    "react-seo-meta-tags": "workspace:*",
     "react-share": "^4.4.1",
     "styled-components": "^5.3.9"
   }

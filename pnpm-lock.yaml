@@ -163,6 +163,9 @@ importers:
       react-icons:
         specifier: ^4.8.0
         version: 4.8.0(react@18.2.0)
+      react-seo-meta-tags:
+        specifier: workspace:*
+        version: link:../react-seo-meta-tags
       react-share:
         specifier: ^4.4.1
         version: 4.4.1(react@18.2.0)

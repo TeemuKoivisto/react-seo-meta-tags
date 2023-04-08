@@ -53,14 +53,41 @@ export interface IBlogPosts {
   totalCount: number
   edges: INode[]
 }
-
-export interface IBlogPostFrontmatter {
+/**
+ * @example
+  {
+    "id": "c61756ed-81a1-537a-8552-b231de1c77d3",
+    "excerpt": "This is another blog post, just to show that the react-seo-meta-tags work.",
+    "html": "<p>This is another blog post, just to show that the react-seo-meta-tags work.</p>",
+    "frontmatter": {
+      "title": "Another post",
+      "datePublished": "2020-01-21",
+      "dateModified": "2020-01-21",
+      "tags": [
+        "seo",
+        "open-graph",
+        "react-seo-meta-tags"
+      ],
+      "description": "I'm another post, which is quite something. Yes this description is quite bad and it probably should include couple keywords such as awesome, SEO, meta-tags, open-graph, facebook, twitter",
+      "imageAlt": null,
+      "slug": "this-is-a-seo-optimized-slug",
+      "images": null
+    }
+  }
+ */
+export interface BlogPost {
+  id: string
+  excerpt: string
+  html: string
+  frontmatter: Frontmatter
+}
+export interface Frontmatter {
   title: string
-  datePublished: string // Can be converted into date, which you can actually do in the graphql query
-  dateModified: string // Eg. 2018-12-02
-  description: string // Should be a short description about the topic, <=200 words. Mainly for SEO purposes.
-  tags: string[]
-  images: IImage[]
+  datePublished: string
+  dateModified: string
+  description: string
+  tags: string[] | null
+  images: IImage[] | null
   imageAlt: string | null
   slug: string
 }
@@ -71,7 +98,7 @@ export interface IImage {
 
 export interface INode {
   node: {
-    frontmatter: IBlogPostFrontmatter
+    frontmatter: Frontmatter
     fields: {
       slug: string
     }

@@ -19,12 +19,11 @@ interface Props {
 
 const BlogIndex = ({ data, location }: Props) => {
   const site = data.site
-  const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMarkdownRemark.nodes
 
   if (posts.length === 0) {
     return (
-      <Layout title={siteTitle} site={site}>
+      <Layout site={site}>
         <p>
           No blog posts found. Add markdown posts to "content/blog" (or the directory you specified
           for the "gatsby-source-filesystem" plugin in gatsby-config.js).
@@ -34,7 +33,7 @@ const BlogIndex = ({ data, location }: Props) => {
   }
 
   return (
-    <Layout title={siteTitle} site={data.site}>
+    <Layout site={data.site}>
       <div>
         <h1>My blog posts</h1>
         <List>

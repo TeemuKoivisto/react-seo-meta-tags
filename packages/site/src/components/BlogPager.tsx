@@ -4,44 +4,38 @@ import styled from 'styled-components'
 
 import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
 
+import type { Page } from './BlogPostTemplate'
+
 interface IProps {
-  previous: {
-    slug?: string
-    title?: string
-    datePublished?: string
-  }
-  next: {
-    slug?: string
-    title?: string
-    datePublished?: string
-  }
+  previous: Page | null
+  next: Page | null
 }
 
 function BlogPagerEl(props: IProps) {
   const { previous, next } = props
   return (
     <BlogPagerContainer>
-      {previous.slug ? (
-        <IconLink to={previous.slug}>
+      {previous === null ? (
+        <div></div>
+      ) : (
+        <IconLink to={previous.fields.slug}>
           <FiChevronsLeft size={24} />
           <LinkText className="m-left">
-            <p>{previous.title}</p>
-            <p>{previous.datePublished}</p>
+            <p>{previous.frontmatter.title}</p>
+            <p>{previous.frontmatter.datePublished}</p>
           </LinkText>
         </IconLink>
-      ) : (
-        <div></div>
       )}
-      {next.slug ? (
-        <IconLink to={next.slug}>
+      {next === null ? (
+        <div></div>
+      ) : (
+        <IconLink to={next.fields.slug}>
           <LinkText className="m-right">
-            <p>{next.title}</p>
-            <p>{next.datePublished}</p>
+            <p>{next.frontmatter.title}</p>
+            <p>{next.frontmatter.datePublished}</p>
           </LinkText>
           <FiChevronsRight size={24} />
         </IconLink>
-      ) : (
-        <div></div>
       )}
     </BlogPagerContainer>
   )

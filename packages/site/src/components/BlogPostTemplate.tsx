@@ -8,22 +8,24 @@ import { BlogHeader } from './BlogHeader'
 import SEO from './SEO'
 import { ShareButtons } from './ShareButtons'
 
-import { SiteData, ISEOBlogPost, IBlogPostFrontmatter } from '../types/graphql'
+import { SiteData, BlogPost } from '../types/graphql'
+
+export interface Page {
+  fields: {
+    slug: string
+  }
+  frontmatter: {
+    title?: string
+    datePublished?: string
+  }
+}
 
 interface Props {
   data: {
-    previous: {
-      slug?: string
-      title?: string
-      datePublished?: string
-    }
-    next: {
-      slug?: string
-      title?: string
-      datePublished?: string
-    }
+    previous: Page | null
+    next: Page | null
     site: SiteData
-    markdownRemark: any
+    markdownRemark: BlogPost
   }
   location: any
 }
@@ -58,34 +60,39 @@ const BlogPostTemplate = ({ data: { previous, next, site, markdownRemark }, loca
   // data from the markdown file this blog-post is generated from and the beautifully
   // mushed together URLs of the blog-post & its image so that in development it picks up
   // the localhost address and in production the canonical URL defined in gatsby-config.js
-  const blogPost = {
-    ...site.siteMetadata,
-    ...markdownRemark.frontmatter,
-    ...{
-      image,
-      publisher: site.siteMetadata.organization
-    }
-  } as ISEOBlogPost
+  // const blogPost = {
+  //   ...site.siteMetadata,
+  //   ...markdownRemark.frontmatter,
+  //   ...{
+  //     image,
+  //     publisher: site.siteMetadata.organization
+  //   }
+  // } as ISEOBlogPost
   const title = markdownRemark.frontmatter.title
   // Use markdown's description field if provided, otherwise just 100 first characters.
   const excerpt = markdownRemark.frontmatter.description || markdownRemark.excerpt
   return (
-    <Layout title={title} site={site} seoBlogPost={blogPost}>
+    <Layout site={site}>
       <article>
         <BlogHeader frontmatter={markdownRemark.frontmatter} excerpt={excerpt} />
         <section className="blog-post" dangerouslySetInnerHTML={{ __html: markdownRemark.html }} />
-        {/* <BlogPager previous={previous?.fields} next={next?.fields} /> */}
+        <BlogPager previous={previous} next={next} />
         <ShareButtons url={postUrl} title={title} />
       </article>
     </Layout>
   )
 }
 
-export const Head = ({ data: { markdownRemark: post } }: any) => {
+export const Head = ({
+  data: { markdownRemark: post }
+}: {
+  data: { markdownRemark: BlogPost }
+}) => {
   return (
     <SEO
       title={post.frontmatter.title}
       description={post.frontmatter.description || post.excerpt}
+      blogPost={post}
     />
   )
 }
@@ -120,6 +127,7 @@ export const pageQuery = graphql`
       }
       frontmatter {
         title
+        datePublished(formatString: "YYYY-MM-DD")
       }
     }
     next: markdownRemark(id: { eq: $nextPostId }) {
@@ -128,6 +136,7 @@ export const pageQuery = graphql`
       }
       frontmatter {
         title
+        datePublished(formatString: "YYYY-MM-DD")
       }
     }
   }
