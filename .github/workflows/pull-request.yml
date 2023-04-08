@@ -1,0 +1,28 @@
+name: Build and test pull requests
+
+on: [pull_request, workflow_dispatch]
+
+jobs:
+  test:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x]
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+        with:
+          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+          fetch-depth: 0
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node_version }}
+
+      - name: Install dependencies with pnpm
+        uses: ./.github/actions/pnpm
+
+      - name: Build & test
+        uses: ./.github/actions/build-test

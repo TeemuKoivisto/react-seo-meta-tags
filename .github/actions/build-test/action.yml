@@ -1,0 +1,14 @@
+name: build-test
+description: Build and run tests
+
+runs:
+  using: composite
+  steps:
+    - name: Build packages
+      run: pnpm --filter react-seo-meta-tags build
+      shell: bash
+
+    - name: Run type check and unit tests
+      run: |
+        pnpm --filter react-seo-meta-tags test
+      shell: bash

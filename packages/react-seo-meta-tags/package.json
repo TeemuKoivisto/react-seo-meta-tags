@@ -1,0 +1,76 @@
+{
+  "name": "react-seo-meta-tags",
+  "version": "1.2.1",
+  "description": "SEO metatags for React apps, especially blogs built with Gatsby or NextJS",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "type": "module",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "rimraf dist && vite build",
+    "watch": "rimraf dist && vite dev",
+    "prepublishOnly": "cp ../../README.md . && cp ../../LICENSE .",
+    "postpublish": "rm README.md LICENSE",
+    "test": "jest"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teemukoivisto/react-seo-meta-tags.git"
+  },
+  "keywords": [
+    "blog",
+    "gatsby",
+    "jsonld",
+    "nextjs",
+    "opengraph",
+    "react",
+    "react-helmet",
+    "seo"
+  ],
+  "author": "https://github.com/teemukoivisto",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/teemukoivisto/react-seo-meta-tags/issues"
+  },
+  "homepage": "https://teemukoivisto.github.io/react-seo-meta-tags/",
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>/tests/setupTests.ts"
+    ],
+    "transform": {
+      ".(ts|tsx)": "ts-jest"
+    },
+    "testRegex": "(/tests/.*.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ]
+  },
+  "peerDependencies": {
+    "react": ">=16.2.0",
+    "react-dom": ">=16.2.0"
+  },
+  "devDependencies": {
+    "@types/enzyme": "3.10.8",
+    "@types/enzyme-adapter-react-16": "1.0.6",
+    "@types/jest": "26.0.19",
+    "@types/react": "16.9.41",
+    "@types/react-dom": "16.9.8",
+    "@types/react-helmet": "6.1.0",
+    "@types/react-test-renderer": "16.9.3",
+    "enzyme": "3.11.0",
+    "enzyme-adapter-react-16": "1.15.5",
+    "jest": "26.6.3",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-helmet": "6.1.0",
+    "react-test-renderer": "16.13.1",
+    "test-utils": "1.1.1",
+    "ts-jest": "26.4.4"
+  },
+  "dependencies": {}
+}
