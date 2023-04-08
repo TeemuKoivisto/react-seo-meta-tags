@@ -1,0 +1,39 @@
+name: Deploy to Github Pages
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deployment:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+        with:
+          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+          fetch-depth: 0
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node_version }}
+
+      - name: Install dependencies with pnpm
+        uses: ./.github/actions/pnpm
+
+      - name: Build
+        run: |
+          pnpm --filter react-seo-meta-tags build &&
+          pnpm --filter site build
+        env:
+          GH_PAGES: true
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.GH_ACTIONS_DEPLOY_KEY }}
+          publish_dir: ./packages/site/public
