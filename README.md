@@ -226,24 +226,24 @@ export interface TwitterProps {
    */
   title?: string
   /**
-   * Description of content (maximum 200 characters). Fallback: og:description.
+   * Description of content (max 200 characters). Fallback: og:description.
    */
   description?: string | null
   /**
-   * Twitter card image, optimal ratio 1.91:1. Recommended: 1200x628. PNG, JPEG, or GIF. Fallback: og:image.
+   * Twitter card image, optimal ratio 1.91:1. Recommended: 1200x628. PNG, JPEG, or GIF. Max 5 MB. Fallback: og:image.
    */
   image?: string | null
   /**
-   * Alt for the image. Fallback: og:image:alt.
+   * Alt for the image. Max 420 characters. Fallback: og:image:alt.
    */
   imageAlt?: string | null
   /**
-   * So since I saw that the large image looked dumb if you are using your faceshot as the image, I added the smaller 'summary'
-   * type as an option. It should be in 1:1 scale. Also there exists 'player' and 'app' types but since I'm not using those,
-   * I'm not going to spend my precious time figuring out how they work for now.
+   * So since I saw that the large image looked dumb if you are using your faceshot as the image, I started using the smaller
+   * 'summary' type. It should be in 1:1 scale. Also there exists 'player' and 'app' types that I haven't researched how
+   * they work.
    * @default 'summary_large_image'
    */
-  cardType?: 'summary_large_image' | 'summary' | null
+  cardType?: 'summary_large_image' | 'summary' | 'player' | 'app' | null
   /**
    * @username of content creator.
    */
@@ -267,7 +267,7 @@ export interface BlogPostProps {
    */
   title: string
   /**
-   * Should be a short description about the topic, <=200 words. Mainly for SEO purposes.
+   * Should be a short description about the topic, max 200 words. Mainly for SEO purposes.
    */
   description?: string | null
   /**
